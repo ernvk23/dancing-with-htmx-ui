@@ -88,4 +88,52 @@ document.addEventListener('DOMContentLoaded', () => {
         event.stopPropagation();
         contactButton.classList.toggle('open');
     });
+
+
+    // Adjust image map coordinates on resize
+    function adjustImageMap() {
+        const image = document.querySelector('img[usemap="#map-directions"]');
+        const areas = document.querySelectorAll('map[name="map-directions"] area');
+        const originalWidth = 988;
+        const originalHeight = 540;
+
+        if (!image || !areas.length) {
+            return;
+        }
+
+        function updateCoords() {
+            const currentWidth = image.width;
+            const currentHeight = image.height;
+            const scaleX = currentWidth / originalWidth;
+            const scaleY = currentHeight / originalHeight;
+
+            areas.forEach(area => {
+                const originalCoords = area.dataset.originalCoords.split(',');
+                const newCoords = originalCoords.map((coord, index) => {
+                    return Math.round(parseInt(coord) * (index % 2 === 0 ? scaleX : scaleY));
+                }).join(',');
+                area.coords = newCoords;
+            });
+        }
+
+        areas.forEach(area => {
+            area.dataset.originalCoords = area.coords;
+        });
+
+        updateCoords();
+
+        window.addEventListener('resize', debounce(updateCoords, 250));
+    }
+
+    // Debounce function (custom, optimized)
+    function debounce(func, delay) {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    // Call adjustImageMap after DOMContentLoaded
+    window.addEventListener('load', adjustImageMap);
 });
