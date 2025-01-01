@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Adjust image map coordinates on resize
+    // Adjust image map coordinates on resize
     function adjustImageMap() {
         const image = document.querySelector('img[usemap="#map-directions"]');
         const areas = document.querySelectorAll('map[name="map-directions"] area');
@@ -102,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function updateCoords() {
+            // Ensure image dimensions are accurate
+            if (image.width === 0 || image.height === 0) return;
+
             const currentWidth = image.width;
             const currentHeight = image.height;
             const scaleX = currentWidth / originalWidth;
@@ -110,17 +114,20 @@ document.addEventListener('DOMContentLoaded', () => {
             areas.forEach(area => {
                 const originalCoords = area.dataset.originalCoords.split(',');
                 const newCoords = originalCoords.map((coord, index) => {
-                    return Math.round(parseInt(coord) * (index % 2 === 0 ? scaleX : scaleY));
+                    // More robust rounding
+                    return Math.round(parseFloat(coord) * (index % 2 === 0 ? scaleX : scaleY));
                 }).join(',');
                 area.coords = newCoords;
             });
         }
 
-        areas.forEach(area => {
-            area.dataset.originalCoords = area.coords;
-        });
-
-        updateCoords();
+        // Store original coordinates only after the image has loaded
+        image.addEventListener('load', () => {
+            areas.forEach(area => {
+                area.dataset.originalCoords = area.coords;
+            });
+            updateCoords(); // Update immediately after storing original coords
+        }, { once: true });
 
         window.addEventListener('resize', debounce(updateCoords, 250));
     }
@@ -135,5 +142,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Call adjustImageMap after DOMContentLoaded
-    window.addEventListener('load', adjustImageMap);
+    adjustImageMap();
 });
