@@ -9,26 +9,26 @@
     <script src="script.js" defer></script>
     <title>La Casa de Grei</title>
     <meta name="description"
-        content="Dance school offering various dance classes for all levels. Learn from experienced instructors in a friendly environment.">
+        content="Школа латиноамериканских танцев в Минске (Беларусь). Обучаем сальсе, бачате (соло и в парах), lady style, реггетону, афро, латина микс. Опытные кубинские преподаватели!">
+    <meta name="keywords"
+        content="латиноамериканские танцы, сальса, бачата, lady style, бачата соло, бачата в парах, кубинская сальса, касино, реггетон, афро, латина микс, школа танцев, Минск, Беларусь, кубинские преподаватели, латина, танцы">
 </head>
 
 <body>
     <header>
         <div class="navbar-overlay"></div>
-        <nav class="navbar">
+        <nav class="navbar" role="navigation">
             <a href="#home">
-                <img src="img/logo.svg" alt="LOGO" class="logo">
+                <img src="img/logo.svg" alt="logo" class="logo">
             </a>
-            <ul class="nav-links">
-                <li><a href="#teachers">Преподаватели</a></li>
-                <li><a href="#pricing">Стоимость</a></li>
-                <li><a href="#schedule">Расписание</a></li>
-                <li><a href="#about">О Нас</a></li>
-                <!-- <li><a href="#gallery">Галерея</a></li>
-                <li><a href="#qa">Вопросы</a></li> -->
-                <li><a href="#contacts">Контакты</a></li>
+            <ul class="nav-links" role="list">
+                <li role="listitem"><a href="#instructors">Преподаватели</a></li>
+                <li role="listitem"><a href="#pricing">Стоимость</a></li>
+                <li role="listitem"><a href="#calendar">Расписание</a></li>
+                <li role="listitem"><a href="#about">О Нас</a></li>
+                <li role="listitem"><a href="#contacts">Контакты</a></li>
             </ul>
-            <button class="nav-toggle" aria-label="Toggle Navigation">
+            <button class="nav-toggle" aria-label="Toggle Navigation" role="button">
                 <svg class="nav-svg" fill="none" viewBox="-10 -10 120 120">
                     <path class="nav-svg-line" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
                         d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70">
@@ -38,22 +38,23 @@
         </nav>
     </header>
     <main>
-        <button class="floating-contact-button">
+        <button class="floating-contact-button" role="button">
             <span class="contact-text">Связаться с нами</span>
             <span class="contact-text-short">Связаться</span>
             <img class="contact-icon" src="img/contacts-display.svg" alt="Contact Icon">
-            <ul class="contact-menu">
-                <li><a href="https://t.me/unknown" target="_blank"><img src="img/telegram.svg"
+            <ul class="contact-menu" role="dialog" aria-modal="true">
+                <li role="listitem"><a href="https://t.me/unknown" target="_blank"><img src="img/telegram.svg"
                             alt="Telegram Icon">Телеграм</a></li>
-                <li><a href="viber://chat?number=YOUR_VIBER_NUMBER" target="_blank"><img src="img/viber.svg"
-                            alt="Viber Icon">Вайбер</a></li>
-                <li><a href="tel:+xxxxxxxxxx"><img src="img/call.svg" alt="Phone Icon">Телефон</a></li>
+                <li role="listitem"><a href="viber://chat?number=YOUR_VIBER_NUMBER" target="_blank"><img
+                            src="img/viber.svg" alt="Viber Icon">Вайбер</a></li>
+                <li role="listitem"><a href="tel:+xxxxxxxxxx"><img src="img/call.svg" alt="Phone Icon">Телефон</a></li>
             </ul>
         </button>
 
-        <section id="home" class="container-full" data-bg-desktop="img/hero.jpg" data-bg-mobile="img/hero.jpg">
-            <div class="home-content">
-                <h2>La Casa de Grei</h2>
+        <section id="home" class="container-full" role="group" aria-labelledby="home-heading"
+            data-bg-desktop="img/hero.jpg" data-bg-mobile="img/hero.jpg">
+            <div class="home-container">
+                <h1>LA CASA<br>DE GREI</h1>
                 <p>Школа латиноамериканских танцев</p>
                 <p>У танца нет возраста. У танца есть душа и она всегда молода.</p>
             </div>
@@ -63,14 +64,14 @@
             <p>Прокрутите вниз</p>
         </div>
 
-        <section id="teachers" class="container-full">
+        <section id="instructors" class="container-full" role="group" aria-labelledby="instructors-heading">
             <h2>Преподаватели</h2>
-            <div class="teacher-container">
-                <article class="teacher">
-                    <div class="image-placeholder">
-                        <img src="img/teacher1.webp" alt="Male teacher" loading="lazy">
+            <div class="instructors-container">
+                <article class="instructor">
+                    <div class="image-placeholder" aria-label="Инструктор по танцам Грейсьер" role="img">
+                        <img src="img/instructor1.webp" alt="Инструктор по танцам Грейсьер" loading="lazy">
                     </div>
-                    <div class="teacher-info-1">
+                    <div class="instructor-info-1">
                         <h3>Грейсьер Мачадо Лопес</h3>
                         <p>Основатель школы</p>
                         <p>Образование: Национальная школа танца в Гаване по специальности: «Танцор современного танца
@@ -80,11 +81,11 @@
                             преподавал в Китае.</p>
                     </div>
                 </article>
-                <article class="teacher">
-                    <div class="image-placeholder">
-                        <img src="img/teacher2.webp" alt="Female teacher" loading="lazy">
+                <article class="instructor">
+                    <div class="image-placeholder" aria-label="Инструктор по танцам Аньель" role="img">
+                        <img src="img/instructor2.webp" alt="Инструктор по танцам Аньель" loading="lazy">
                     </div>
-                    <div class="teacher-info-2">
+                    <div class="instructor-info-2">
                         <h3>Аньель Эррера Кастильо</h3>
                         <p>Образование: Национальная школа исскусств в Гаване по специальности: "Танцор современного и
                             народного танца".</p>
@@ -93,269 +94,280 @@
             </div>
         </section>
 
-        <section id="pricing" class="container-full">
+        <section id="pricing" class="container-full" role="group" aria-labelledby="pricing-heading">
             <h2>Стоимость</h2>
-            <h3>Пробное занятие бесплатно. При покупке абонемента в день пробного - скидка 10%.</h3>
             <div class="pricing-container">
-                <div class="pricing-card">
-                    <h3 class="price">65,00 руб.</h3>
-                    <div class="pricing-heading">
-                        <span class="currency">BYN</span>
-                        <span class="amount">65</span>
-                        <span class="period">/ месяц</span>
+                <p>Пробное занятие бесплатно.<br> При покупке абонемента в день пробного - скидка 10%.</p>
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h3 class="price">65,00 руб.</h3>
+                        <div class="pricing-heading">
+                            <span class="currency">BYN</span>
+                            <span class="amount">65</span>
+                            <span class="period">/ месяц</span>
+                        </div>
+                        <ul class="features" role="list">
+                            <li class="available" role="listitem"><span>✔</span>4 занятия</li>
+                            <li class="available" role="listitem"><span>✔</span>действует в течение 30 дней</li>
+                            <li class="not-available" role="listitem"><span>✘</span>заморозка не включена</li>
+                        </ul>
                     </div>
-                    <ul class="features">
-                        <li class="available"><span>✔</span>4 занятия</li>
-                        <li class="available"><span>✔</span>действует в течение 30 дней</li>
-                        <li class="not-available"><span>✘</span>заморозка не включена</li>
+                    <div class="pricing-card">
+                        <h3 class="price">110,00 руб.</h3>
+                        <div class="pricing-heading">
+                            <span class="currency">BYN</span>
+                            <span class="amount">110</span>
+                            <span class="period">/ месяц</span>
+                        </div>
+                        <ul class="features" role="list">
+                            <li class="available" role="listitem"><span>✔</span>8 занятий</li>
+                            <li class="available" role="listitem"><span>✔</span>действует в течение 30 дней</li>
+                            <li class="not-available" role="listitem"><span>✘</span>заморозка не включена</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card">
+                        <h3 class="price">180,00 руб.</h3>
+                        <div class="pricing-heading">
+                            <span class="currency">BYN</span>
+                            <span class="amount">90</span>
+                            <span class="period">/ месяц</span>
+                        </div>
+                        <ul class="features" role="list">
+                            <li class="available" role="listitem"><span>✔</span>16 занятий</li>
+                            <li class="available" role="listitem"><span>✔</span>действует в течение 60 дней</li>
+                            <li class="available" role="listitem"><span>✔</span>включена неделя заморозки</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card">
+                        <h3 class="price">240,00 руб.</h3>
+                        <div class="pricing-heading">
+                            <span class="currency">BYN</span>
+                            <span class="amount">80</span>
+                            <span class="period">/ месяц</span>
+                        </div>
+                        <ul class="features" role="list">
+                            <li class="available" role="listitem"><span>✔</span>24 занятия</li>
+                            <li class="available" role="listitem"><span>✔</span>действует в течение 90 дней</li>
+                            <li class="available" role="listitem"><span>✔</span>включена неделя заморозки</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pricing-summary">
+                    <p>Пробное занятие <strong>0,00 руб.</strong></p>
+                    <p>Разовое занятие <strong>20,00 руб.</strong></p>
+                    <p>Безлимит 1 месяц в одном филиале <strong>150,00 руб.</strong></p>
+                </div>
+                <div class="payment-methods">
+                    <p>Оплата может быть произведена либо:</p>
+                    <ul role="list">
+                        <li role="listitem">по месту проведения занятий</li>
+                        <li role="listitem">с помощью системы ERIP</li>
+                        <p>оплата > ЕРИП > Сервис E-POS > оплата тов.и услуг >
+                            лицевой счет: 28795-1-25 (сумму можно менять)</p>
                     </ul>
                 </div>
-
-                <div class="pricing-card">
-                    <h3 class="price">110,00 руб.</h3>
-                    <div class="pricing-heading">
-                        <span class="currency">BYN</span>
-                        <span class="amount">110</span>
-                        <span class="period">/ месяц</span>
-                    </div>
-                    <ul class="features">
-                        <li class="available"><span>✔</span>8 занятий</li>
-                        <li class="available"><span>✔</span>действует в течение 30 дней</li>
-                        <li class="not-available"><span>✘</span>заморозка не включена</li>
-                    </ul>
-                </div>
-
-                <div class="pricing-card">
-                    <h3 class="price">180,00 руб.</h3>
-                    <div class="pricing-heading">
-                        <span class="currency">BYN</span>
-                        <span class="amount">90</span>
-                        <span class="period">/ месяц</span>
-                    </div>
-                    <ul class="features">
-                        <li class="available"><span>✔</span>16 занятий</li>
-                        <li class="available"><span>✔</span>действует в течение 60 дней</li>
-                        <li class="available"><span>✔</span>включена неделя заморозки</li>
-                    </ul>
-                </div>
-
-                <div class="pricing-card">
-                    <h3 class="price">240,00 руб.</h3>
-                    <div class="pricing-heading">
-                        <span class="currency">BYN</span>
-                        <span class="amount">80</span>
-                        <span class="period">/ месяц</span>
-                    </div>
-                    <ul class="features">
-                        <li class="available"><span>✔</span>24 занятия</li>
-                        <li class="available"><span>✔</span>действует в течение 90 дней</li>
-                        <li class="available"><span>✔</span>включена неделя заморозки</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pricing-summary">
-                <p>Пробное занятие <span class="summary-value">0,00 руб.</span></p>
-                <p>Разовое занятие <span class="summary-value">20,00 руб.</span></p>
-                <p>Безлимит 1 месяц в одном филиале <span class="summary-value">150,00 руб.</span></p>
             </div>
         </section>
 
-        <section id="schedule" class="container-full">
+        <section id="calendar" class="container-full" role="group" aria-labelledby="calendar-heading">
             <h2>Расписание</h2>
-            <h3>Пробный урок — отличная возможность выбрать свой стиль и начать танцевать.</h3>
-            <div class="schedule-container">
+            <div class="calendar-container">
+                <p>Пробный урок — отличная возможность выбрать свой стиль и начать танцевать.</p>
+                <p>Запись на пробное занятие <strong>обязательна.</strong> В расписании могут быть изменения.</p>
                 <!-- Monday -->
-                <div class="schedule-card">
-                    <h3>Понедельник</h3>
-                    <p class="schedule-location">
-                        <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
-                            ул. Мележа 1, зал 308
-                        </a>
-                    </p>
-                    <ul class="schedule-classes">
-                        <li>
-                            <span class="time">18:00 - 19:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">19:00 - 20:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">20:00 - 21:00</span>
-                            <span class="class-name">Salsa</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">21:00 - 22:00</span>
-                            <span class="class-name">Bachata</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Tuesday -->
-                <div class="schedule-card">
-                    <h3>Вторник</h3>
-                    <p class="schedule-location">
-                        <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
-                            ул. Мележа 1, зал 308
-                        </a>
-                    </p>
-                    <ul class="schedule-classes">
-                        <li>
-                            <span class="time">18:00 - 19:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">19:00 - 20:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">20:00 - 21:00</span>
-                            <span class="class-name">Salsa</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">21:00 - 22:00</span>
-                            <span class="class-name">Bachata</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Wednesday -->
-                <div class="schedule-card">
-                    <h3>Среда</h3>
-                    <p class="schedule-location">
-                        <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
-                            ул. Мележа 1, зал 308
-                        </a>
-                    </p>
-                    <ul class="schedule-classes">
-                        <li>
-                            <span class="time">18:00 - 19:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">19:00 - 20:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">20:00 - 21:00</span>
-                            <span class="class-name">Salsa</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">21:00 - 22:00</span>
-                            <span class="class-name">Bachata</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Thursday -->
-                <div class="schedule-card">
-                    <h3>Четверг</h3>
-                    <p class="schedule-location">
-                        <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
-                            ул. Мележа 1, зал 308
-                        </a>
-                    </p>
-                    <ul class="schedule-classes">
-                        <li>
-                            <span class="time">18:00 - 19:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">19:00 - 20:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">20:00 - 21:00</span>
-                            <span class="class-name">Salsa</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">21:00 - 22:00</span>
-                            <span class="class-name">Bachata</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Friday -->
-                <div class="schedule-card">
-                    <h3>Пятница</h3>
-                    <p class="schedule-location">
-                        <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
-                            ул. Мележа 1, зал 308
-                        </a>
-                    </p>
-                    <ul class="schedule-classes">
-                        <li>
-                            <span class="time">18:00 - 19:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">19:00 - 20:00</span>
-                            <span class="class-name">Lady's Style</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">20:00 - 21:00</span>
-                            <span class="class-name">Salsa</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                        <li>
-                            <span class="time">21:00 - 22:00</span>
-                            <span class="class-name">Bachata</span>
-                            <span class="teacher-name">Грейс</span>
-                        </li>
-                    </ul>
+                <div class="calendar-cards">
+                    <div class="calendar-card">
+                        <h3>Понедельник</h3>
+                        <div class="calendar-location">
+                            <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
+                                ул. Мележа 1, зал 308
+                            </a>
+                        </div>
+                        <ul class="calendar-classes" role="list">
+                            <li role="listitem">
+                                <span class="time">18:00 - 19:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">19:00 - 20:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">20:00 - 21:00</span>
+                                <span class="class-name">Salsa</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">21:00 - 22:00</span>
+                                <span class="class-name">Bachata</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Tuesday -->
+                    <div class="calendar-card">
+                        <h3>Вторник</h3>
+                        <div class="calendar-location">
+                            <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
+                                ул. Мележа 1, зал 308
+                            </a>
+                        </div>
+                        <ul class="calendar-classes" role="list">
+                            <li role="listitem">
+                                <span class="time">18:00 - 19:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">19:00 - 20:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">20:00 - 21:00</span>
+                                <span class="class-name">Salsa</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">21:00 - 22:00</span>
+                                <span class="class-name">Bachata</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Wednesday -->
+                    <div class="calendar-card">
+                        <h3>Среда</h3>
+                        <div class="calendar-location">
+                            <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
+                                ул. Мележа 1, зал 308
+                            </a>
+                        </div>
+                        <ul class="calendar-classes" role="list">
+                            <li role="listitem">
+                                <span class="time">18:00 - 19:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">19:00 - 20:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">20:00 - 21:00</span>
+                                <span class="class-name">Salsa</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">21:00 - 22:00</span>
+                                <span class="class-name">Bachata</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Thursday -->
+                    <div class="calendar-card">
+                        <h3>Четверг</h3>
+                        <div class="calendar-location">
+                            <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
+                                ул. Мележа 1, зал 308
+                            </a>
+                        </div>
+                        <ul class="calendar-classes" role="list">
+                            <li role="listitem">
+                                <span class="time">18:00 - 19:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">19:00 - 20:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">20:00 - 21:00</span>
+                                <span class="class-name">Salsa</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">21:00 - 22:00</span>
+                                <span class="class-name">Bachata</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Friday -->
+                    <div class="calendar-card">
+                        <h3>Пятница</h3>
+                        <div class="calendar-location">
+                            <a href="https://yandex.by/maps/-/CDq7509P" target="_blank">
+                                ул. Мележа 1, зал 308
+                            </a>
+                        </div>
+                        <ul class="calendar-classes" role="list">
+                            <li role="listitem">
+                                <span class="time">18:00 - 19:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">19:00 - 20:00</span>
+                                <span class="class-name">Lady's Style</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">20:00 - 21:00</span>
+                                <span class="class-name">Salsa</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                            <li role="listitem">
+                                <span class="time">21:00 - 22:00</span>
+                                <span class="class-name">Bachata</span>
+                                <span class="teacher-name">Грейс</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="container-full">
+        <section id="about" class="container-full" role="group" aria-labelledby="about-heading">
             <h2>О нас</h2>
             <div class="gallery-container">
-                <h3>Каждый год мы участвуем в Фестивале латиноамериканской культуры в Минске</h3>
-                <iframe width="auto" height="500px" src="https://www.youtube.com/embed/4m6O2EXk2hE?si=ZgpkAuLwD4q6Ah2_"
-                    title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen></iframe>
-                <div class="image-placeholder">
-                    <img src="img/IMG_7510.JPG" alt="A man dancing" loading="lazy">
+                <p>Каждый год мы участвуем в Фестивале латиноамериканской культуры в Минске</p>
+                <iframe width="auto" height="500px"
+                    aria-label="Участие в фестивале латиноамериканской культуры в Минске"
+                    src="https://www.youtube.com/embed/4m6O2EXk2hE?si=ZgpkAuLwD4q6Ah2_" title="YouTube video player"
+                    frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="image-placeholder" aria-label="Группа танцующих людей" role="img">
+                    <img src="img/IMG_7510.JPG" alt="Группа танцующих людей" loading="lazy">
                 </div>
-                <div class="image-placeholder">
-                    <img src="img/IMG_7512.JPG" alt="A man dancing" loading="lazy">
+                <div class="image-placeholder" aria-label="Танцующая пара" role="img">
+                    <img src="img/IMG_7512.JPG" alt="Танцующая пара" loading="lazy">
                 </div>
-                <div class="image-placeholder">
-                    <img src="img/IMG_7504.JPG" alt="A man dancing" loading="lazy">
+                <div class="image-placeholder" aria-label="Танцующий мужчина" role="img">
+                    <img src="img/IMG_7504.JPG" alt="Танцующий мужчина" loading="lazy">
                 </div>
             </div>
-
         </section>
 
-        <section id="qa" class="container-full">
+        <section id="qa" class="container-full" role="group" aria-labelledby="qa-heading">
             <h2>Вопросы</h2>
-            <ul class="qa-container">
-                <li>
+            <ul class="qa-container" role="list">
+                <li role="listitem">
                     <h3>Как начать новичку?</h3>
                     <p>Выбирайте группы с нуля или для начинающих, в них не требуют специальной подготовки. Главное -
                         это
                         желание научиться танцевать. </p>
                 </li>
-                <li>
+                <li role="listitem">
                     <h3>В группы парных занятий нужно приходить с парой?</h3>
-                    <p>Да, нужно приходжить с парой или записаться в лист ожидания пары.</p>
+                    <p>Да,<br>нужно приходжить с парой или записаться в лист ожидания пары.</p>
                 </li>
-                <li>
+                <li role="listitem">
                     <h3>В чем тренироваться?</h3>
                     <p>В удобной, не стесняющей движения одежде и танцевальных туфлях или кроссовках. На латино микс
                         рекомендуем одевать леггинсы и кроссовки.</p>
@@ -363,56 +375,71 @@
             </ul>
         </section>
 
-        <section id="contacts" class="container-full">
+        <section id="contacts" class="container-full" role="group" aria-labelledby="contacts-heading">
             <h2>Контакты</h2>
-            <h3>Не стесняйтесь писать, звонить и посещать нас.
-                Мы действительно любим общаться с нашими клиентами.</h3>
 
-            <div class="social-media">
-                <a href="https://www.facebook.com/LaCasaDeGrei?locale=ru_RU" target="_blank"><img src="img/facebook.svg"
-                        alt="Facebook" loading="lazy"></a>
-                <a href="https://www.instagram.com/la_casa_de_grei/" target="_blank"><img src="img/instagram.svg"
-                        alt="instagram" loading="lazy"></a>
-                <a href="https://www.youtube.com/@lacasadegrei2151" target="_blank"><img src="img/youtube.svg"
-                        alt="instagram" loading="lazy"></a>
-            </div>
-
-            <h4>Три зала в Минске:</h4>
-            <ol>
-                <li>ул. Тимирязева, 9/10 (танцевальное пространство Эллада)</li>
-                <li>пр-т Рокоссовского, 44/2 (теннисный центр "Аква Минск")</li>
-                <li>ул. Матусевича, 35г (спортивный центр Sport Goat)</li>
-            </ol>
-            <div class="contact-locations">
-                <div class="image-placeholder">
-                    <img src="img/map.webp" alt="Map" usemap="#map-directions" loading="lazy">
-                    <map name="map-directions">
-                        <area target="_blank" alt="ул. Матусевича, 35г" title="ул. Матусевича, 35г"
-                            href="https://yandex.by/maps/?rtext=~ул.%20Матусевича%2C%2035г&rtt=auto" coords="7,4,174,54"
-                            shape="rect" data-original-coords="7,4,174,54">
-                        <area target="_blank" alt="пр-т Рокоссовского, 44к2" title="пр-т Рокоссовского, 44к2"
-                            href="https://yandex.by/maps/?rtext=~пр-т%20Рокоссовского%2C%2044к2&rtt=auto"
-                            coords="785,482,978,538" shape="rect" data-original-coords="785,482,978,538">
-                        <area target="_blank" alt="ул. Тимирязева, 9к10" title="ул. Тимирязева, 9к10"
-                            href="https://yandex.by/maps/?rtext=~ул.%20Тимирязева%2C%209к10&rtt=auto"
-                            coords="423,84,603,137" shape="rect" data-original-coords="423,84,603,137">
-                    </map>
+            <div class="contacts-container">
+                <p>Не стесняйтесь писать, звонить и посещать нас.
+                    Мы действительно любим общаться с нашими клиентами.</p>
+                <p>
+                    <strong>Телефон:</strong> <a href="tel:+375291234567">+375 (29) 123-45-67</a>
+                </p>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:info@lacasadegrei.by">info@lacasadegrei.by</a>
+                </p>
+                <p>Наши социальные сети</p>
+                <div class="social-media">
+                    <a href="https://www.facebook.com/LaCasaDeGrei?locale=ru_RU" target="_blank"><img
+                            src="img/facebook.svg" alt="Facebook" loading="lazy"></a>
+                    <a href="https://www.instagram.com/la_casa_de_grei/" target="_blank"><img src="img/instagram.svg"
+                            alt="Instagram" loading="lazy"></a>
+                    <a href="https://vk.com/greisier" target="_blank"><img src="img/vk.svg" alt="VK" loading="lazy"></a>
+                    <a href="https://www.youtube.com/@lacasadegrei2151" target="_blank"><img src="img/youtube.svg"
+                            alt="Youtube" loading="lazy"></a>
                 </div>
-                <h5>(Нажмите на местоположение на карте, чтобы проложить туда маршрут)</h5>
+                <h3>Три зала в Минске:</h3>
+                <ol class="contact-saloon" role="list">
+                    <li role="listitem">ул. Тимирязева, 9/10 (танцевальное пространство Эллада)</li>
+                    <li role="listitem">пр-т Рокоссовского, 44/2 (теннисный центр "Аква Минск")</li>
+                    <li role="listitem">ул. Матусевича, 35г (спортивный центр Sport Goat)</li>
+                </ol>
+                <div class="contact-locations">
+                    <div class="image-placeholder" aria-label="Расположение танцевальных студий">
+                        <img src="img/map.webp" alt="Расположение танцевальных студий" usemap="#map-directions"
+                            loading="lazy">
+                        <map name="map-directions">
+                            <area target="_blank" alt="ул. Матусевича, 35г" title="ул. Матусевича, 35г"
+                                href="https://yandex.by/maps/?rtext=~ул.%20Матусевича%2C%2035г&rtt=auto"
+                                coords="7,4,174,54" shape="rect" data-original-coords="7,4,174,54">
+                            <area target="_blank" alt="пр-т Рокоссовского, 44к2" title="пр-т Рокоссовского, 44к2"
+                                href="https://yandex.by/maps/?rtext=~пр-т%20Рокоссовского%2C%2044к2&rtt=auto"
+                                coords="785,482,978,538" shape="rect" data-original-coords="785,482,978,538">
+                            <area target="_blank" alt="ул. Тимирязева, 9к10" title="ул. Тимирязева, 9к10"
+                                href="https://yandex.by/maps/?rtext=~ул.%20Тимирязева%2C%209к10&rtt=auto"
+                                coords="423,84,603,137" shape="rect" data-original-coords="423,84,603,137">
+                        </map>
+                    </div>
+                    <p><em>(Нажмите на местоположение на карте, чтобы проложить туда маршрут)</em></p>
+                </div>
             </div>
-            <p>
-                <strong>Телефон:</strong> <a href="tel:+375291234567">+375 (29) 123-45-67</a>
-            </p>
-            <p>
-                <strong>Email:</strong> <a href="mailto:info@lacasadegrei.by">info@lacasadegrei.by</a>
-            </p>
         </section>
 
     </main>
     <footer>
-        <div class="copyright">
-            <a href="/"><img src="img/logo.svg" alt="LOGO"></a>
-            <p>© La Casa de Grei</p>
+        <div class="footer-info">
+            <div class="copyright">
+                <p>© 2025 La Casa de Grei. All rights reserved.</p>
+                <p>Создание и продвижение сайта <a href="mailto:ernvk23@gmail.com" target="_blank">ernvk23</a></p>
+                <a href="/"><img src="img/logo.svg" alt="LOGO"></a>
+            </div>
+            <div class="legal">
+                <p>Индивидуальный предприниматель Коваленко Максим Леонидович</p>
+                <p>УНП: 193553191 Республика Беларусь</p>
+
+                <p><strong>Реквизиты для оплаты:</strong></p>
+                <p>Расчетный счет: BY97ALFA30132A17830030270000 в BYN ЗАО «Альфа-Банк»</p>
+                <p>БИК: ALFABY2X</p>
+            </div>
         </div>
     </footer>
 </body>
