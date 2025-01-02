@@ -401,7 +401,7 @@ body.nav-open .container-full {
 
 .contact-icon {
     height: 1.5rem;
-    width: auto;
+    width: 1.5rem;
     margin-left: 0.5rem;
     transition: transform var(--transition-duration) ease;
     /* Smooth transition for rotation */
@@ -756,7 +756,6 @@ body.nav-open .container-full {
 
 .contact-locations {
     width: 100%;
-
 }
 
 .contact-locations img {
@@ -811,14 +810,23 @@ body.nav-open .container-full {
     }
 }
 
-/* Footer */
-footer {
-    background: var(--linear-gradient);
-    color: var(--text-color);
+
+.copyright {
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    padding: 0.5rem;
-    max-width: 60%;
-    margin-inline: auto;
+    padding-top: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    background: var(--linear-gradient-text-secondary);
+}
+
+.copyright img {
+    width: 5rem;
+    height: 5rem;
+    /* margin-inline: auto; */
+    padding: 0;
+
 }
 
 /* Media Queries for Mobile */
