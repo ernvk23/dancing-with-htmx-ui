@@ -25,7 +25,7 @@
     /* Darker Reddish-Purple (text, subtle elements) */
 
     /* Accent Color (Warm and Inviting) */
-    --accent-color: #d4af37e0;
+    --accent-color: #b69426c5;
     /* Golden Yellow - Refined and balanced */
 
     /* Neutral Colors */
@@ -38,19 +38,14 @@
 
     /* Other Variables */
     --border-radius: 0.5rem;
-    --box-shadow-navbar: 0 0.1rem 0.4rem var(--primary-color);
+    --box-shadow-navbar: 0 0.1rem 0.3rem var(--primary-color);
     --box-shadow-primary: 0 0 0.3rem var(--primary-color);
     --box-shadow-secondary: 0 0 0.3rem var(--secondary-color-dark);
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
     --transition-duration-longer: 0.5s;
 
-    /* Gradients (Subtle) */
-    --gradient-start: var(--background-color);
-    /* Very dark gray */
-    --gradient-end: var(--primary-color-dark);
-    /* Dark reddish-purple gray */
-    --linear-gradient: linear-gradient(90deg, var(--gradient-start) 70%, #1f0c33 90%, var(--gradient-start));
+    --linear-gradient: linear-gradient(90deg, var(--background-color) 70%, #1f0c33 90%, var(--background-color));
     --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, #33194d80 50%, transparent 80%);
     --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.418) 50%, transparent 80%);
     --viewport-width-desktop: 1400px;
@@ -382,7 +377,7 @@ footer .container-full {
      */
     left: 12%;
     font-size: 1rem;
-    padding: 0.8rem;
+    padding: 0.6rem;
     z-index: 80;
     /* Ensure it stays on top */
     cursor: pointer;
@@ -416,7 +411,6 @@ footer .container-full {
     width: 1.5rem;
     margin-left: 0.5rem;
     transition: transform var(--transition-duration) ease;
-    /* Smooth transition for rotation */
 }
 
 .contact-menu {
@@ -424,7 +418,7 @@ footer .container-full {
     bottom: 0;
     left: 0;
     right: 0;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     /* background-color: transparent; */
     list-style: none;
     opacity: 0;
@@ -916,10 +910,6 @@ footer .container-full {
         padding: 0.5rem;
     }
 
-
-    .contact-menu {
-        margin-bottom: 3rem;
-    }
 
     .contact-text {
         display: none;
