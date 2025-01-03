@@ -51,8 +51,8 @@
     --linear-gradient: linear-gradient(90deg, var(--gradient-start) 70%, #2a1144 90%, var(--gradient-start));
     --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, #33194d80 50%, transparent 80%);
     --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.418) 50%, transparent 80%);
-    --viewport-width-desktop: 50%;
-    --viewport-width-tablet: 80%;
+    --viewport-width-desktop: 1400px;
+    /* --viewport-width-tablet: 80%; */
     --viewport-width-mobile: 90%;
 }
 
@@ -101,7 +101,7 @@ h3 {
 
 #pricing,
 #contacts,
-footer {
+footer .container-full {
     background: var(--linear-gradient-text-primary);
 }
 
@@ -112,6 +112,13 @@ footer {
     background: var(--linear-gradient-text-secondary);
 }
 
+.bigger-text {
+    font-size: larger;
+}
+
+.smaller-text {
+    font-size: smaller;
+}
 
 /* Container for max-width consistency */
 .container-full {
@@ -243,8 +250,8 @@ footer {
     height: auto;
     padding-bottom: 56.25%;
     border-radius: var(--border-radius);
-    background: transparent;
     overflow: hidden;
+
 }
 
 .instructor .image-placeholder {
@@ -324,7 +331,6 @@ footer {
     background-color: var(--background-color);
     background-position: center top;
     background-attachment: fixed;
-    background-size: cover;
     background-repeat: no-repeat;
     background-clip: padding-box;
     position: relative;
@@ -350,6 +356,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    /* align-items: center; */
 }
 
 .home-container p:first-of-type {
@@ -372,7 +379,7 @@ footer {
     position: fixed;
     bottom: 3rem;
     /* left: calc(20vw + 2rem); */
-    left: 15vw;
+    left: 12vw;
     font-size: 1rem;
     padding: 0.8rem;
     z-index: 80;
@@ -498,7 +505,7 @@ footer {
     border-radius: var(--border-radius);
     margin-top: 3rem;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .instructors-container img {
@@ -514,8 +521,9 @@ footer {
     box-shadow: var(--box-shadow);
     padding: 1rem;
     gap: 1rem;
-    flex-basis: 350px;
+    flex-basis: 300px;
 }
+
 
 
 .instructor-info-1 p:first-of-type {
@@ -535,7 +543,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: center;
+    justify-content: space-around;
     align-items: stretch;
     margin-block: 1rem;
     padding: 1rem;
@@ -577,6 +585,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    /* align-items: center; */
     /* align-items: baseline; */
     gap: 2rem;
 }
@@ -585,7 +594,7 @@ footer {
 .pricing-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     /* min-width: 200px; */
     /* width: 100%; */
     /* justify-content: space-evenly; */
@@ -598,15 +607,11 @@ footer {
 
 }
 
-.pricing-container>p:first-of-type {
-    /* max-width: fit-content; */
-    /* margin-inline: auto; */
-}
-
 /* .pricing-container>p:first-of-type,
 .payment-methods {
     margin-left: 3%;
 } */
+
 
 .pricing-summary {
     text-align: center;
@@ -631,8 +636,9 @@ footer {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     /* padding-block: 1rem; */
-    flex-basis: 20%;
-    padding: 1rem;
+    /* flex-basis: 200px; */
+    padding-block: 3rem;
+    padding-inline: 0.5rem;
     color: var(--card-text-color);
     /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
@@ -704,8 +710,8 @@ footer {
 
 .payment-methods {
     margin-top: 2rem;
-
     /* text-align: center; */
+    margin-inline: auto;
 }
 
 .payment-methods li {
@@ -720,7 +726,7 @@ footer {
 .gallery-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 /* .gallery-container p {
@@ -808,9 +814,11 @@ footer {
     box-shadow: var(--box-shadow);
 }
 
-footer {
+footer .container-full {
     text-align: center;
-    margin-inline: auto;
+    padding-block: 0;
+    margin-block: auto;
+    min-height: auto;
     max-width: var(--viewport-width-desktop);
 }
 
@@ -840,6 +848,11 @@ footer {
 .legal {
     padding: 1rem;
 }
+
+.legal ul {
+    list-style: none;
+}
+
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
@@ -892,8 +905,6 @@ footer {
         max-width: var(--viewport-width-mobile);
     }
 
-
-
     /* Simplified navbar styles */
     .navbar {
         max-width: var(--viewport-width-mobile);
@@ -903,9 +914,6 @@ footer {
         padding: 0.5rem 1rem;
     }
 
-    .instructor {
-        /* flex-basis: 400px; */
-    }
 
     .contact-locations {
         flex-direction: column;
@@ -913,7 +921,7 @@ footer {
 
     .floating-contact-button {
         bottom: 2rem;
-        left: 5vw;
+        left: 2rem;
         padding: 0.5rem;
     }
 
@@ -930,79 +938,14 @@ footer {
         display: inline;
     }
 
-    .footer {
+    footer .container-full {
         max-width: var(--viewport-width-mobile);
+        padding-bottom: 2.5rem;
     }
 
 
     .qa-container {
         flex-direction: column;
         gap: 2rem;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1048px) {
-    .nav-content {
-        padding: 0.5rem;
-    }
-
-    .nav-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 1rem;
-        right: 0;
-        left: 0;
-        max-width: var(--viewport-width-tablet);
-        margin-inline: auto;
-        flex-direction: column;
-        z-index: 100;
-        justify-content: flex-start;
-        gap: 1rem;
-        padding-block: 4rem;
-        padding-right: 1rem;
-        /* background: var(--background-color); */
-        background-image: var(--linear-gradient);
-        color: var(--text-color);
-        box-shadow: var(--box-shadow);
-    }
-
-    .nav-links.open {
-        display: flex;
-        /* Adjust width as needed */
-        flex-direction: column;
-        text-align: center;
-        /* z-index: 100; */
-        justify-content: flex-start;
-        gap: 1rem;
-        padding-top: 4rem;
-        background-image: var(--linear-gradient);
-        color: var(--text-color);
-        border-radius: var(--border-radius);
-    }
-
-    /* Container for max-width consistency */
-    .container-full {
-        max-width: var(--viewport-width-tablet);
-    }
-
-    /* Simplified navbar styles */
-    .navbar {
-        max-width: var(--viewport-width-tablet);
-    }
-
-    .nav-links li {
-        padding: 0.5rem 1rem;
-    }
-
-    .floating-contact-button {
-        bottom: 2rem;
-        left: 5vw;
-        padding: 0.5rem;
     }
 }
