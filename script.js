@@ -142,4 +142,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call adjustImageMap after DOMContentLoaded
     adjustImageMap();
+
+
+    //Navbar border shadow when scrolling
+    const navbar = document.querySelector('.navbar');
+
+    function toggleNavbarShadow() {
+        if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', toggleNavbarShadow);
+
+    // Call once on load to set initial state
+    toggleNavbarShadow();
+
+
 });

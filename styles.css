@@ -29,7 +29,7 @@
     /* Golden Yellow - Refined and balanced */
 
     /* Neutral Colors */
-    --background-color: #070707;
+    --background-color: black;
     /* Very dark gray, almost black */
     --text-color: #eeeeeee3;
     /* Very light gray, almost white */
@@ -38,7 +38,7 @@
 
     /* Other Variables */
     --border-radius: 0.5rem;
-    --box-shadow-navbar: 0 0 0.1rem var(--primary-color);
+    --box-shadow-navbar: 0 0.1rem 0.4rem var(--primary-color);
     --box-shadow-primary: 0 0 0.3rem var(--primary-color);
     --box-shadow-secondary: 0 0 0.3rem var(--secondary-color-dark);
     /* Reddish-purple glow */
@@ -139,19 +139,26 @@ footer .container-full {
     align-items: center;
     justify-content: space-between;
     padding-inline: 1rem;
-    background-image: var(--linear-gradient);
+    padding-block: 0.2rem;
+    background: var(--linear-gradient);
     position: fixed;
     top: 1rem;
     left: 0;
     right: 0;
-    max-width: var(--viewport-width-desktop);
-    /* min-width: 768px; */
     margin-inline: auto;
+    width: calc(100% - 4rem);
+    max-width: calc(1400px - 4rem);
     z-index: 1001;
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-navbar);
+    /* box-shadow: var(--box-shadow-navbar); */
     overflow: hidden;
+    transition: box-shadow var(--transition-duration) ease;
 }
+
+.navbar.scrolled {
+    box-shadow: var(--box-shadow-navbar);
+}
+
 
 .navbar-overlay {
     display: none;
@@ -182,7 +189,7 @@ footer .container-full {
     align-items: flex-end;
     list-style: none;
     gap: 0.5rem;
-    padding: 0.2rem;
+    /* padding: 0.2rem; */
     white-space: nowrap;
 }
 
@@ -847,8 +854,6 @@ footer .container-full {
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
-
-
     .container-full {
         max-width: var(--viewport-width-mobile);
     }
@@ -867,8 +872,8 @@ footer .container-full {
         display: none;
         position: fixed;
         top: 1rem;
-        right: 0;
-        left: 0;
+        right: 2rem;
+        left: 2rem;
         max-width: var(--viewport-width-mobile);
         margin-inline: auto;
         flex-direction: column;
@@ -900,7 +905,6 @@ footer .container-full {
     #home {
         background-size: contain;
     }
-
 
     .nav-links li {
         padding: 0.5rem 1rem;
