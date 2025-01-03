@@ -94,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function adjustImageMap() {
         const image = document.querySelector('img[usemap="#map-directions"]');
         const areas = document.querySelectorAll('map[name="map-directions"] area');
-        const originalWidth = 988;
-        const originalHeight = 540;
+        const originalWidth = 1400;
+        const originalHeight = 882;
 
         if (!image || !areas.length) {
             return;

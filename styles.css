@@ -29,16 +29,17 @@
     /* Golden Yellow - Refined and balanced */
 
     /* Neutral Colors */
-    --background-color: #121212;
+    --background-color: #070707;
     /* Very dark gray, almost black */
-    --text-color: #eee;
+    --text-color: #eeeeeee3;
     /* Very light gray, almost white */
     --text-color-secondary: #ccc;
     /* Slightly darker gray for less prominent text */
 
     /* Other Variables */
     --border-radius: 0.5rem;
-    --box-shadow: 0 0 0.3rem var(--primary-color);
+    --box-shadow-primary: 0 0 0.3rem var(--primary-color);
+    --box-shadow-secondary: 0 0 0.3rem var(--secondary-color-dark);
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
     --transition-duration-longer: 0.5s;
@@ -52,13 +53,12 @@
     --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, #33194d80 50%, transparent 80%);
     --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.418) 50%, transparent 80%);
     --viewport-width-desktop: 1400px;
-    /* --viewport-width-tablet: 80%; */
-    --viewport-width-mobile: 90%;
+    --viewport-width-mobile: 768px;
 }
 
 /* Typography */
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif, 'Times New Roman', Times, serif;
     /* System font stack */
     scroll-behavior: smooth;
     line-height: 1.6;
@@ -148,19 +148,9 @@ footer .container-full {
     margin-inline: auto;
     z-index: 1001;
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-secondary);
     overflow: hidden;
 }
-
-/* .navbar-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 90;
-    opacity: 0;
-    pointer-events: none;
-} */
 
 .navbar-overlay {
     display: none;
@@ -196,7 +186,7 @@ footer .container-full {
 }
 
 .nav-links a {
-    font-size: 1em;
+    font-size: 1.2rem;
     color: var(--text-color);
     font-weight: bold;
     transition: color var(--transition-duration) ease;
@@ -248,10 +238,11 @@ footer .container-full {
     position: relative;
     width: 100%;
     height: auto;
-    padding-bottom: 56.25%;
+    /* padding-bottom: 56.25%; */
+    padding-bottom: 65%;
     border-radius: var(--border-radius);
     overflow: hidden;
-
+    text-align: center;
 }
 
 .instructor .image-placeholder {
@@ -331,6 +322,7 @@ footer .container-full {
     background-color: var(--background-color);
     background-position: center top;
     background-attachment: fixed;
+    /* background-size: contain; */
     background-repeat: no-repeat;
     background-clip: padding-box;
     position: relative;
@@ -377,9 +369,11 @@ footer .container-full {
 
 .floating-contact-button {
     position: fixed;
-    bottom: 3rem;
+    bottom: 2rem;
     /* left: calc(20vw + 2rem); */
-    left: 12vw;
+    /* left: calc((100vw - var(--viewport-width-desktop))/2);
+     */
+    left: 12%;
     font-size: 1rem;
     padding: 0.8rem;
     z-index: 80;
@@ -518,7 +512,7 @@ footer .container-full {
     align-items: flex-end;
     justify-content: flex-end;
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-primary);
     padding: 1rem;
     gap: 1rem;
     flex-basis: 300px;
@@ -560,7 +554,7 @@ footer .container-full {
     background-color: var(--background-color);
     border-radius: var(--border-radius);
     padding: 1rem;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-primary);
     gap: 1rem;
     width: 300px;
 }
@@ -619,11 +613,12 @@ footer .container-full {
     line-height: 2;
 }
 
-.pricing-summary strong {
+.pricing-summary span {
     background-color: var(--secondary-color-dark);
     border-radius: var(--border-radius);
     padding-inline: 0.2rem;
     white-space: nowrap;
+    font-weight: bold;
 }
 
 .pricing-card {
@@ -634,7 +629,7 @@ footer .container-full {
     gap: 1rem;
     background-color: var(--background-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-secondary);
     /* padding-block: 1rem; */
     /* flex-basis: 200px; */
     padding-block: 3rem;
@@ -734,7 +729,7 @@ footer .container-full {
 } */
 
 .gallery-container iframe {
-    /* aspect-ratio: 1/1; */
+    aspect-ratio: 16/9;
     border-radius: var(--border-radius);
 }
 
@@ -748,7 +743,7 @@ footer .container-full {
 
 .qa-container li {
     /* margin-top: 2rem; */
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-primary);
     padding: 1rem;
     text-align: left;
     margin-top: 1rem;
@@ -809,14 +804,10 @@ footer .container-full {
     z-index: 1;
 }
 
-.location-item img {
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-}
-
 footer .container-full {
     text-align: center;
-    padding-block: 0;
+    padding-top: 0;
+    padding-bottom: 2.5rem;
     margin-block: auto;
     min-height: auto;
     max-width: var(--viewport-width-desktop);
@@ -856,6 +847,10 @@ footer .container-full {
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
+    .container-full {
+        max-width: var(--viewport-width-mobile);
+    }
+
     .nav-content {
         padding: 0.5rem;
     }
@@ -883,7 +878,7 @@ footer .container-full {
         /* background: var(--background-color); */
         background-image: var(--linear-gradient);
         color: var(--text-color);
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--box-shadow-secondary);
     }
 
     .nav-links.open {
@@ -900,27 +895,13 @@ footer .container-full {
         border-radius: var(--border-radius);
     }
 
-    /* Container for max-width consistency */
-    .container-full {
-        max-width: var(--viewport-width-mobile);
-    }
-
-    /* Simplified navbar styles */
-    .navbar {
-        max-width: var(--viewport-width-mobile);
-    }
 
     .nav-links li {
         padding: 0.5rem 1rem;
     }
 
 
-    .contact-locations {
-        flex-direction: column;
-    }
-
     .floating-contact-button {
-        bottom: 2rem;
         left: 2rem;
         padding: 0.5rem;
     }
@@ -940,12 +921,17 @@ footer .container-full {
 
     footer .container-full {
         max-width: var(--viewport-width-mobile);
-        padding-bottom: 2.5rem;
     }
-
 
     .qa-container {
         flex-direction: column;
         gap: 2rem;
+    }
+}
+
+
+@media (max-width: 1600px) and (min-width: 769px) {
+    .floating-contact-button {
+        left: 2rem;
     }
 }
