@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileNavToggle.classList.toggle('expanded');
         navLinks.classList.toggle('open');
         overlay.classList.toggle('show');
+        document.body.classList.toggle('no-scroll'); // Toggle no-scroll class on body
     }
 
     mobileNavToggle?.addEventListener('click', toggleNav);
