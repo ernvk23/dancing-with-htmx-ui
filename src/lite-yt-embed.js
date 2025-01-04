@@ -26,8 +26,8 @@ class LiteYTEmbed extends HTMLElement {
          * See https://github.com/paulirish/lite-youtube-embed/blob/master/youtube-thumbnail-urls.md
          */
         if (!this.style.backgroundImage) {
-          this.style.backgroundImage = `url("https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg")`;
-          this.upgradePosterImage();
+            this.style.backgroundImage = `url("https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg")`;
+            this.upgradePosterImage();
         }
 
         // Set up play button, and its visually hidden label
@@ -48,13 +48,13 @@ class LiteYTEmbed extends HTMLElement {
         this.addNoscriptIframe();
 
         // for the PE pattern, change anchor's semantics to button
-        if(playBtnEl.nodeName === 'A'){
+        if (playBtnEl.nodeName === 'A') {
             playBtnEl.removeAttribute('href');
             playBtnEl.setAttribute('tabindex', '0');
             playBtnEl.setAttribute('role', 'button');
             // fake button needs keyboard help
             playBtnEl.addEventListener('keydown', e => {
-                if( e.key === 'Enter' || e.key === ' ' ){
+                if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     this.activate();
                 }
@@ -62,8 +62,8 @@ class LiteYTEmbed extends HTMLElement {
         }
 
         // On hover (or tap), warm up the TCP connections we're (likely) about to use.
-        this.addEventListener('pointerover', LiteYTEmbed.warmConnections, {once: true});
-        this.addEventListener('focusin', LiteYTEmbed.warmConnections, {once: true});
+        this.addEventListener('pointerover', LiteYTEmbed.warmConnections, { once: true });
+        this.addEventListener('focusin', LiteYTEmbed.warmConnections, { once: true });
 
         // Once the user clicks, add the real iframe and drop our play button
         // TODO: In the future we could be like amp-youtube and silently swap in the iframe during idle time
@@ -131,7 +131,7 @@ class LiteYTEmbed extends HTMLElement {
 
     /** Return the YT Player API instance. (Public L-YT-E API) */
     async getYTPlayer() {
-        if(!this.playerPromise) {
+        if (!this.playerPromise) {
             await this.activate();
         }
 
@@ -178,7 +178,7 @@ class LiteYTEmbed extends HTMLElement {
         return params;
     }
 
-    async activate(){
+    async activate() {
         if (this.classList.contains('lyt-activated')) return;
         this.classList.add('lyt-activated');
 
@@ -193,7 +193,7 @@ class LiteYTEmbed extends HTMLElement {
         iframeEl.focus();
     }
 
-    createBasicIframe(){
+    createBasicIframe() {
         const iframeEl = document.createElement('iframe');
         iframeEl.width = 560;
         iframeEl.height = 315;
@@ -216,7 +216,7 @@ class LiteYTEmbed extends HTMLElement {
      * See https://github.com/paulirish/lite-youtube-embed/blob/master/youtube-thumbnail-urls.md for more details
      */
     upgradePosterImage() {
-         // Defer to reduce network contention.
+        // Defer to reduce network contention.
         setTimeout(() => {
             const webpUrl = `https://i.ytimg.com/vi_webp/${this.videoId}/sddefault.webp`;
             const img = new Image();

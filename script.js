@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Get root font size for rem calculation
     const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const links = document.querySelectorAll('.nav-links a[href^="#"], .logo, #qa-erip');
+    const links = document.querySelectorAll('.nav-links a[href^="#"], #logo-header, #qa-erip');
 
     links.forEach(link => {
         link.addEventListener('click', function (e) {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const logo = document.querySelector('.logo');
+    const logo = document.querySelector('#logo-header');
 
     logo.addEventListener('click', () => {
         if (navLinks.classList.contains('open')) {

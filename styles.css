@@ -178,14 +178,15 @@ footer .container-full {
     z-index: 99;
 }
 
-
-.logo {
+#logo-header {
     height: 3rem;
     min-width: 3rem;
     z-index: 1000;
     position: relative;
     user-select: none;
 }
+
+
 
 .nav-links {
     display: flex;
@@ -529,6 +530,8 @@ footer .container-full {
 
 .teachers-container img {
     border-radius: 50%;
+    /* width: 300px;
+    height: auto; */
 }
 
 .teacher {
@@ -673,7 +676,7 @@ footer .container-full {
 .pricing-summary span {
     background-color: var(--secondary-color-dark);
     border-radius: var(--border-radius);
-    padding-inline: 0.2rem;
+    padding: 0.2rem;
     white-space: nowrap;
     font-weight: bold;
 }
@@ -780,11 +783,16 @@ lite-youtube {
     max-width: var(--viewport-width-desktop) !important;
     margin-inline: auto;
     border-radius: var(--border-radius);
-    /* border: solid red; */
-
-    /* background-size: contain; */
 }
 
+lite-youtube>.lyt-playbtn {
+    filter: none !important;
+    transition: none !important;
+}
+
+.lyt-visually-hidden {
+    display: none !important;
+}
 
 /* Questions Section */
 .qa-container {
@@ -874,7 +882,7 @@ footer .container-full {
 }
 
 
-.copyright>a:last-child {
+#logo-footer {
     display: inline-block;
     width: 5rem;
     height: 5rem;
