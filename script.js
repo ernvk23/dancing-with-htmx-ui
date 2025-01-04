@@ -44,6 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const logo = document.querySelector('.logo');
+
+    logo.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) {
+            toggleNav();
+        }
+    });
+
     const homeSection = document.getElementById('home');
 
     function setBackgroundImage() {

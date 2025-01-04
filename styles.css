@@ -25,7 +25,7 @@
     /* Darker Reddish-Purple (text, subtle elements) */
 
     /* Accent Color (Warm and Inviting) */
-    --accent-color: #b69426c5;
+    --accent-color: #bb9413;
     /* Golden Yellow - Refined and balanced */
 
     /* Neutral Colors */
@@ -40,8 +40,8 @@
     --border-radius: 0.5rem;
     --box-shadow-navbar: 0 0.1rem 0.5rem 0.1rem var(--primary-color);
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
-    --box-shadow-primary: 0 0 0.5rem 0.1rem var(--primary-color);
-    --box-shadow-secondary: 0 0 0.5rem var(--secondary-color-dark);
+    --box-shadow-primary: 0 0 0.3rem 0.1rem var(--primary-color);
+    --box-shadow-secondary: 0 0 0.3rem 0.1rem var(--secondary-color-dark);
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
     --transition-duration-longer: 0.5s;
@@ -106,7 +106,7 @@ footer .container-full {
     background: var(--linear-gradient-text-primary);
 }
 
-#instructors,
+#teachers,
 #calendar,
 #qa {
     background: var(--linear-gradient-text-secondary);
@@ -256,12 +256,12 @@ footer .container-full {
     text-align: center;
 }
 
-.instructor .image-placeholder {
+.teacher .image-placeholder {
     padding-bottom: 100%;
 }
 
 
-.instructor .image-placeholder::before {
+.teacher .image-placeholder::before {
     border-radius: 50%;
 }
 
@@ -331,13 +331,14 @@ footer .container-full {
 
 #home {
     background-color: var(--background-color);
-    background-position: center top;
+    background-position: top center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-clip: padding-box;
     position: relative;
     z-index: 0;
     text-align: center;
+    background-size: cover;
 }
 
 #home::before {
@@ -354,7 +355,7 @@ footer .container-full {
 }
 
 /* .home-container, */
-/* .instructors-container,
+/* .teachers-container,
 .pricing-container,
 .calendar-container,
 .qa-container,
@@ -516,7 +517,7 @@ footer .container-full {
     flex-grow: 1;
 }
 
-.instructors-container {
+.teachers-container {
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
@@ -525,11 +526,11 @@ footer .container-full {
     gap: 2rem;
 }
 
-.instructors-container img {
+.teachers-container img {
     border-radius: 50%;
 }
 
-.instructor {
+.teacher {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -544,7 +545,7 @@ footer .container-full {
 
 
 
-.instructor-info-1 p:first-of-type {
+.teacher-info-1 p:first-of-type {
     color: var(--primary-color-light);
     font-style: italic;
 }
@@ -922,7 +923,7 @@ footer .container-full {
     }
 
     #home {
-        background-size: cover;
+        background-position: top;
     }
 
     .nav-links li {
