@@ -41,7 +41,7 @@
     --box-shadow-navbar: 0 0.1rem 0.5rem 0.1rem var(--primary-color);
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
     --box-shadow-primary: 0 0 0.5rem 0.1rem var(--primary-color);
-    --box-shadow-secondary: 0 0 0.5rem 0.1rem var(--secondary-color-dark);
+    --box-shadow-secondary: 0 0 0.5rem var(--secondary-color-dark);
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
     --transition-duration-longer: 0.5s;
@@ -250,7 +250,7 @@ footer .container-full {
     width: 100%;
     height: auto;
     /* padding-bottom: 56.25%; */
-    padding-bottom: 65%;
+    padding-bottom: 64%;
     border-radius: var(--border-radius);
     overflow: hidden;
     text-align: center;
@@ -658,14 +658,6 @@ footer .container-full {
     /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
-
-.pricing-container>p:first-of-type,
-/* .pricing-summary, */
-.payment-methods {
-    /* width: 100%; */
-    /* box-sizing: border-box; */
-}
-
 .price {
     background-color: var(--secondary-color-dark);
     border-radius: var(--border-radius);
@@ -745,9 +737,16 @@ footer .container-full {
     font-size: 1.4rem;
 } */
 
-.gallery-container iframe {
-    aspect-ratio: 16/9;
+lite-youtube {
+    height: auto;
+    max-height: 600px;
+    width: 100%;
+    max-width: var(--viewport-width-desktop) !important;
+    margin-inline: auto;
     border-radius: var(--border-radius);
+    /* border: solid red; */
+
+    /* background-size: contain; */
 }
 
 

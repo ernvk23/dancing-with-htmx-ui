@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="img/logo.svg">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="src/lite-yt-embed.css">
+    <script src="src/lite-yt-embed.js" defer></script>
     <title>La Casa de Grei</title>
     <meta name="description"
         content="Школа латиноамериканских танцев в Минске (Беларусь). Обучаем сальсе, бачате (соло и в парах), lady style, реггетону, афро, латина микс. Опытные кубинские преподаватели!">
@@ -351,10 +353,17 @@
             <h2>О нас</h2>
             <div class="gallery-container">
                 <p class="bigger-text">Каждый год мы участвуем в Фестивале латиноамериканской культуры в Минске</p>
-                <iframe aria-label="Участие в фестивале латиноамериканской культуры в Минске"
+                <!-- <iframe aria-label="Участие в фестивале латиноамериканской культуры в Минске"
                     src="https://www.youtube.com/embed/4m6O2EXk2hE?si=ZgpkAuLwD4q6Ah2_" title="YouTube video player"
                     frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-                    loading="lazy"></iframe>
+                    loading="lazy"></iframe> -->
+                <lite-youtube videoid="4m6O2EXk2hE" style="background-image: url('img/festival-placeholder.webp');"
+                    aria-label="Участие в фестивале латиноамериканской культуры в Минске">
+                    <a href="https://www.youtube.com/watch?v=4m6O2EXk2hE" class="lyt-playbtn" title="Play Video">
+                        <span class="lyt-visually-hidden">Play Video: Участие в фестивале латиноамериканской культуры в
+                            Минске</span>
+                    </a>
+                </lite-youtube>
                 <div class="image-placeholder" aria-label="Группа танцующих людей" role="img">
                     <img src="img/group-dancing.webp" alt="Группа танцующих людей" loading="lazy">
                 </div>
