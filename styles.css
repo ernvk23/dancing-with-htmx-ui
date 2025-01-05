@@ -353,7 +353,7 @@ footer .container-full {
 
 #home {
     background-color: var(--background-color);
-    background-position: center;
+    background-position: top center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-clip: padding-box;
@@ -985,8 +985,8 @@ footer .container-full {
     }
 
     #home {
-        background-position: top center;
-        background-size: cover;
+        /* background-position: top center;
+        background-size: cover; */
     }
 
     .nav-links li {
