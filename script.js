@@ -84,17 +84,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const contactButton = document.querySelector('.floating-contact-button');
 
-    // Close the menu when clicking outside of it
+    // Handle contact button clicks and outside clicks
     document.addEventListener('click', (event) => {
-        if (!contactButton.contains(event.target)) {
+        if (contactButton.contains(event.target)) {
+            // Click is inside the contact button, toggle the menu
+            event.stopPropagation(); // Prevent immediate closing if clicking the button itself
+            contactButton.classList.toggle('open');
+        } else {
+            // Click is outside the contact button, close the menu
             contactButton.classList.remove('open');
         }
     });
 
-    contactButton.addEventListener('click', (event) => {
-        // Prevent event propagation to avoid immediate closing
-        event.stopPropagation();
-        contactButton.classList.toggle('open');
+    // Close the menu on scroll
+    window.addEventListener('scroll', () => {
+        contactButton.classList.remove('open'); // Close if open, no need to check
     });
 
 
@@ -168,6 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call once on load to set initial state
     toggleNavbarShadow();
+
+
+
 
 
 });
