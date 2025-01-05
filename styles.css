@@ -265,8 +265,23 @@ footer .container-full {
 
 .teacher .image-placeholder {
     padding-bottom: 100%;
+
 }
 
+.navbar .image-placeholder {
+    padding-bottom: 1%;
+    /* border: solid red; */
+}
+
+.navbar .image-placeholder::before {
+    z-index: 2000;
+    content: "";
+}
+
+
+.navbar .image-placeholder.loaded::before {
+    z-index: auto;
+}
 
 .teacher .image-placeholder::before {
     border-radius: 50%;
@@ -284,7 +299,7 @@ footer .container-full {
     justify-content: center;
     background: var(--background-color);
     opacity: 1;
-    transition: opacity var(--transition-duration-longer) ease;
+    transition: opacity var(--transition-duration) ease;
     z-index: 1;
 }
 
