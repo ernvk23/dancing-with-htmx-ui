@@ -14,6 +14,7 @@
     --primary-color-light: #9966CC;
     /* Lighter Purple (hover, active states) */
     --primary-color-dark: #33194d;
+    --primary-color-dark-contacts: rgba(40, 1, 78, 0.795);
     /* Darker Purple (shadows, text on light backgrounds) */
 
     /* Secondary Color (Warm and Complementary) */
@@ -26,6 +27,7 @@
 
     /* Accent Color (Warm and Inviting) */
     --accent-color: #bb9413;
+    --accent-color-bright: #f7bd00;
     /* Golden Yellow - Refined and balanced */
 
     /* Neutral Colors */
@@ -51,6 +53,9 @@
     --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.418) 50%, transparent 80%);
     --viewport-width-desktop: 1400px;
     --viewport-width-mobile: 768px;
+
+    --stagger-delay: 0.05s;
+    /* Delay between each item */
 }
 
 /* Typography */
@@ -76,13 +81,13 @@ img {
 
 
 a {
-    color: var(--secondary-color-light);
+    color: var(--accent-color);
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
-    color: var(--accent-color);
+    color: var(--accent-color-bright);
 }
 
 h1 {
@@ -207,8 +212,8 @@ footer .container-full {
 }
 
 .nav-links a:hover {
-    color: var(--accent-color);
     text-decoration: none;
+    color: var(--accent-color-bright);
 }
 
 
@@ -414,6 +419,7 @@ footer .container-full {
     border-radius: var(--border-radius);
     border: none;
     /* overflow: hidden; */
+    min-width: 130px;
 }
 
 .contact-text {
@@ -430,34 +436,31 @@ footer .container-full {
 }
 
 .contact-icon {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.2rem;
+    width: auto;
     margin-left: 0.5rem;
     transition: transform var(--transition-duration) ease;
 }
 
-.contact-menu {
+.contact-menu-container {
     position: absolute;
-    bottom: 0;
+    bottom: 100%;
+    /* Align with the button's bottom */
     left: 0;
-    right: 0;
-    margin-bottom: 3rem;
-    /* background-color: transparent; */
-    list-style: none;
-    opacity: 0;
-    /* Initially hidden */
-    /* transition: opacity 3s ease; */
-    pointer-events: none;
-    /* Prevent clicks when hidden */
-    /* padding: 1rem; */
+    width: 100%;
     overflow: hidden;
+    pointer-events: none;
+}
 
+.contact-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .contact-menu li {
     white-space: nowrap;
-    /* Prevent text wrapping */
-    overflow: hidden;
+    margin-top: 0.2rem;
 }
 
 .contact-menu a {
@@ -465,14 +468,13 @@ footer .container-full {
     color: var(--text-color);
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-    margin-top: 0.5rem;
-    background-color: var(--background-color);
-    /* padding: 0.5rem; */
+    background-color: var(--primary-color-dark);
     border-radius: var(--border-radius);
-    transform: translateY(5rem);
-    transition: transform 0.2s ease-in-out;
-    /* Initially position below the visible area */
+    height: 2.5rem;
+    padding-inline: 0.5rem;
+    opacity: 0;
+    transform: translateY(300%);
+    transition: transform 0.15s ease-out, opacity 0.15s ease-out;
 }
 
 
@@ -480,39 +482,40 @@ footer .container-full {
     background-color: var(--primary-color-light);
 }
 
-.contact-menu a img {
-    height: 3rem;
-    padding: 0.5rem;
-    font-size: 1rem;
+.contact-menu img {
+    height: 2rem;
+    width: auto;
+    padding: 0.2rem;
+    margin-right: 0.4rem;
 }
 
-/* Click effects */
+
+/* Open state styles */
 .floating-contact-button.open .contact-icon {
-    transform: rotate(180deg);
-    /* Rotate 180 degrees on click */
+    transform: rotate(180deg) translateY(-0.1rem);
 }
 
-.floating-contact-button.open .contact-menu {
-    opacity: 1;
+.floating-contact-button.open .contact-menu-container {
     pointer-events: auto;
 }
 
 .floating-contact-button.open .contact-menu a {
+    opacity: 1;
     transform: translateY(0);
 }
 
-
-/* Staggered animation for menu items */
+/* Staggered animation with CSS only */
 .floating-contact-button.open .contact-menu li:nth-child(1) a {
-    transition-delay: 0.15s;
+    transition-delay: 0.1s;
+
 }
 
 .floating-contact-button.open .contact-menu li:nth-child(2) a {
-    transition-delay: 0.1s;
+    transition-delay: 0.05s;
 }
 
 .floating-contact-button.open .contact-menu li:nth-child(3) a {
-    transition-delay: 0.05s;
+    transition-delay: 0s;
 }
 
 .spacer {
@@ -978,7 +981,6 @@ footer .container-full {
         left: 2rem;
         padding: 0.5rem;
     }
-
 
     .contact-text {
         display: none;
