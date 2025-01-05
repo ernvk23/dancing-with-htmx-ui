@@ -405,7 +405,7 @@ footer .container-full {
      */
     left: 12%;
     font-size: 1rem;
-    padding: 0.6rem;
+    padding: 0.5rem;
     z-index: 80;
     /* Ensure it stays on top */
     cursor: pointer;
@@ -419,32 +419,33 @@ footer .container-full {
     border-radius: var(--border-radius);
     border: none;
     /* overflow: hidden; */
-    min-width: 130px;
+    min-width: 120px;
 }
 
 .contact-text {
     /* font-size: 1rem; */
     white-space: nowrap;
     color: black;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 .contact-text-short {
     color: black;
-    font-weight: bolder;
+    font-weight: bold;
     display: none;
 }
 
 .contact-icon {
-    height: 1.2rem;
+    height: 1rem;
     width: auto;
-    margin-left: 0.5rem;
+    margin-left: 0.1rem;
+    /* margin-left: 0.5rem; */
     transition: transform var(--transition-duration) ease;
 }
 
 .contact-menu-container {
     position: absolute;
-    bottom: 100%;
+    bottom: 110%;
     /* Align with the button's bottom */
     left: 0;
     width: 100%;
@@ -483,10 +484,10 @@ footer .container-full {
 }
 
 .contact-menu img {
-    height: 2rem;
+    height: 1.5rem;
     width: auto;
-    padding: 0.2rem;
-    margin-right: 0.4rem;
+    /* padding: 0.2rem; */
+    margin-right: 0.5rem;
 }
 
 
@@ -979,7 +980,6 @@ footer .container-full {
 
     .floating-contact-button {
         left: 2rem;
-        padding: 0.5rem;
     }
 
     .contact-text {
