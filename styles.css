@@ -136,7 +136,7 @@ footer .container-full {
     position: relative;
     margin-inline: auto;
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: 1rem;
     overflow: hidden;
 }
 
@@ -338,7 +338,7 @@ footer .container-full {
 
 #home {
     background-color: var(--background-color);
-    background-position: top center;
+    background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-clip: padding-box;
@@ -970,7 +970,8 @@ footer .container-full {
     }
 
     #home {
-        background-position: top;
+        background-position: top center;
+        background-size: cover;
     }
 
     .nav-links li {
