@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileNavToggle.classList.toggle('expanded');
         navLinks.classList.toggle('open');
         overlay.classList.toggle('show');
-        document.body.classList.toggle('no-scroll'); // Toggle no-scroll class on body
+        // document.body.classList.toggle('no-scroll'); // Toggle no-scroll class on body
     }
 
     mobileNavToggle?.addEventListener('click', toggleNav);
@@ -96,9 +96,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    let lastScrollY = window.scrollY;
+
     // Close the menu on scroll
     window.addEventListener('scroll', () => {
-        contactButton.classList.remove('open'); // Close if open, no need to check
+        const currentScrollY = window.scrollY;
+        // Check if the scroll distance is greater than 50px
+        if (Math.abs(currentScrollY - lastScrollY) > 50) {
+            // Collapse the contact button if open
+            contactButton.classList.remove('open');
+
+            // Collapse the navbar if the overlay is shown
+            if (overlay.classList.contains('show')) {
+                toggleNav();
+            }
+
+            // Update the last scroll position
+            lastScrollY = currentScrollY;
+        }
     });
 
 
