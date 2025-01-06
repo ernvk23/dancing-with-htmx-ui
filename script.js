@@ -1,3 +1,10 @@
+window.onload = function () {
+    var logo = document.getElementById('your-logo-id');
+    if (logo) {
+        logo.removeAttribute('alt');
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     // Get root font size for rem calculation
     const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);

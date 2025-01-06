@@ -282,20 +282,6 @@ footer .container-full {
     border-radius: 5rem;
 }
 
-.navbar .image-placeholder {
-    padding-bottom: 1%;
-    /* border: solid red; */
-}
-
-.navbar .image-placeholder::before {
-    z-index: 2000;
-    content: "";
-}
-
-
-.navbar .image-placeholder.loaded::before {
-    z-index: auto;
-}
 
 .teacher .image-placeholder::before {
     border-radius: 50%;
