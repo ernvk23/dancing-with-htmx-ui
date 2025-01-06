@@ -106,17 +106,26 @@ h3 {
     font-size: 1.5rem;
 }
 
+#styles,
 #pricing,
 #contacts,
 footer .container-full {
     background: var(--linear-gradient-text-primary);
 }
 
-#teachers,
+#about,
 #calendar,
 #qa {
     background: var(--linear-gradient-text-secondary);
 }
+
+#about>p:first-of-type,
+#gallery>p:first-of-type {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
 
 .bigger-text {
     font-size: larger;
@@ -266,6 +275,11 @@ footer .container-full {
 .teacher .image-placeholder {
     padding-bottom: 100%;
 
+}
+
+.style-card .image-placeholder {
+    padding-bottom: 100%;
+    border-radius: 5rem;
 }
 
 .navbar .image-placeholder {
@@ -539,6 +553,42 @@ footer .container-full {
     flex-grow: 1;
 }
 
+.styles-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    border-radius: var(--border-radius);
+    gap: 1rem;
+    flex-grow: 4;
+}
+
+.styles-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.style-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-secondary);
+    padding-block: 2rem;
+    padding-inline: 1rem;
+    max-width: 300px;
+    min-width: 260px;
+    flex-basis: 25%;
+}
+
+.style-card>h3 {
+    border-bottom: solid 0.2rem var(--secondary-color-dark);
+}
+
 .teachers-container {
     display: flex;
     align-items: flex-start;
@@ -706,7 +756,7 @@ footer .container-full {
     /* padding-block: 1rem; */
     /* flex-basis: 200px; */
     padding-block: 2rem;
-    /* padding-inline: 0.5rem; */
+    padding-inline: 0.5rem;
     max-width: 300px;
     min-width: 260px;
     flex-basis: 25%;
@@ -1021,6 +1071,12 @@ footer .container-full {
         flex-direction: column;
         gap: 2rem;
     }
+
+    #about>p:first-of-type,
+    #gallery>p:first-of-type {
+        font-size: 1.2rem;
+    }
+
 
 }
 
