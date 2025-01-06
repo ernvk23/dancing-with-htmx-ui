@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Get root font size for rem calculation
     const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const links = document.querySelectorAll('.nav-links a[href^="#"], #logo-header, #qa-erip');
+    const links = document.querySelectorAll('.nav-links a[href^="#"], #logo-header, #qa-erip, #cta');
 
     links.forEach(link => {
         link.addEventListener('click', function (e) {

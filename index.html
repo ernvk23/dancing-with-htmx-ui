@@ -24,11 +24,11 @@
                 <img src="img/logo-content.svg" alt="" id="logo-header" ria-label="Logo">
             </a>
             <ul class="nav-links" role="list">
+                <li role="listitem"><a href="#about">О Нас</a></li>
                 <li role="listitem"><a href="#styles">Стили</a></li>
                 <!-- <li role="listitem"><a href="#teachers">Преподаватели</a></li> -->
                 <li role="listitem"><a href="#pricing">Стоимость</a></li>
                 <li role="listitem"><a href="#calendar">Расписание</a></li>
-                <li role="listitem"><a href="#about">О Нас</a></li>
                 <li role="listitem"><a href="#contacts">Контакты</a></li>
             </ul>
             <button class="nav-toggle" aria-label="Toggle Navigation" role="button">
@@ -62,8 +62,9 @@
             <div class="spacer"></div>
             <div class="home-container">
                 <h1>LA CASA<br>DE GREI</h1>
-                <p>Школа латиноамериканских танцев</p>
+                <p>Кубинская школа латиноамериканских танцев</p>
                 <p>У танца нет возраста. У танца есть душа и она всегда молода</p>
+                <a href="#styles" id="cta">Посмотреть стили</a>
             </div>
             <div class="spacer"></div>
             <div class="scroll-down">
@@ -72,6 +73,78 @@
             </div>
         </section>
 
+        <section id="about" class="container-full" role="group" aria-labelledby="about-heading">
+            <h2>О нас</h2>
+            <p class="bigger-text">Кубинская школа латиноамериканских танцев в центре Минска.
+                Профессиональные танцоры из Кубы передают мастерство и знакомят с
+                культурой своей родины.</p>
+            <p class="teacher-heading">Преподаватели</p>
+            <div class="teachers-container">
+                <article class="teacher">
+                    <div class="image-placeholder" aria-label="Инструктор по танцам Грейсьер" role="img">
+                        <img src="img/male-teacher.webp" alt="Инструктор по танцам Грейсьер" loading="lazy">
+                    </div>
+                    <div class="teacher-info-1">
+                        <h3>Грейсьер Мачадо Лопес</h3>
+                        <p>Основатель школы</p>
+                        <p>Образование: Национальная школа танца в Гаване по специальности: «Танцор современного
+                            танца
+                            и
+                            фольклора». Участвовал в международных фестивалях в Италии, Франции, Венесуэле,
+                            Колумбии. 8
+                            лет
+                            преподавал в Китае.</p>
+                    </div>
+                </article>
+                <article class="teacher">
+                    <div class="image-placeholder" aria-label="Инструктор по танцам Аньель" role="img">
+                        <img src="img/female-teacher.webp" alt="Инструктор по танцам Аньель" loading="lazy">
+                    </div>
+                    <div class="teacher-info-2">
+                        <h3>Аньель Эррера Кастильо</h3>
+                        <p>Образование: Национальная школа исскусств в Гаване по специальности: "Танцор современного
+                            и
+                            народного танца".</p>
+                    </div>
+                </article>
+            </div>
+            <p class="gallery-heading">Галерея</p>
+            <div class="gallery-container">
+                <p class="bigger-text">Наша история</p>
+                <lite-youtube videoid="K1ultgU_QXA" title="Белорусский кубинец: о любви и билете в Беларусь"
+                    style="background-image: url('img/info-placeholder.webp');"
+                    aria-label="Белорусский кубинец: о любви и билете в Беларусь">
+                    <a href="https://www.youtube.com/watch?v=K1ultgU_QXA" class="lyt-playbtn" title="Play Video">
+                        <span class="lyt-visually-hidden">
+                            Play Video: Белорусский кубинец: о любви и билете в Беларусь
+                        </span>
+                    </a>
+                </lite-youtube>
+                <p class="bigger-text">Каждый год мы участвуем в Фестивале латиноамериканской культуры в Минске</p>
+                <!-- <iframe aria-label="Участие в фестивале латиноамериканской культуры в Минске"
+                    src="https://www.youtube.com/embed/4m6O2EXk2hE?si=ZgpkAuLwD4q6Ah2_" title="YouTube video player"
+                    frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+                    loading="lazy"></iframe> -->
+                <lite-youtube videoid="4m6O2EXk2hE"
+                    title="Фестиваль латиноамериканской культуры в Минске 13-22 октября 2022г"
+                    style="background-image: url('img/festival-placeholder.webp');"
+                    aria-label="Участие в фестивале латиноамериканской культуры в Минске">
+                    <a href="https://www.youtube.com/watch?v=4m6O2EXk2hE" class="lyt-playbtn" title="Play Video">
+                        <span class="lyt-visually-hidden">Play Video: Участие в фестивале латиноамериканской культуры в
+                            Минске</span>
+                    </a>
+                </lite-youtube>
+                <div class="image-placeholder" aria-label="Группа танцующих людей" role="img">
+                    <img src="img/group-dancing.webp" alt="Группа танцующих людей" loading="lazy">
+                </div>
+                <div class="image-placeholder" aria-label="Танцующая пара" role="img">
+                    <img src="img/couple-dancing.webp" alt="Танцующая пара" loading="lazy">
+                </div>
+                <div class="image-placeholder" aria-label="Танцующий мужчина" role="img">
+                    <img src="img/man-dancing.webp" alt="Танцующий мужчина" loading="lazy">
+                </div>
+            </div>
+        </section>
 
         <section id="styles" class="container-full">
             <h2>Наши стили</h2>
@@ -83,7 +156,7 @@
                             <img src="img/salsa.jpeg" alt="Иконка Сальса" loading="lazy">
                         </div>
                         <h3>Сальса Куба</h3>
-                        <p>Энергичный кубинский стиль сальсы. Круговые движения, сложный футвёрк и импровизация под
+                        <p>Энергичный кубинский стиль. Круговые движения, сложный футвёрк и импровизация под
                             музыку.</p>
                     </div>
                     <div class="style-card">
@@ -120,8 +193,6 @@
             </div>
             <div class="spacer"></div>
         </section>
-
-
 
         <section id="pricing" class="container-full" role="group" aria-labelledby="pricing-heading">
             <h2>Стоимость</h2>
@@ -374,72 +445,6 @@
                 </div>
             </div>
             <div class="spacer"></div>
-        </section>
-
-
-        <section id="about" class="container-full" role="group" aria-labelledby="about-heading">
-            <h2>О нас</h2>
-            <p>Преподаватели</p>
-            <div class="spacer"></div>
-            <div class="teachers-container">
-                <article class="teacher">
-                    <div class="image-placeholder" aria-label="Инструктор по танцам Грейсьер" role="img">
-                        <img src="img/male-teacher.webp" alt="Инструктор по танцам Грейсьер" loading="lazy">
-                    </div>
-                    <div class="teacher-info-1">
-                        <h3>Грейсьер Мачадо Лопес</h3>
-                        <p>Основатель школы</p>
-                        <p>Образование: Национальная школа танца в Гаване по специальности: «Танцор современного
-                            танца
-                            и
-                            фольклора». Участвовал в международных фестивалях в Италии, Франции, Венесуэле,
-                            Колумбии. 8
-                            лет
-                            преподавал в Китае.</p>
-                    </div>
-                </article>
-                <article class="teacher">
-                    <div class="image-placeholder" aria-label="Инструктор по танцам Аньель" role="img">
-                        <img src="img/female-teacher.webp" alt="Инструктор по танцам Аньель" loading="lazy">
-                    </div>
-                    <div class="teacher-info-2">
-                        <h3>Аньель Эррера Кастильо</h3>
-                        <p>Образование: Национальная школа исскусств в Гаване по специальности: "Танцор современного
-                            и
-                            народного танца".</p>
-                    </div>
-                </article>
-            </div>
-            <div class="spacer"></div>
-        </section>
-
-
-        <section id="gallery" class="container-full" role="group" aria-labelledby="gallery-heading">
-            <div class="gallery-container">
-                <p class="bigger-text">Каждый год мы участвуем в Фестивале латиноамериканской культуры в Минске</p>
-                <!-- <iframe aria-label="Участие в фестивале латиноамериканской культуры в Минске"
-                    src="https://www.youtube.com/embed/4m6O2EXk2hE?si=ZgpkAuLwD4q6Ah2_" title="YouTube video player"
-                    frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-                    loading="lazy"></iframe> -->
-                <lite-youtube videoid="4m6O2EXk2hE"
-                    title="Фестиваль латиноамериканской культуры в Минске 13-22 октября 2022г"
-                    style="background-image: url('img/festival-placeholder.webp');"
-                    aria-label="Участие в фестивале латиноамериканской культуры в Минске">
-                    <a href="https://www.youtube.com/watch?v=4m6O2EXk2hE" class="lyt-playbtn" title="Play Video">
-                        <span class="lyt-visually-hidden">Play Video: Участие в фестивале латиноамериканской культуры в
-                            Минске</span>
-                    </a>
-                </lite-youtube>
-                <div class="image-placeholder" aria-label="Группа танцующих людей" role="img">
-                    <img src="img/group-dancing.webp" alt="Группа танцующих людей" loading="lazy">
-                </div>
-                <div class="image-placeholder" aria-label="Танцующая пара" role="img">
-                    <img src="img/couple-dancing.webp" alt="Танцующая пара" loading="lazy">
-                </div>
-                <div class="image-placeholder" aria-label="Танцующий мужчина" role="img">
-                    <img src="img/man-dancing.webp" alt="Танцующий мужчина" loading="lazy">
-                </div>
-            </div>
         </section>
 
         <section id="qa" class="container-full" role="group" aria-labelledby="qa-heading">
