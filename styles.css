@@ -389,7 +389,7 @@ footer .container-full {
 .home-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin-bottom: 8rem;
     flex-grow: 2;
@@ -399,6 +399,7 @@ footer .container-full {
     font-size: 2rem;
     background: var(--linear-gradient-text-primary);
     padding: 0.5rem;
+    margin-block: 2rem;
     /* Push this paragraph to the top */
 }
 
@@ -562,7 +563,9 @@ footer .container-full {
     box-shadow: var(--box-shadow-primary);
     padding: 1rem;
     gap: 1rem;
-    flex-basis: 350px;
+    max-width: 300px;
+    min-width: 320px;
+    flex-basis: 25%;
     background-color: var(--background-color);
 }
 
@@ -592,7 +595,6 @@ footer .container-full {
 
 /* Day Card */
 .calendar-card {
-    min-width: 250px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -600,22 +602,14 @@ footer .container-full {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-primary);
     padding: 1.5rem;
+    max-width: 300px;
+    min-width: 250px;
     flex-basis: 25%;
-    /* flex: 1 0 15rem; */
-    /* flex-basis: 15%; */
-    /* flex-shrink: 0; */
-    /* flex-grow: 1; */
     color: var(--text-color);
-    /* flex-grow: 1; */
-    /* Adjust the flex-basis as needed */
-
 }
 
 .day-heading {
     text-align: center;
-    /* color: var(--primary-color); */
-    /* margin-bottom: 0.5rem; */
-    /* font-size: 1.2em; */
 }
 
 .location-group {
@@ -659,7 +653,6 @@ footer .container-full {
 }
 
 
-
 .pricing-container {
     display: flex;
     flex-direction: column;
@@ -690,6 +683,7 @@ footer .container-full {
     text-align: center;
     font-size: 1.2rem;
     line-height: 1.8;
+    margin-top: 1rem;
 }
 
 .pricing-summary span {
@@ -703,7 +697,7 @@ footer .container-full {
 .pricing-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     gap: 1rem;
     background-color: var(--background-color);
@@ -711,9 +705,11 @@ footer .container-full {
     box-shadow: var(--box-shadow-secondary);
     /* padding-block: 1rem; */
     /* flex-basis: 200px; */
-    padding-block: 3rem;
-    padding-inline: 0.5rem;
-    /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+    padding-block: 2rem;
+    /* padding-inline: 0.5rem; */
+    max-width: 300px;
+    min-width: 260px;
+    flex-basis: 25%;
 }
 
 .price {
@@ -773,6 +769,9 @@ footer .container-full {
     color: var(--secondary-color-dark);
 }
 
+.payment-methods {
+    margin-top: 1rem;
+}
 
 .payment-methods li {
     margin-left: 1rem;
@@ -786,14 +785,11 @@ footer .container-full {
 .gallery-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: space-evenly;
     flex-grow: 1;
 }
 
-/* .gallery-container p {
-    font-size: 1.4rem;
-} */
 
 lite-youtube {
     height: auto;
@@ -931,15 +927,26 @@ footer .container-full {
     }
 
     h1 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 
     h2 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     h3 {
         font-size: 1.5rem;
+    }
+
+
+    .home-container p:first-of-type {
+        font-size: 1.5rem;
+        margin-block: 1rem;
+        /* Push this paragraph to the top */
+    }
+
+    .home-container p:last-of-type {
+        font-size: 1rem;
     }
 
     .container-full {
