@@ -139,7 +139,7 @@ footer .container-full {
 
 
 #cta {
-    margin-top: 3rem;
+    margin-top: 2rem;
     display: inline-block;
     padding: 0.5rem;
     background-color: var(--primary-color-dark);
@@ -157,6 +157,7 @@ footer .container-full {
 
 #cta:hover {
     text-decoration: none;
+    background-color: var(--primary-color);
     /* transform: scale(1.2);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
 }
@@ -430,7 +431,7 @@ footer .container-full {
     justify-content: center;
     align-items: center;
     margin-bottom: 8rem;
-    flex-grow: 2;
+    flex-grow: 1;
 }
 
 .home-container p:first-of-type {
@@ -474,7 +475,6 @@ footer .container-full {
     border: none;
     /* overflow: hidden; */
     min-width: 120px;
-
 }
 
 .contact-text {
@@ -535,7 +535,7 @@ footer .container-full {
 
 
 .contact-menu a:hover {
-    background-color: var(--primary-color-light);
+    background-color: var(--primary-color);
 }
 
 .contact-menu img {
@@ -584,7 +584,7 @@ footer .container-full {
     justify-content: space-around;
     border-radius: var(--border-radius);
     gap: 1rem;
-    flex-grow: 4;
+    flex-grow: 1;
 }
 
 .styles-cards {
