@@ -552,7 +552,7 @@ footer .container-full {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 2rem;
+    gap: 4rem;
 }
 
 .style-card {
@@ -1060,7 +1060,9 @@ footer .container-full {
         font-size: 1.2rem;
     }
 
-
+    .styles-cards {
+        gap: 2rem;
+    }
 }
 
 
