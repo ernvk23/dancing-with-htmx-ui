@@ -194,7 +194,7 @@ footer .container-full {
 
 #logo-header {
     height: 3rem;
-    min-width: 3rem;
+    width: 3rem;
     z-index: 1000;
     position: relative;
     user-select: none;
@@ -331,7 +331,7 @@ footer .container-full {
 
 .scroll-down img {
     width: 3rem;
-    height: auto;
+    height: 3rem;
 }
 
 .scroll-down p {
@@ -453,7 +453,7 @@ footer .container-full {
 
 .contact-icon {
     height: 1rem;
-    width: auto;
+    width: 1rem;
     margin-left: 0.1rem;
     /* margin-left: 0.5rem; */
     transition: transform var(--transition-duration) ease;
@@ -501,7 +501,7 @@ footer .container-full {
 
 .contact-menu img {
     height: 1.5rem;
-    width: auto;
+    width: 1.5rem;
     /* padding: 0.2rem; */
     margin-right: 0.5rem;
 }
@@ -586,8 +586,6 @@ footer .container-full {
 
 .teachers-container img {
     border-radius: 50%;
-    /* width: 300px;
-    height: auto; */
 }
 
 .teacher {
@@ -828,7 +826,6 @@ footer .container-full {
 
 
 lite-youtube {
-    height: auto;
     max-height: 600px;
     width: 100%;
     max-width: var(--viewport-width-desktop) !important;
