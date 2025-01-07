@@ -322,8 +322,7 @@ footer .container-full {
     position: relative;
     width: 100%;
     height: auto;
-    /* padding-bottom: 56.25%; */
-    padding-bottom: 64%;
+    padding-bottom: 60%;
     border-radius: var(--border-radius);
     overflow: hidden;
     text-align: center;
@@ -331,12 +330,19 @@ footer .container-full {
 
 .teacher .image-placeholder {
     padding-bottom: 100%;
-
 }
 
 .style-card .image-placeholder {
     padding-bottom: 100%;
     border-radius: 25%;
+}
+
+lite-youtube .image-placeholder {
+    padding-bottom: 0%;
+}
+
+lite-youtube .image-placeholder.loaded {
+    z-index: -1;
 }
 
 
@@ -354,7 +360,7 @@ footer .container-full {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--background-color);
+    background-color: var(--background-color);
     opacity: 1;
     transition: opacity var(--transition-duration) ease;
     z-index: 1;
@@ -888,14 +894,25 @@ footer .container-full {
 
 
 lite-youtube {
-    max-height: 600px;
+    max-height: 720px;
     width: 100%;
     max-width: var(--viewport-width-desktop) !important;
     margin-inline: auto;
     border-radius: var(--border-radius);
+    background-image: none !important;
+    background-color: none !important;
+    display: flex !important;
+    position: relative;
+    z-index: 1;
 }
 
-lite-youtube>.lyt-playbtn {
+
+lite-youtube img {
+    width: 100%;
+    height: 100%;
+}
+
+.lyt-playbtn {
     filter: none !important;
     transition: none !important;
 }
