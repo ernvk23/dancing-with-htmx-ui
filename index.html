@@ -19,18 +19,18 @@
 <body>
     <header>
         <div class="navbar-overlay"></div>
-        <nav class="navbar" role="navigation">
+        <nav class="navbar">
             <a href="#home" id="logo-header">
-                <img src="img/logo-content.svg" alt="" ria-label="Logo">
+                <img src="img/logo-content.svg" alt="">
             </a>
-            <ul class="nav-links" role="list">
-                <li role="listitem"><a href="#about">О Нас</a></li>
-                <li role="listitem"><a href="#styles">Стили</a></li>
-                <li role="listitem"><a href="#pricing">Стоимость</a></li>
-                <li role="listitem"><a href="#calendar">Расписание</a></li>
-                <li role="listitem"><a href="#contacts">Контакты</a></li>
+            <ul class="nav-links">
+                <li><a href="#about">О Нас</a></li>
+                <li><a href="#styles">Стили</a></li>
+                <li><a href="#pricing">Стоимость</a></li>
+                <li><a href="#calendar">Расписание</a></li>
+                <li><a href="#contacts">Контакты</a></li>
             </ul>
-            <button class="nav-toggle" aria-label="Toggle Navigation" role="button">
+            <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-links">
                 <svg class="nav-svg" fill="none" viewBox="-10 -10 120 120">
                     <path class="nav-svg-line" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"
                         d="m 20 40 h 60 a 1 1 0 0 1 0 20 h -60 a 1 1 0 0 1 0 -40 h 30 v 70">
@@ -40,25 +40,25 @@
         </nav>
     </header>
     <main>
-        <button class="floating-contact-button" role="button">
+        <button class="floating-contact-button" aria-expanded="false">
             <span class="contact-text">Связаться с нами</span>
             <span class="contact-text-short">Связаться</span>
-            <img class="contact-icon" src="img/contacts-display.svg" alt="Open">
+            <img class="contact-icon" src="img/contacts-display.svg" alt="">
             <div class="contact-menu-container">
-                <ul class="contact-menu" role="dialog" aria-modal="true">
-                    <li role="listitem"><a href="https://t.me/machadolopezirina" target="_blank" rel="noopener"><img
+                <ul class="contact-menu" aria-modal="true" aria-label="Contact Options">
+                    <li><a href="https://t.me/machadolopezirina" target="_blank" rel="noopener"><img
                                 src="img/telegram.svg" alt="Telegram Icon">Телеграм</a></li>
-                    <li role="listitem"><a href="viber://chat?number=%2B375293575258" target="_blank"
-                            rel="noopener"><img src="img/viber.svg" alt="Viber Icon">Вайбер</a></li>
-                    <li role="listitem"><a href="tel:+375293575258" target="_blank" rel="noopener"><img
-                                src="img/call.svg" alt="Phone Icon">Телефон</a>
+                    <li><a href="viber://chat?number=%2B375293575258" target="_blank" rel="noopener"><img
+                                src="img/viber.svg" alt="Viber Icon">Вайбер</a></li>
+                    <li><a href="tel:+375293575258" target="_blank" rel="noopener"><img src="img/call.svg"
+                                alt="Phone Icon">Телефон</a>
                     </li>
                 </ul>
             </div>
         </button>
 
-        <section id="home" class="container-full" role="group" aria-labelledby="home-heading"
-            data-bg-desktop="img/home-desktop.webp" data-bg-mobile="img/home-mobile.webp">
+        <section id="home" class="container-full" aria-labelledby="home-heading" data-bg-desktop="img/home-desktop.webp"
+            data-bg-mobile="img/home-mobile.webp">
             <div class="home-container">
                 <h1>LA CASA<br>DE GREI</h1>
                 <p>Школа латиноамериканских танцев</p>
@@ -66,12 +66,12 @@
                 <a href="#styles" id="cta">Посмотреть стили</a>
             </div>
             <div class="scroll-down">
-                <img src="img/scroll-down.svg" alt="Scroll down">
+                <img src="img/scroll-down.svg" alt="Прокрутить вниз">
                 <p>Прокрутите<br>вниз</p>
             </div>
         </section>
 
-        <section id="about" class="container-full" role="group" aria-labelledby="about-heading">
+        <section id="about" class="container-full" aria-labelledby="about-heading">
             <h2>О нас</h2>
             <p class="bigger-text">Кубинская школа латиноамериканских танцев в центре Минска.
                 Профессиональные танцоры из Кубы передают мастерство и знакомят с
@@ -110,8 +110,7 @@
             <div class="gallery-container">
                 <p class="bigger-text">Наша история</p>
                 <lite-youtube videoid="K1ultgU_QXA" title="Белорусский кубинец: о любви и билете в Беларусь"
-                    style="background-image: url('img/info-placeholder.webp');"
-                    aria-label="Белорусский кубинец: о любви и билете в Беларусь">
+                    style="background-image: url('img/info-placeholder.webp');">
                     <a href="https://www.youtube.com/watch?v=K1ultgU_QXA" class="lyt-playbtn" title="Play Video">
                         <span class="lyt-visually-hidden">
                             Play Video: Белорусский кубинец: о любви и билете в Беларусь
@@ -119,14 +118,9 @@
                     </a>
                 </lite-youtube>
                 <p class="bigger-text">Каждый год мы участвуем в Фестивале латиноамериканской культуры в Минске</p>
-                <!-- <iframe aria-label="Участие в фестивале латиноамериканской культуры в Минске"
-                    src="https://www.youtube.com/embed/4m6O2EXk2hE?si=ZgpkAuLwD4q6Ah2_" title="YouTube video player"
-                    frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-                    loading="lazy"></iframe> -->
                 <lite-youtube videoid="4m6O2EXk2hE"
                     title="Фестиваль латиноамериканской культуры в Минске 13-22 октября 2022г"
-                    style="background-image: url('img/festival-placeholder.webp');"
-                    aria-label="Участие в фестивале латиноамериканской культуры в Минске">
+                    style="background-image: url('img/festival-placeholder.webp');">
                     <a href="https://www.youtube.com/watch?v=4m6O2EXk2hE" class="lyt-playbtn" title="Play Video">
                         <span class="lyt-visually-hidden">Play Video: Участие в фестивале латиноамериканской культуры в
                             Минске</span>
@@ -144,7 +138,7 @@
             </div>
         </section>
 
-        <section id="styles" class="container-full">
+        <section id="styles" class="container-full" aria-labelledby="styles-heading">
             <h2>Наши стили</h2>
             <div class="spacer"></div>
             <div class="styles-container">
@@ -192,7 +186,7 @@
             <div class="spacer"></div>
         </section>
 
-        <section id="pricing" class="container-full" role="group" aria-labelledby="pricing-heading">
+        <section id="pricing" class="container-full" aria-labelledby="pricing-heading">
             <h2>Стоимость</h2>
             <div class="spacer"></div>
             <div class="pricing-container">
@@ -206,10 +200,10 @@
                             <span class="amount">65</span>
                             <span class="period">/ месяц</span>
                         </div>
-                        <ul class="features" role="list">
-                            <li class="available" role="listitem"><span>✔</span>4 занятия</li>
-                            <li class="available" role="listitem"><span>✔</span>действует в течение 30 дней</li>
-                            <li class="not-available" role="listitem"><span>✘</span>заморозка не включена</li>
+                        <ul class="features">
+                            <li class="available"><span>✔</span>4 занятия</li>
+                            <li class="available"><span>✔</span>действует в течение 30 дней</li>
+                            <li class="not-available"><span>✘</span>заморозка не включена</li>
                         </ul>
                     </div>
                     <div class="pricing-card">
@@ -219,10 +213,10 @@
                             <span class="amount">110</span>
                             <span class="period">/ месяц</span>
                         </div>
-                        <ul class="features" role="list">
-                            <li class="available" role="listitem"><span>✔</span>8 занятий</li>
-                            <li class="available" role="listitem"><span>✔</span>действует в течение 30 дней</li>
-                            <li class="not-available" role="listitem"><span>✘</span>заморозка не включена</li>
+                        <ul class="features">
+                            <li class="available"><span>✔</span>8 занятий</li>
+                            <li class="available"><span>✔</span>действует в течение 30 дней</li>
+                            <li class="not-available"><span>✘</span>заморозка не включена</li>
                         </ul>
                     </div>
                     <div class="pricing-card">
@@ -232,10 +226,10 @@
                             <span class="amount">90</span>
                             <span class="period">/ месяц</span>
                         </div>
-                        <ul class="features" role="list">
-                            <li class="available" role="listitem"><span>✔</span>16 занятий</li>
-                            <li class="available" role="listitem"><span>✔</span>действует в течение 60 дней</li>
-                            <li class="available" role="listitem"><span>✔</span>включена <strong>одна неделя</strong>
+                        <ul class="features">
+                            <li class="available"><span>✔</span>16 занятий</li>
+                            <li class="available"><span>✔</span>действует в течение 60 дней</li>
+                            <li class="available"><span>✔</span>включена <strong>одна неделя</strong>
                                 заморозки</li>
                         </ul>
                     </div>
@@ -246,10 +240,10 @@
                             <span class="amount">80</span>
                             <span class="period">/ месяц</span>
                         </div>
-                        <ul class="features" role="list">
-                            <li class="available" role="listitem"><span>✔</span>24 занятия</li>
-                            <li class="available" role="listitem"><span>✔</span>действует в течение 90 дней</li>
-                            <li class="available" role="listitem"><span>✔</span>включены <strong>две недели</strong>
+                        <ul class="features">
+                            <li class="available"><span>✔</span>24 занятия</li>
+                            <li class="available"><span>✔</span>действует в течение 90 дней</li>
+                            <li class="available"><span>✔</span>включены <strong>две недели</strong>
                                 заморозки</li>
                         </ul>
                     </div>
@@ -261,11 +255,11 @@
                 </div>
                 <div class="payment-methods">
                     <p>Способы оплаты:</p>
-                    <ul role="list">
-                        <li role="listitem">На месте проведения занятий</li>
-                        <li role="listitem">Банковский перевод на счет: <strong>BY97ALFA30132A17830030270000</strong>
+                    <ul>
+                        <li>На месте проведения занятий</li>
+                        <li>Банковский перевод на счет: <strong>BY97ALFA30132A17830030270000</strong>
                         </li>
-                        <li role="listitem">Через ERIP (E-POS), лиц. счет: <strong>28795-1-25</strong></li>
+                        <li>Через ERIP (E-POS), лиц. счет: <strong>28795-1-25</strong></li>
                     </ul>
                     <p class="smaller-text">Подробные инструкции по оплате через ERIP доступны в разделе <a href="#qa"
                             id="qa-erip">"Вопросы и ответы"</a>.</p>
@@ -274,7 +268,7 @@
             <div class="spacer"></div>
         </section>
 
-        <section id="calendar" class="container-full" role="group" aria-labelledby="calendar-heading">
+        <section id="calendar" class="container-full" aria-labelledby="calendar-heading">
             <h2 id="calendar-heading">Расписание</h2>
             <div class="spacer"></div>
             <div class="calendar-container">
@@ -445,26 +439,26 @@
             <div class="spacer"></div>
         </section>
 
-        <section id="qa" class="container-full" role="group" aria-labelledby="qa-heading">
+        <section id="qa" class="container-full" aria-labelledby="qa-heading">
             <h2>Вопросы и ответы</h2>
             <div class="spacer"></div>
-            <ul class="qa-container" role="list">
-                <li role="listitem">
+            <ul class="qa-container">
+                <li>
                     <h3>Как начать новичку?</h3>
                     <p>Выбирайте группы с нуля или для начинающих, в них не требуют специальной подготовки. Главное -
                         это
                         желание научиться танцевать. </p>
                 </li>
-                <li role="listitem">
+                <li>
                     <h3>В группы парных занятий нужно приходить с парой?</h3>
                     <p>Да,<br>нужно приходить с парой или записаться в лист ожидания пары.</p>
                 </li>
-                <li role="listitem">
+                <li>
                     <h3>В чем тренироваться?</h3>
                     <p>В удобной, не стесняющей движения одежде и танцевальных туфлях или кроссовках. На латино микс
                         рекомендуем одевать леггинсы и кроссовки.</p>
                 </li>
-                <li role="listitem">
+                <li>
                     <h3>Как произвести платеж с помощью системы ERIP?</h3>
                     <p>Для оплаты через систему ERIP, пожалуйста, следуйте этим шагам:</p>
                     <p>
@@ -476,7 +470,7 @@
             <div class="spacer"></div>
         </section>
 
-        <section id="contacts" class="container-full" role="group" aria-labelledby="contacts-heading">
+        <section id="contacts" class="container-full" aria-labelledby="contacts-heading">
             <h2>Контакты</h2>
             <div class="spacer"></div>
             <div class="contacts-container">
@@ -496,10 +490,10 @@
                             src="img/youtube.svg" alt="Youtube" loading="lazy"></a>
                 </div>
                 <h3>Три зала в Минске:</h3>
-                <ol class="contact-saloon" role="list">
-                    <li role="listitem">ул. Тимирязева, 9/10 (танцевальное пространство Эллада)</li>
-                    <li role="listitem">пр-т Рокоссовского, 44/2 (теннисный центр "Аква Минск")</li>
-                    <li role="listitem">ул. Матусевича, 35г (спортивный центр Sport Goat)</li>
+                <ol class="contact-saloon">
+                    <li>ул. Тимирязева, 9/10 (танцевальное пространство Эллада)</li>
+                    <li>пр-т Рокоссовского, 44/2 (теннисный центр "Аква Минск")</li>
+                    <li>ул. Матусевича, 35г (спортивный центр Sport Goat)</li>
                 </ol>
                 <div class="contact-locations">
                     <div class="image-placeholder" aria-label="Расположение танцевальных студий">
