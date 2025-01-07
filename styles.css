@@ -82,13 +82,16 @@ img {
 
 
 a {
+    display: inline-block;
     color: var(--accent-color);
     text-decoration: none;
+    transition: transform 0.1s ease;
+    /* Smooth transition */
 }
 
-a:hover {
-    text-decoration: underline;
-    color: var(--accent-color-bright);
+a:active {
+    transform: scale(0.95);
+    /* Scale down to 95% on press */
 }
 
 h1 {
@@ -153,13 +156,11 @@ footer .container-full {
     /* transition: transform 0.2s ease-in-out; */
     font-weight: bold;
     font-style: italic;
+    transition: transform 0.1s ease;
 }
 
-#cta:hover {
-    text-decoration: none;
-    background-color: var(--primary-color);
-    /* transform: scale(1.2);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+#cta:active {
+    transform: scale(0.95);
 }
 
 
@@ -257,11 +258,12 @@ footer .container-full {
     transition: color var(--transition-duration) ease;
     padding: 0.5rem;
     user-select: none;
+    text-decoration: none;
+    transition: transform 0.1s ease;
 }
 
-.nav-links a:hover {
-    text-decoration: none;
-    color: var(--accent-color-bright);
+.nav-links a:active {
+    transform: scale(0.95);
 }
 
 .nav-toggle {
@@ -474,6 +476,12 @@ footer .container-full {
     border: none;
     /* overflow: hidden; */
     min-width: 120px;
+    transition: transform 0.1s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+    /* Scale down on press */
 }
 
 .contact-text {
@@ -533,10 +541,6 @@ footer .container-full {
 }
 
 
-.contact-menu a:hover {
-    background-color: var(--primary-color);
-}
-
 .contact-menu img {
     height: 1.5rem;
     width: 1.5rem;
@@ -590,7 +594,7 @@ footer .container-full {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 4rem;
+    gap: 2rem;
 }
 
 .style-card {
@@ -1111,32 +1115,19 @@ footer .container-full {
 }
 
 
-/* Disable hover on touch devices */
-@media (hover: none) {
-
-    /* Disable hover for general links on touch */
+@media (hover:hover) {
     a:hover {
-        text-decoration: none;
-        color: var(--text-color);
+        text-decoration: underline;
+        color: var(--accent-color-bright);
     }
 
-    /* Disable hover for #cta button on touch */
     #cta:hover {
-        text-decoration: none;
-        background-color: var(--primary-color-dark);
-        /* Reset to default */
+        background-color: var(--primary-color);
     }
 
-    /* Disable hover for .nav-links a on touch */
-    .nav-links a:hover {
-        text-decoration: none;
-        color: var(--text-color);
-        /* Reset to default */
-    }
-
-    /* Disable hover for .contact-menu a on touch */
     .contact-menu a:hover {
-        background-color: var(--primary-color-dark);
-        /* Reset to default */
+        color: var(--text-color);
+        text-decoration: none;
+        background-color: var(--primary-color);
     }
 }
