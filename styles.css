@@ -237,6 +237,7 @@ footer .container-full {
 
 #logo-header {
     z-index: 1002;
+    transition: transform var(--clicked-feedback-time) ease;
 }
 
 #logo-header:active {
@@ -288,12 +289,8 @@ footer .container-full {
     width: 2rem;
     height: 2rem;
     z-index: 1001;
-    transition: transform var(--clicked-feedback-time) ease;
 }
 
-.nav-toggle:active {
-    transform: scale(0.85);
-}
 
 .nav-svg {
     width: 100%;
