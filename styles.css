@@ -56,6 +56,7 @@
     --viewport-width-mobile: 768px;
 
     --stagger-delay: 0.05s;
+    --clicked-feedback-time: 0.05s;
     /* Delay between each item */
 }
 
@@ -85,12 +86,13 @@ a {
     display: inline-block;
     color: var(--accent-color);
     text-decoration: none;
-    transition: transform 0.1s ease;
+    transition: transform var(--clicked-feedback-time) ease;
     /* Smooth transition */
 }
 
 a:active {
-    transform: scale(0.95);
+    transform: scale(0.93);
+    color: var(--accent-color-bright);
     /* Scale down to 95% on press */
 }
 
@@ -156,11 +158,12 @@ footer .container-full {
     /* transition: transform 0.2s ease-in-out; */
     font-weight: bold;
     font-style: italic;
-    transition: transform 0.1s ease;
+    transition: transform var(--clicked-feedback-time) ease;
 }
 
 #cta:active {
-    transform: scale(0.95);
+    background-color: var(--primary-color);
+    transform: scale(0.93);
 }
 
 
@@ -238,9 +241,8 @@ footer .container-full {
     z-index: 1000;
     position: relative;
     user-select: none;
+    transition: transform var(--clicked-feedback-time) ease;
 }
-
-
 
 .nav-links {
     display: flex;
@@ -259,11 +261,12 @@ footer .container-full {
     padding: 0.5rem;
     user-select: none;
     text-decoration: none;
-    transition: transform 0.1s ease;
+    transition: transform var(--clicked-feedback-time) ease;
 }
 
 .nav-links a:active {
-    transform: scale(0.95);
+    color: var(--accent-color-bright);
+    transform: scale(0.93);
 }
 
 .nav-toggle {
@@ -276,6 +279,11 @@ footer .container-full {
     width: 2rem;
     height: 2rem;
     z-index: 1001;
+    transition: transform var(--clicked-feedback-time) ease;
+}
+
+.nav-toggle:active {
+    transform: scale(0.95);
 }
 
 .nav-svg {
@@ -431,7 +439,7 @@ footer .container-full {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 8rem;
+    margin-bottom: 9rem;
     flex-grow: 1;
 }
 
@@ -476,11 +484,12 @@ footer .container-full {
     border: none;
     /* overflow: hidden; */
     min-width: 120px;
-    transition: transform 0.1s ease;
+    transition: transform var(--clicked-feedback-time) ease;
 }
 
-button:active {
-    transform: scale(0.95);
+.floating-contact-button:active {
+    transform: scale(0.93);
+    background-color: var(--accent-color-bright);
     /* Scale down on press */
 }
 
@@ -1125,9 +1134,17 @@ footer .container-full {
         background-color: var(--primary-color);
     }
 
+    .nav-links a:hover {
+        text-decoration: none;
+    }
+
     .contact-menu a:hover {
         color: var(--text-color);
         text-decoration: none;
         background-color: var(--primary-color);
+    }
+
+    .floating-contact-button:hover {
+        background-color: var(--accent-color-bright);
     }
 }
