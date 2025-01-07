@@ -264,7 +264,6 @@ footer .container-full {
     color: var(--accent-color-bright);
 }
 
-
 .nav-toggle {
     display: none;
     justify-content: space-between;
@@ -1064,11 +1063,6 @@ footer .container-full {
         box-shadow: var(--box-shadow-navbar);
     }
 
-    #home {
-        /* background-position: top center;
-        background-size: cover; */
-    }
-
     .nav-links li {
         padding: 0.5rem 1rem;
     }
@@ -1086,14 +1080,17 @@ footer .container-full {
         display: inline;
     }
 
-    footer .container-full {
-        max-width: var(--viewport-width-mobile);
-    }
 
     .qa-container {
         flex-direction: column;
         gap: 2rem;
     }
+
+    footer .container-full {
+        max-width: var(--viewport-width-mobile);
+    }
+
+
 
     /* #about>p:nth-child(3),
     #gallery>p:first-of-type {
@@ -1110,5 +1107,36 @@ footer .container-full {
 @media (max-width: 1600px) and (min-width: 769px) {
     .floating-contact-button {
         left: 2rem;
+    }
+}
+
+
+/* Disable hover on touch devices */
+@media (hover: none) {
+
+    /* Disable hover for general links on touch */
+    a:hover {
+        text-decoration: none;
+        color: var(--text-color);
+    }
+
+    /* Disable hover for #cta button on touch */
+    #cta:hover {
+        text-decoration: none;
+        background-color: var(--primary-color-dark);
+        /* Reset to default */
+    }
+
+    /* Disable hover for .nav-links a on touch */
+    .nav-links a:hover {
+        text-decoration: none;
+        color: var(--text-color);
+        /* Reset to default */
+    }
+
+    /* Disable hover for .contact-menu a on touch */
+    .contact-menu a:hover {
+        background-color: var(--primary-color-dark);
+        /* Reset to default */
     }
 }
