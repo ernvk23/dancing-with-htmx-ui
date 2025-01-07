@@ -286,9 +286,10 @@ footer .container-full {
     background: transparent;
     border: none;
     cursor: pointer;
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
     z-index: 1001;
+    padding: 0.5rem;
 }
 
 
