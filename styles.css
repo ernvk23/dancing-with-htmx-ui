@@ -86,7 +86,7 @@ a {
     display: inline-block;
     color: var(--accent-color);
     text-decoration: none;
-    transition: all var(--clicked-feedback-time) ease;
+    transition: color var(--clicked-feedback-time) ease, transform var(--clicked-feedback-time) ease;
     /* Smooth transition */
 }
 
@@ -156,9 +156,10 @@ footer .container-full {
     cursor: pointer;
     /* box-shadow: var(--box-shadow-cta); */
     /* transition: transform 0.2s ease-in-out; */
+    user-select: none;
     font-weight: bold;
     font-style: italic;
-    transition: all var(--clicked-feedback-time) ease;
+    transition: background-color var(--clicked-feedback-time) ease, transform var(--clicked-feedback-time) ease;
 }
 
 #cta:active {
@@ -237,6 +238,7 @@ footer .container-full {
 
 #logo-header {
     z-index: 1002;
+    user-select: none;
     transition: transform var(--clicked-feedback-time) ease;
 }
 
@@ -249,7 +251,6 @@ footer .container-full {
     width: 3rem;
     position: relative;
     user-select: none;
-    /* transition: transform var(--clicked-feedback-time) ease; */
     cursor: pointer;
 }
 
@@ -271,7 +272,7 @@ footer .container-full {
     margin-inline: 0.5rem;
     user-select: none;
     text-decoration: none;
-    transition: all var(--clicked-feedback-time) ease;
+    transition: color var(--clicked-feedback-time) ease, transform var(--clicked-feedback-time) ease;
 }
 
 .nav-links a:active {
@@ -281,6 +282,7 @@ footer .container-full {
 
 .nav-toggle {
     display: none;
+    user-select: none;
     justify-content: space-between;
     flex-direction: column;
     background: transparent;
@@ -490,8 +492,9 @@ footer .container-full {
     border-radius: var(--border-radius);
     border: none;
     /* overflow: hidden; */
+    user-select: none;
     min-width: 120px;
-    transition: all var(--clicked-feedback-time) ease;
+    transition: background-color var(--clicked-feedback-time) ease, transform var(--clicked-feedback-time) ease;
 }
 
 .floating-contact-button:active {
