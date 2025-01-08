@@ -917,6 +917,8 @@ lite-youtube::before {
     z-index: -1 !important;
     transition: opacity var(--transition-duration-fast) ease-in !important;
     opacity: 0;
+    padding: 0.5rem !important;
+    font-size: 0.8rem !important;
 }
 
 lite-youtube .lyt-playbtn {
