@@ -48,6 +48,7 @@
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
     --transition-duration-longer: 0.5s;
+    --transition-duration-fast: 0.25s;
 
     --linear-gradient: linear-gradient(90deg, var(--background-color) 60%, #1f0c33);
     --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, #33194d80 50%, transparent 80%);
@@ -351,7 +352,7 @@ footer .container-full {
     opacity: 0;
     aspect-ratio: 16/9;
     object-fit: cover;
-    transition: opacity var(--transition-duration-longer) ease-in;
+    transition: opacity var(--transition-duration-fast) ease-in;
 }
 
 .lazy-load.loaded {
@@ -435,7 +436,7 @@ footer .container-full {
     inset: 0;
     background-color: var(--background-color);
     z-index: -1;
-    transition: opacity var(--transition-duration-longer) ease-out;
+    transition: opacity var(--transition-duration-longer) ease-in;
 }
 
 #home.loaded::before {
@@ -914,14 +915,14 @@ lite-youtube::before {
     overflow: visible !important;
     white-space: wrap !important;
     z-index: -1 !important;
-    transition: opacity var(--transition-duration-longer) ease-in !important;
+    transition: opacity var(--transition-duration-fast) ease-in !important;
     opacity: 0;
 }
 
 lite-youtube .lyt-playbtn {
     filter: none !important;
     z-index: -1 !important;
-    transition: opacity var(--transition-duration-longer) ease-in !important;
+    transition: opacity var(--transition-duration-fast) ease-in !important;
     opacity: 0;
 }
 
