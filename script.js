@@ -82,6 +82,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
+    const lazyImages = document.querySelectorAll('.lazy-load');
+
+    lazyImages.forEach(img => {
+        const handleImageLoad = () => {
+            img.classList.add('loaded');
+
+            // Check if the image is associated with a lite-youtube element
+            const liteYouTube = img.parentElement.parentElement;
+            if (liteYouTube && liteYouTube.tagName === 'LITE-YOUTUBE') {
+                console.log(liteYouTube);
+                // Add a class to the lite-youtube element to make it interactive
+                liteYouTube.classList.add('img-ready');
+            }
+        };
+
+        if (img.complete) {
+            // Image is already loaded, handle immediately
+            handleImageLoad();
+        } else {
+            // Image is not loaded yet, add event listener
+            img.addEventListener('load', handleImageLoad, { once: true });
+        }
+    });
+
     const contactButton = document.querySelector('.floating-contact-button');
 
     // Handle contact button clicks and outside clicks
