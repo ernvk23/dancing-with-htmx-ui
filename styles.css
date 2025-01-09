@@ -366,6 +366,11 @@ footer .container-full {
     border-radius: 50%;
 }
 
+
+.contact-locations .image-placeholder {
+    padding-bottom: 63%;
+}
+
 lite-youtube .image-placeholder {
     margin-block: 0.2rem;
 }
