@@ -340,6 +340,7 @@ footer .container-full {
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .image-placeholder img {
@@ -365,6 +366,10 @@ footer .container-full {
     border-radius: 50%;
 }
 
+lite-youtube .image-placeholder {
+    margin-block: 0.2rem;
+}
+
 .teacher .lazy-load,
 .style-card .lazy-load {
     aspect-ratio: 1/1;
@@ -374,9 +379,6 @@ footer .container-full {
     padding-bottom: 100%;
     border-radius: 25%;
 }
-
-
-
 
 
 .teacher .image-placeholder::before {
@@ -428,6 +430,7 @@ footer .container-full {
     position: relative;
     z-index: 0;
     text-align: center;
+    background-position: top;
     background-size: contain;
 }
 
@@ -443,16 +446,6 @@ footer .container-full {
 #home.loaded::before {
     opacity: 0.4;
 }
-
-/* .home-container, */
-/* .teachers-container,
-.pricing-container,
-.calendar-container,
-.qa-container,
-.contacts-container {
-    min-height: 60vh;
-} */
-
 
 .home-container {
     display: flex;
@@ -918,8 +911,8 @@ lite-youtube::before {
     z-index: -1 !important;
     transition: opacity var(--transition-duration-fast) ease-in !important;
     opacity: 0;
-    padding: 0.5rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.8rem !important;
+    font-size: 1rem !important;
 }
 
 lite-youtube .lyt-playbtn {
@@ -934,7 +927,7 @@ lite-youtube .lyt-visually-hidden {
 }
 
 lite-youtube.img-ready {
-    pointer-events: auto;
+    pointer-events: auto !important;
 }
 
 lite-youtube.img-ready::before,
@@ -1072,6 +1065,10 @@ footer .container-full {
         font-size: 1.5rem;
     }
 
+    #home {
+        /* background-position: top; */
+        background-size: cover;
+    }
 
     .home-container p:first-of-type {
         font-size: 1.5rem;
@@ -1176,12 +1173,20 @@ footer .container-full {
         width: 2.5rem;
         height: 2.5rem;
     }
+
+    lite-youtube::before {
+        font-size: 0.8rem;
+    }
 }
 
 
 @media (max-width: 1600px) and (min-width: 769px) {
     .floating-contact-button {
         left: 2rem;
+    }
+
+    #home {
+        background-size: cover;
     }
 }
 
