@@ -41,7 +41,7 @@
     /* Other Variables */
     --border-radius: 0.5rem;
     --box-shadow-navbar: 0 0.1rem 0.5rem 0.01rem var(--primary-color);
-    --box-shadow-cta: 0 0.1rem 0.5rem 0.01rem var(--accent-color);
+    --box-shadow-cta: 0px 4px 8px -4px var(--text-color-secondary);
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
     --box-shadow-primary: 0 0 0.3rem 0.01rem var(--primary-color);
     --box-shadow-secondary: 0 0 0.3rem 0.01rem var(--secondary-color-dark);
@@ -145,7 +145,7 @@ footer .container-full {
 
 
 #cta {
-    margin-top: 2rem;
+    margin-top: 4rem;
     display: inline-block;
     padding: 0.5rem;
     background-color: #2d1644;
@@ -161,6 +161,7 @@ footer .container-full {
     font-weight: bold;
     font-style: italic;
     transition: background-color var(--clicked-feedback-time) ease, transform var(--clicked-feedback-time) ease;
+    box-shadow: var(--box-shadow-cta);
 }
 
 #cta:active {
@@ -420,7 +421,7 @@ footer .container-full {
 
 #home {
     background-color: var(--background-color);
-    background-position: center;
+    background-position: top;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-clip: padding-box;
@@ -436,7 +437,7 @@ footer .container-full {
     inset: 0;
     background-color: var(--background-color);
     z-index: -1;
-    transition: opacity var(--transition-duration-longer) ease-in;
+    transition: opacity var(--transition-duration) ease-in;
 }
 
 #home.loaded::before {
@@ -1071,13 +1072,6 @@ footer .container-full {
         font-size: 1.5rem;
     }
 
-    #home {
-        background-position: top center;
-    }
-
-    .home-container {
-        justify-content: center;
-    }
 
     .home-container p:first-of-type {
         font-size: 1.5rem;
@@ -1172,6 +1166,15 @@ footer .container-full {
 
     .styles-cards {
         gap: 2rem;
+    }
+
+    .scroll-down {
+        bottom: 2rem;
+    }
+
+    .scroll-down img {
+        width: 2.5rem;
+        height: 2.5rem;
     }
 }
 
