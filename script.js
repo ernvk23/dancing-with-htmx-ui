@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    function isiPhone() {
+        return /iPhone/.test(navigator.userAgent) && !window.MSStream;
+    }
+
     // Get root font size for rem calculation
     const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
     const links = document.querySelectorAll('.nav-links a[href^="#"], #logo-header, #qa-erip, #cta');
@@ -214,7 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleNavbarShadow();
 
 
-
-
-
+    if (isiPhone()) {
+        const homeSection = document.getElementById('home');
+        if (homeSection) {
+            homeSection.style.backgroundAttachment = 'scroll';
+        }
+    }
 });
