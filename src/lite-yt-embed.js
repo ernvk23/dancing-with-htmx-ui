@@ -25,10 +25,10 @@ class LiteYTEmbed extends HTMLElement {
          *
          * See https://github.com/paulirish/lite-youtube-embed/blob/master/youtube-thumbnail-urls.md
          */
-        if (!this.style.backgroundImage) {
-            this.style.backgroundImage = `url("https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg")`;
-            this.upgradePosterImage();
-        }
+        // if (!this.style.backgroundImage) {
+        //     this.style.backgroundImage = `url("https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg")`;
+        //     this.upgradePosterImage();
+        // }
 
         // Set up play button, and its visually hidden label
         if (!playBtnEl) {
@@ -187,6 +187,7 @@ class LiteYTEmbed extends HTMLElement {
         }
 
         const iframeEl = this.createBasicIframe();
+        iframeEl.loading = "lazy";
         this.append(iframeEl);
 
         // Set focus for a11y
