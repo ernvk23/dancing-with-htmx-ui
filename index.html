@@ -4,12 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="img/logo.svg" type="image/svg+xml">
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="src/lite-yt-embed.css">
-    <script src="src/lite-yt-embed.js" defer></script>
     <title>La Casa de Grei</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+    <!-- Preloads -->
+    <link rel="preload" href="img/logo-content.svg" as="image">
+    <link rel="preload" href="img/home-mobile.webp" as="image" media="(max-width: 768px)">
+    <link rel="preload" href="img/home-desktop.webp" as="image" media="(min-width: 769px)">
+    <link rel="preload" href="img/scroll-down.svg" as="image">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="src/lite-yt-embed.css">
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
+    <script src="src/lite-yt-embed.js" defer></script>
     <meta name="description"
         content="Школа латиноамериканских танцев в Минске (Беларусь). Обучаем сальсе, бачате (соло и в парах), lady style, реггетону, афро, латина микс. Опытные кубинские преподаватели!">
     <meta name="keywords"
@@ -21,7 +29,7 @@
         <div class="navbar-overlay"></div>
         <nav class="navbar">
             <a href="#home" id="logo-header">
-                <img src="img/logo-content.svg" alt="">
+                <img src="img/logo-content.svg" alt="La Casa de Grei логотип">
             </a>
             <ul class="nav-links">
                 <li><a href="#about">О Нас</a></li>
@@ -538,7 +546,7 @@
                 <p><em>Создание и продвижение сайта <a href="mailto:ernvk23@gmail.com" target="_blank"
                             rel="noopener">Edgar
                             R.N</a></em></p>
-                <img src="img/logo-content.svg" alt="logo" id="logo-footer">
+                <img src="img/logo-content.svg" alt="La Casa de Grei логотип" id="logo-footer">
             </div>
             <div class="legal">
                 <p>Индивидуальный предприниматель Коваленко Максим Леонидович</p>
