@@ -352,8 +352,6 @@ footer .container-full {
 
 .lazy-load {
     opacity: 0;
-    aspect-ratio: 16/9;
-    object-fit: cover;
     transition: opacity var(--transition-duration-fast) ease-in;
 }
 
@@ -373,6 +371,11 @@ footer .container-full {
 
 lite-youtube .image-placeholder {
     margin-block: 0.2rem;
+    aspect-ratio: 16/9;
+}
+
+.gallery-container .image-placeholder {
+    padding-bottom: 64%;
 }
 
 .teacher .lazy-load,
