@@ -209,8 +209,8 @@ footer .container-full {
     left: 0;
     right: 0;
     margin-inline: auto;
-    width: calc(100% - 2rem);
-    max-width: calc(1400px - 2rem);
+    width: calc(100% - 1rem);
+    max-width: calc(1400px - 3rem);
     z-index: 1001;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -1109,8 +1109,8 @@ footer .container-full {
         display: none;
         position: fixed;
         top: 0.5rem;
-        right: 1rem;
-        left: 1rem;
+        right: 0.5rem;
+        left: 0.5rem;
         max-width: var(--viewport-width-mobile);
         margin-inline: auto;
         flex-direction: column;
@@ -1176,9 +1176,6 @@ footer .container-full {
         gap: 2rem;
     }
 
-    .scroll-down {
-        /* bottom: 2.5rem; */
-    }
 
     .scroll-down img {
         width: 2.5rem;
