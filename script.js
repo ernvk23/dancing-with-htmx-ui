@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetElement) {
                 // Adjust the offset if your navbar has a different height
-                const targetPosition = targetElement.offsetTop - rootFontSize * 5;
+                const targetPosition = targetElement.offsetTop - rootFontSize * 4.5;
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'

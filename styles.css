@@ -185,8 +185,9 @@ footer .container-full {
 .container-full {
     display: flex;
     flex-direction: column;
-    margin-top: 5rem;
-    min-height: calc(100vh - 6rem);
+    margin-top: 4.5rem;
+    /* 0.5rem(navbar top)+0.5rem(below navbar)+0.5rem(bottom view)+ 3rem(navbar) + 0.2rem padding-block*/
+    min-height: calc(100vh - 5rem);
     max-width: var(--viewport-width-desktop);
     position: relative;
     margin-inline: auto;
@@ -204,7 +205,7 @@ footer .container-full {
     padding-block: 0.2rem;
     background: var(--linear-gradient);
     position: fixed;
-    top: 1rem;
+    top: 0.5rem;
     left: 0;
     right: 0;
     margin-inline: auto;
@@ -212,7 +213,6 @@ footer .container-full {
     max-width: calc(1400px - 2rem);
     z-index: 1001;
     border-radius: var(--border-radius);
-    /* box-shadow: var(--box-shadow-navbar); */
     overflow: hidden;
     transition: box-shadow var(--transition-duration) ease;
 }
@@ -1062,7 +1062,6 @@ footer .container-full {
 @media (max-width: 768px) {
     :root {
         --border-radius: 0.4rem;
-        --box-shadow-navbar: 0 0.1rem 0.4rem 0.01rem var(--primary-color);
     }
 
     h1 {
@@ -1109,7 +1108,7 @@ footer .container-full {
     .nav-links {
         display: none;
         position: fixed;
-        top: 1rem;
+        top: 0.5rem;
         right: 1rem;
         left: 1rem;
         max-width: var(--viewport-width-mobile);
