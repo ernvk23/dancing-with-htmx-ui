@@ -12,8 +12,8 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
-      "destination": "https://www.lacasadegrei.by",
+      "source": "/(.*)",
+      "destination": "https://www.lacasadegrei.by/",
       "permanent": true
     }
   ]
