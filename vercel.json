@@ -14,7 +14,7 @@
     {
       "source": "/(.*)",
       "destination": "https://www.lacasadegrei.by/",
-      "permanent": true
+      "statusCode": 301
     }
   ]
 }

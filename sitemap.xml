@@ -8,49 +8,49 @@
 
 <url>
   <loc>https://lacasadegrei.by/</loc>
-  <lastmod>2025-01-24</lastmod>  <!-- UPDATE THIS DATE WHEN YOU UPDATE HOMEPAGE CONTENT -->
+  <lastmod>2025-02-02</lastmod>  <!-- UPDATE THIS DATE WHEN YOU UPDATE HOMEPAGE CONTENT -->
   <changefreq>monthly</changefreq>
   <priority>1.0</priority>
 </url>
 
 <url>
   <loc>https://lacasadegrei.by/#about</loc>
-  <lastmod>2024-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE ABOUT SECTION -->
+  <lastmod>2025-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE ABOUT SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
   <loc>https://lacasadegrei.by/#styles</loc>
-  <lastmod>2024-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE STYLES SECTION -->
+  <lastmod>2025-02-02</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE STYLES SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
   <loc>https://lacasadegrei.by/#pricing</loc>
-  <lastmod>2024-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE PRICING SECTION -->
+  <lastmod>2025-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE PRICING SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
   <loc>https://lacasadegrei.by/#calendar</loc>
-  <lastmod>2024-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE CALENDAR SECTION -->
+  <lastmod>2025-02-02</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE CALENDAR SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 
 <url>
   <loc>https://lacasadegrei.by/#qa</loc>
-  <lastmod>2024-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE QA SECTION -->
+  <lastmod>2025-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE QA SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 
 <url>
   <loc>https://lacasadegrei.by/#contacts</loc>
-  <lastmod>2024-01-10</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE CONTACTS SECTION -->
+  <lastmod>2025-02-02</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE CONTACTS SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
