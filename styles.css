@@ -51,8 +51,8 @@
     --transition-duration-fast: 0.25s;
 
     --linear-gradient: linear-gradient(90deg, var(--background-color) 60%, #1f0c33);
-    --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, #33194d80 50%, transparent 80%);
-    --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.418) 50%, transparent 80%);
+    --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, hsla(270, 51%, 20%, 0.329) 50%, transparent 80%);
+    --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.233) 50%, transparent 80%);
     --viewport-width-desktop: 1400px;
     --viewport-width-mobile: 768px;
 
