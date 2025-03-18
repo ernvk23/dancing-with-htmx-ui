@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(autoplayTimer);
             autoplayTimer = setTimeout(() => {
                 nextSlide();
-            }, 3000); // Change slides every 5 seconds
+            }, 2000000); // Change slides every 5 seconds
         }
 
         // Touch events for mobile swipe

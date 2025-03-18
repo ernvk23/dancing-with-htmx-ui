@@ -951,15 +951,16 @@ lite-youtube.img-ready .lyt-playbtn {
 /* Carousel Section */
 .carousel {
     position: relative;
-    width: 100%;
     overflow: hidden;
     touch-action: pan-y;
 }
 
 .carousel-container {
     display: flex;
+    /* width: 90%; */
+    /* gap: -3rem; */
     transition: transform var(--transition-duration) ease;
-    margin-inline: 8%;
+    margin-inline: 4%;
     /* Create space for peek preview */
     /* width: 120%; */
     /* Compensate for margins */
@@ -975,7 +976,6 @@ lite-youtube.img-ready .lyt-playbtn {
     pointer-events: none;
     filter: blur(4px);
     user-select: none;
-
 }
 
 .carousel-slide.active {
@@ -998,7 +998,7 @@ lite-youtube.img-ready .lyt-playbtn {
 }
 
 .carousel-slide .image-placeholder {
-    transform: scale(0.9);
+    transform: scale(0.95);
     transition: transform var(--transition-duration-fast) ease;
 }
 
@@ -1033,6 +1033,7 @@ lite-youtube.img-ready .lyt-playbtn {
     width: 5rem;
     height: 5rem;
     border: none;
+    padding: 1.2rem;
     margin-inline: 8rem;
     background: rgba(0, 0, 0, 0.7);
     color: var(--text-color);
