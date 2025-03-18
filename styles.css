@@ -1042,9 +1042,9 @@ lite-youtube.img-ready .lyt-playbtn {
     align-items: center;
     justify-content: center;
     pointer-events: auto;
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1rem;
     transition: all var(--transition-duration) ease;
+    text-align: center;
 }
 
 .carousel-button:hover {
