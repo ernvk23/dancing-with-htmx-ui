@@ -330,6 +330,123 @@ document.addEventListener('DOMContentLoaded', () => {
             resetAutoplay();
         }, { passive: true });
 
+        // Prevent default touch behavior on carousel
+        carousel.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Updated touch events for better control
+        container.addEventListener('touchstart', (e) => {
+            if (isTransitioning) return;
+            touchStartX = e.touches[0].clientX;
+            clearTimeout(autoplayTimer);
+            container.style.transition = 'none';
+        }, { passive: true });
+
+        container.addEventListener('touchmove', (e) => {
+            if (!touchStartX || isTransitioning) return;
+
+            const currentX = e.touches[0].clientX;
+            const diff = touchStartX - currentX;
+            const movePercent = (diff / container.offsetWidth) * 100;
+
+            // Limit movement to one slide at a time
+            const maxMove = 100;
+            if (Math.abs(movePercent) > maxMove) return;
+
+            // Add resistance at edges
+            if ((currentIndex === 0 && movePercent < 0) ||
+                (currentIndex === slides.length - 1 && movePercent > 0)) {
+                container.style.transform = `translateX(${-currentIndex * 100 - movePercent * 0.3}%)`;
+            } else {
+                container.style.transform = `translateX(${-currentIndex * 100 - movePercent}%)`;
+            }
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+            if (isTransitioning) return;
+            container.style.transition = `transform var(--transition-duration) ease`;
+
+            touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            const movePercent = (diff / container.offsetWidth) * 100;
+
+            if (Math.abs(movePercent) > 20) { // Lower threshold for better responsiveness
+                if (movePercent > 0 && currentIndex < slides.length - 1) {
+                    nextSlide();
+                } else if (movePercent < 0 && currentIndex > 0) {
+                    prevSlide();
+                } else {
+                    goToSlide(currentIndex); // Snap back if at edge
+                }
+            } else {
+                goToSlide(currentIndex); // Return to current slide
+            }
+
+            touchStartX = 0;
+            resetAutoplay();
+        }, { passive: true });
+
+        let isDragging = false;
+        let dragDistance = 0;
+        const dragThreshold = 0.3; // 30% of slide width to trigger change
+
+        // Prevent scrolling only when actually dragging
+        carousel.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        container.addEventListener('touchstart', (e) => {
+            if (isTransitioning) return;
+            isDragging = true;
+            carousel.classList.add('dragging');
+            touchStartX = e.touches[0].clientX;
+            clearTimeout(autoplayTimer);
+            container.style.transition = 'none';
+        }, { passive: true });
+
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging || isTransitioning) return;
+
+            const currentX = e.touches[0].clientX;
+            const diff = touchStartX - currentX;
+            dragDistance = (diff / container.offsetWidth);
+            const movePercent = dragDistance * 100;
+
+            // Add resistance at edges
+            if ((currentIndex === 0 && movePercent < 0) ||
+                (currentIndex === slides.length - 1 && movePercent > 0)) {
+                container.style.transform = `translateX(${-currentIndex * 100 - movePercent * 0.2}%)`;
+            } else {
+                container.style.transform = `translateX(${-currentIndex * 100 - movePercent}%)`;
+            }
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+            if (!isDragging || isTransitioning) return;
+            isDragging = false;
+            carousel.classList.remove('dragging');
+            container.style.transition = `transform var(--transition-duration) ease`;
+
+            if (Math.abs(dragDistance) > dragThreshold) {
+                if (dragDistance > 0 && currentIndex < slides.length - 1) {
+                    nextSlide();
+                } else if (dragDistance < 0 && currentIndex > 0) {
+                    prevSlide();
+                } else {
+                    goToSlide(currentIndex); // Snap back if at edge
+                }
+            } else {
+                goToSlide(currentIndex); // Return to current slide
+            }
+
+            dragDistance = 0;
+            touchStartX = 0;
+            resetAutoplay();
+        }, { passive: true });
+
         // Click events
         nextButton.addEventListener('click', nextSlide);
         prevButton.addEventListener('click', prevSlide);

@@ -952,35 +952,30 @@ lite-youtube.img-ready .lyt-playbtn {
 .carousel {
     position: relative;
     width: 100%;
-    /* margin: 2rem auto; */
-    /* overflow: hidden; */
+    overflow: hidden;
+    touch-action: pan-y;
 }
 
 .carousel-container {
     display: flex;
     transition: transform var(--transition-duration) ease;
-    /* margin: 0 -10%; */
-    /* width: 110%; */
-    margin-inline: 5%;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* gap: 2rem; */
+    margin-inline: 8%;
+    /* Create space for peek preview */
+    /* width: 120%; */
+    /* Compensate for margins */
+    will-change: transform;
 }
 
 .carousel-slide {
     min-width: 100%;
-    height: 100%;
+    /* flex: 0 0 100%; */
     position: relative;
-    /* padding: 0 10%; */
     opacity: 0.3;
-    /* padding: 0.2rem; */
-    transition: opacity var(--transition-duration-fast) ease;
+    transition: all var(--transition-duration) ease;
     pointer-events: none;
-    /* backdrop-filter: blur(20px); */
     filter: blur(4px);
-    /* Prevent interaction with non-active slides */
+    user-select: none;
 }
-
 
 .carousel-slide.active {
     opacity: 1;
@@ -992,17 +987,18 @@ lite-youtube.img-ready .lyt-playbtn {
 .carousel-navigation {
     position: absolute;
     top: 40%;
+    left: 0;
+    right: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     pointer-events: none;
     z-index: 2;
-    padding: 0 2%;
 }
 
 .carousel-slide .image-placeholder {
     transform: scale(0.9);
-    transition: transform var(--transition-duration) ease;
+    transition: transform var(--transition-duration-fast) ease;
 }
 
 .carousel-slide.active .image-placeholder {
@@ -1036,7 +1032,7 @@ lite-youtube.img-ready .lyt-playbtn {
     width: 5rem;
     height: 5rem;
     border: none;
-    margin-inline: 3rem;
+    margin-inline: 8rem;
     background: rgba(0, 0, 0, 0.7);
     color: var(--text-color);
     cursor: pointer;
@@ -1300,9 +1296,15 @@ footer .container-full {
     }
 
     .carousel-container {
-        /* margin-inline: -10%; */
-        /* width: 110%; */
-        margin-inline: 4%;
+        margin-inline: 8%;
+    }
+
+    /* .carousel-slide {
+        padding: 0 5%;
+    } */
+
+    .carousel-navigation {
+        top: 30%;
     }
 
     .carousel-dots {
@@ -1315,9 +1317,9 @@ footer .container-full {
     }
 
     .carousel-button {
-        width: 2.5rem;
-        height: 2.5rem;
-        margin-inline: 1rem;
+        width: 2rem;
+        height: 2rem;
+        margin-inline: 2rem;
     }
 
 }
