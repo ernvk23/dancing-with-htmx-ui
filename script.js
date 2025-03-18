@@ -224,4 +224,129 @@ document.addEventListener('DOMContentLoaded', () => {
             homeSection.style.backgroundAttachment = 'scroll';
         }
     }
+
+    // Carousel functionality
+    const carousel = document.querySelector('.carousel');
+    if (carousel) {
+        const container = carousel.querySelector('.carousel-container');
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const dotsContainer = carousel.querySelector('.carousel-dots');
+        const prevButton = carousel.querySelector('.prev');
+        const nextButton = carousel.querySelector('.next');
+        let currentIndex = 0;
+        let autoplayTimer;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isTransitioning = false;
+        const transitionDelay = 500; // Match this with your CSS transition duration
+
+        // Set initial state
+        slides[0].classList.add('active');
+
+        // Create dots based on number of slides
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+        // Ensure smooth transitions
+        function goToSlide(index) {
+            if (isTransitioning || index === currentIndex) return;
+            isTransitioning = true;
+
+            slides[currentIndex].classList.remove('active');
+            dots[currentIndex].classList.remove('active');
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            container.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+            resetAutoplay();
+
+            // Reset transition lock after animation completes
+            setTimeout(() => {
+                isTransitioning = false;
+            }, transitionDelay);
+        }
+
+        function nextSlide() {
+            if (isTransitioning) return;
+            const next = (currentIndex + 1) % slides.length;
+            goToSlide(next);
+        }
+
+        function prevSlide() {
+            if (isTransitioning) return;
+            const prev = (currentIndex - 1 + slides.length) % slides.length;
+            goToSlide(prev);
+        }
+
+        function resetAutoplay() {
+            clearTimeout(autoplayTimer);
+            autoplayTimer = setTimeout(() => {
+                nextSlide();
+            }, 3000); // Change slides every 5 seconds
+        }
+
+        // Touch events for mobile swipe
+        container.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            clearTimeout(autoplayTimer);
+        }, { passive: true });
+
+        container.addEventListener('touchmove', (e) => {
+            if (!touchStartX) return;
+
+            const currentX = e.touches[0].clientX;
+            const diff = touchStartX - currentX;
+            const movePercent = (diff / container.offsetWidth) * 100;
+
+            // Prevent overscroll
+            if ((currentIndex === 0 && diff < 0) ||
+                (currentIndex === slides.length - 1 && diff > 0)) return;
+
+            container.style.transform = `translateX(${-currentIndex * 100 - movePercent}%)`;
+        }, { passive: true });
+
+        container.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            } else {
+                // Return to current slide if swipe wasn't long enough
+                goToSlide(currentIndex);
+            }
+
+            touchStartX = 0;
+            resetAutoplay();
+        }, { passive: true });
+
+        // Click events
+        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        // Start autoplay
+        resetAutoplay();
+
+        // Pause autoplay when tab is not visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearTimeout(autoplayTimer);
+            } else {
+                resetAutoplay();
+            }
+        });
+    }
 });
