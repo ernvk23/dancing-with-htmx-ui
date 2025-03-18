@@ -975,6 +975,7 @@ lite-youtube.img-ready .lyt-playbtn {
     pointer-events: none;
     filter: blur(4px);
     user-select: none;
+
 }
 
 .carousel-slide.active {
@@ -1322,19 +1323,37 @@ footer .container-full {
         margin-inline: 2rem;
     }
 
-}
-
-
-@media (max-width: 1600px) and (min-width: 769px) {
-    .floating-contact-button {
-        left: 2rem;
+    .typing {
+        font-size: 1rem;
+        min-height: 4rem;
     }
 
-    #home {
-        background-size: cover;
-    }
 }
 
+.typing {
+    font-size: 1.2rem;
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.4),
+            var(--background-color) 50%,
+            rgba(0, 0, 0, 0.4));
+    padding: 0.5rem;
+    font-style: italic;
+    min-height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block: 1rem;
+    border-radius: var(--border-radius);
+    transition: background-size 0.3s ease;
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+}
+
+.typing.done {
+    background-size: 100% 100%;
+}
+
+/* Remove blink animation keyframes as we don't need them anymore */
 
 @media (hover:hover) {
     a:hover {

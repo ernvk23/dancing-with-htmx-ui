@@ -73,7 +73,40 @@
             <div class="home-container">
                 <h1>LA CASA<br>DE GREI</h1>
                 <p>Школа латиноамериканских танцев</p>
-                <p>У танца нет возраста. У танца есть душа и она всегда молода</p>
+                <p id="typed-quote" class="typing"
+                    data-text="«У танца нет возраста. У танца есть душа и она всегда молода»"></p>
+                <script>
+                    (function () {
+                        const element = document.getElementById('typed-quote');
+                        const text = element.dataset.text;
+                        let index = 0;
+
+                        // Pre-fill with spaces to maintain height
+                        element.textContent = ' '.repeat(text.length);
+
+                        function type() {
+                            if (index < text.length) {
+                                element.textContent = text.slice(0, index + 1) + ' '.repeat(text.length - index - 1);
+                                index++;
+                                setTimeout(type, 15);
+                            } else {
+                                element.textContent = text;
+                                element.classList.add('done');
+                            }
+                        }
+
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    type();
+                                    observer.disconnect();
+                                }
+                            });
+                        });
+
+                        observer.observe(element);
+                    })();
+                </script>
                 <a href="#styles" id="cta">Посмотреть стили</a>
             </div>
             <div class="scroll-down">
