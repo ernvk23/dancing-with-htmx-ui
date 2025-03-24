@@ -414,8 +414,8 @@ lite-youtube img {
 }
 
 .scroll-down img {
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .scroll-down p {
@@ -1314,8 +1314,8 @@ footer .container-full {
 
 
     .scroll-down img {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     lite-youtube::before {

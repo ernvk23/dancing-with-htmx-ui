@@ -1,11 +1,4 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg width="200px" height="200px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
-<g id="SVGRepo_iconCarrier"> <path d="M19 15C19 18.866 15.866 22 12 22C8.13401 22 5 18.866 5 15V9C5 5.13401 8.13401 2 12 2C15.866 2 19 5.13401 19 9V11" stroke="#eee" stroke-width="1.5" stroke-linecap="round"/> <path d="M10.5 8.5C10.5 7.67157 11.1716 7 12 7C12.8284 7 13.5 7.67157 13.5 8.5V10.5C13.5 11.3284 12.8284 12 12 12C11.1716 12 10.5 11.3284 10.5 10.5V8.5Z" stroke="#eee" stroke-width="1.5"/> <path d="M12 2V7" stroke="#eee" stroke-width="1.5" stroke-linecap="round"/> </g>
-
-</svg>
+<svg fill="#ffffff" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16 6c-.874.69-1.757 1.397-2.656 2.008-1 .679-1.972 1.287-2.912 1.825-.868.497-1.774.87-2.432 1.167-.658-.297-1.564-.67-2.432-1.167a44.819 44.819 0 0 1-2.912-1.825C1.756 7.398.874 6.691 0 6h1.49c.524.4 1.062.837 1.625 1.222.71.486 1.437.942 2.18 1.37.755.433 1.792.95 2.5 1.285h.001L8 9.973l.203-.096c.71-.334 1.747-.852 2.501-1.285a33.18 33.18 0 0 0 2.181-1.37c.562-.385 1.1-.822 1.625-1.222H16z" fill="gray"></path> </g></svg>

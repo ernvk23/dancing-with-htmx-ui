@@ -88,7 +88,7 @@
                             if (index < text.length) {
                                 element.textContent = text.slice(0, index + 1) + ' '.repeat(text.length - index - 1);
                                 index++;
-                                setTimeout(type, 20);
+                                setTimeout(type, 10);
                             } else {
                                 element.textContent = text;
                                 element.classList.add('done');
