@@ -236,11 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentIndex = 0;
         let autoplayTimer;
         let touchStartX = 0;
-        let touchEndX = 0;
         let isTransitioning = false;
         let isDragging = false;
         const transitionDelay = 200;
-        const dragThreshold = 0.15; // Reduced from 0.3 to 0.15 for easier triggering
+        const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
 
         // Set initial state
         function initializeSlides() {
@@ -311,41 +310,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const diff = touchStartX - currentX;
             const movePercent = (diff / container.offsetWidth) * 100;
 
-            // Make movement more responsive
-            if (Math.abs(movePercent) > 5) { // If moved more than 10% of width
-                e.preventDefault(); // Prevent scrolling
-                // Start transitioning early
-                if (movePercent > 0 && currentIndex < slides.length - 1) {
-                    nextSlide();
-                } else if (movePercent < 0 && currentIndex > 0) {
-                    prevSlide();
-                }
-                isDragging = false;
-                return;
-            }
 
+            // Allow movement even at edges, just with resistance
             const resistance = (currentIndex === 0 && diff < 0) ||
                 (currentIndex === slides.length - 1 && diff > 0) ? 0.3 : 1;
 
             container.style.transform = `translateX(${-currentIndex * 100 - movePercent * resistance}%)`;
-        }, { passive: false }); // Changed to false to allow preventDefault
+        }, { passive: true });
 
         container.addEventListener('touchend', (e) => {
-            if (!isDragging || isTransitioning) return;
+            if (!isDragging) return;
             isDragging = false;
             container.style.transition = 'transform 0.2s ease-in';
 
             const diff = touchStartX - e.changedTouches[0].clientX;
             const movePercent = (diff / container.offsetWidth);
 
+            // Always check for movement, regardless of dragged state
             if (Math.abs(movePercent) > dragThreshold) {
-                if (movePercent > 0 && currentIndex < slides.length - 1) nextSlide();
-                else if (movePercent < 0 && currentIndex > 0) prevSlide();
-                else goToSlide(currentIndex);
+                if (movePercent > 0 && currentIndex < slides.length - 1) {
+                    nextSlide();
+                } else if (movePercent < 0 && currentIndex > 0) {
+                    prevSlide();
+                } else {
+                    goToSlide(currentIndex);
+                }
             } else {
                 goToSlide(currentIndex);
             }
 
+            // Reset states
             touchStartX = 0;
             resetAutoplay();
         }, { passive: true });
