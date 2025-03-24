@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchStartX = 0;
         let touchEndX = 0;
         let isTransitioning = false;
-        const transitionDelay = 250; // Reduced from 500ms to 250ms for quicker transitions
+        const transitionDelay = 200; // Reduced from 500ms to 250ms for quicker transitions
 
         // Set initial state
         slides[0].classList.add('active');
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             touchEndX = e.changedTouches[0].clientX;
             const diff = touchStartX - touchEndX;
 
-            if (Math.abs(diff) > 50) { // Minimum swipe distance
+            if (Math.abs(diff) > 10) { // Minimum swipe distance
                 if (diff > 0) nextSlide();
                 else prevSlide();
             } else {
