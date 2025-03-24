@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(autoplayTimer);
             autoplayTimer = setTimeout(() => {
                 nextSlide();
-            }, 300000); // Change slides every 5 seconds
+            }, 3000); // Change slides every 5 seconds
         }
 
         function updateCarouselButtons() {
