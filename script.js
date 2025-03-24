@@ -238,21 +238,21 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchStartX = 0;
         let touchEndX = 0;
         let isTransitioning = false;
-        const transitionDelay = 200; // Reduced from 500ms to 250ms for quicker transitions
+        let isDragging = false;
+        const transitionDelay = 200;
+        const dragThreshold = 0.15; // Reduced from 0.3 to 0.15 for easier triggering
 
-        // Set initial state - add this right after slides are selected
+        // Set initial state
         function initializeSlides() {
-            // Set first slide as active and its adjacent slide
             slides[0].classList.add('active');
             if (slides.length > 1) {
                 slides[1].classList.add('next');
             }
         }
 
-        // Call initialization right after setting up carousel
         initializeSlides();
 
-        // Create dots based on number of slides
+        // Create dots
         slides.forEach((_, index) => {
             const dot = document.createElement('div');
             dot.classList.add('carousel-dot');
@@ -263,93 +263,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const dots = dotsContainer.querySelectorAll('.carousel-dot');
 
-        // Ensure smooth transitions
         function goToSlide(index) {
             if (isTransitioning || index === currentIndex) return;
             isTransitioning = true;
 
-            // Remove all states
-            slides.forEach(slide => {
-                slide.classList.remove('active', 'prev', 'next');
-            });
+            slides.forEach(slide => slide.classList.remove('active', 'prev', 'next'));
             dots[currentIndex].classList.remove('active');
 
-            // Add active state to current slide
             slides[index].classList.add('active');
             dots[index].classList.add('active');
 
-            // Add prev/next states to adjacent slides
-            if (index > 0) {
-                slides[index - 1].classList.add('prev');
-            }
-            if (index < slides.length - 1) {
-                slides[index + 1].classList.add('next');
-            }
+            if (index > 0) slides[index - 1].classList.add('prev');
+            if (index < slides.length - 1) slides[index + 1].classList.add('next');
 
             container.style.transform = `translateX(-${index * 100}%)`;
             currentIndex = index;
             resetAutoplay();
-            updateCarouselButtons();
 
-            setTimeout(() => {
-                isTransitioning = false;
-            }, transitionDelay);
+            setTimeout(() => isTransitioning = false, transitionDelay);
         }
 
         function nextSlide() {
-            if (isTransitioning) return;
-            const next = (currentIndex + 1) % slides.length;
-            goToSlide(next);
+            if (!isTransitioning) goToSlide((currentIndex + 1) % slides.length);
         }
 
         function prevSlide() {
-            if (isTransitioning) return;
-            const prev = (currentIndex - 1 + slides.length) % slides.length;
-            goToSlide(prev);
+            if (!isTransitioning) goToSlide((currentIndex - 1 + slides.length) % slides.length);
         }
 
         function resetAutoplay() {
             clearTimeout(autoplayTimer);
-            autoplayTimer = setTimeout(() => {
-                nextSlide();
-            }, 2000); // Change slides every 5 seconds
+            autoplayTimer = setTimeout(nextSlide, 2000);
         }
 
-        function updateCarouselButtons() {
-            // Always enable both buttons to allow circular navigation
-            prevButton.disabled = false;
-            nextButton.disabled = false;
-        }
-
-        // Touch events for mobile swipe
+        // Touch event handlers
         container.addEventListener('touchstart', (e) => {
+            if (isTransitioning) return;
+            isDragging = true;
             touchStartX = e.touches[0].clientX;
             clearTimeout(autoplayTimer);
+            container.style.transition = 'none';
         }, { passive: true });
 
         container.addEventListener('touchmove', (e) => {
-            if (!touchStartX) return;
-
+            if (!isDragging || isTransitioning) return;
             const currentX = e.touches[0].clientX;
             const diff = touchStartX - currentX;
             const movePercent = (diff / container.offsetWidth) * 100;
 
-            // Prevent overscroll
-            if ((currentIndex === 0 && diff < 0) ||
-                (currentIndex === slides.length - 1 && diff > 0)) return;
+            // Make movement more responsive
+            if (Math.abs(movePercent) > 5) { // If moved more than 10% of width
+                e.preventDefault(); // Prevent scrolling
+                // Start transitioning early
+                if (movePercent > 0 && currentIndex < slides.length - 1) {
+                    nextSlide();
+                } else if (movePercent < 0 && currentIndex > 0) {
+                    prevSlide();
+                }
+                isDragging = false;
+                return;
+            }
 
-            container.style.transform = `translateX(${-currentIndex * 100 - movePercent}%)`;
-        }, { passive: true });
+            const resistance = (currentIndex === 0 && diff < 0) ||
+                (currentIndex === slides.length - 1 && diff > 0) ? 0.3 : 1;
+
+            container.style.transform = `translateX(${-currentIndex * 100 - movePercent * resistance}%)`;
+        }, { passive: false }); // Changed to false to allow preventDefault
 
         container.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].clientX;
-            const diff = touchStartX - touchEndX;
+            if (!isDragging || isTransitioning) return;
+            isDragging = false;
+            container.style.transition = 'transform 0.2s ease-in';
 
-            if (Math.abs(diff) > 10) { // Minimum swipe distance
-                if (diff > 0) nextSlide();
-                else prevSlide();
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            const movePercent = (diff / container.offsetWidth);
+
+            if (Math.abs(movePercent) > dragThreshold) {
+                if (movePercent > 0 && currentIndex < slides.length - 1) nextSlide();
+                else if (movePercent < 0 && currentIndex > 0) prevSlide();
+                else goToSlide(currentIndex);
             } else {
-                // Return to current slide if swipe wasn't long enough
                 goToSlide(currentIndex);
             }
 
@@ -357,166 +350,28 @@ document.addEventListener('DOMContentLoaded', () => {
             resetAutoplay();
         }, { passive: true });
 
-        // Prevent default touch behavior on carousel
+        // Prevent scroll while dragging
         carousel.addEventListener('touchmove', (e) => {
-            e.preventDefault();
+            if (isDragging) e.preventDefault();
         }, { passive: false });
 
-        // Updated touch events for better control
-        container.addEventListener('touchstart', (e) => {
-            if (isTransitioning) return;
-            touchStartX = e.touches[0].clientX;
-            clearTimeout(autoplayTimer);
-            container.style.transition = 'none';
-        }, { passive: true });
-
-        container.addEventListener('touchmove', (e) => {
-            if (!touchStartX || isTransitioning) return;
-
-            const currentX = e.touches[0].clientX;
-            const diff = touchStartX - currentX;
-            const movePercent = (diff / container.offsetWidth) * 100;
-
-            // Limit movement to one slide at a time
-            const maxMove = 100;
-            if (Math.abs(movePercent) > maxMove) return;
-
-            // Add resistance at edges
-            if ((currentIndex === 0 && movePercent < 0) ||
-                (currentIndex === slides.length - 1 && movePercent > 0)) {
-                container.style.transform = `translateX(${-currentIndex * 100 - movePercent * 0.3}%)`;
-            } else {
-                container.style.transform = `translateX(${-currentIndex * 100 - movePercent}%)`;
-            }
-        }, { passive: true });
-
-        container.addEventListener('touchend', (e) => {
-            if (isTransitioning) return;
-            container.style.transition = `transform 0.2s ease-in`;
-
-            touchEndX = e.changedTouches[0].clientX;
-            const diff = touchStartX - touchEndX;
-            const movePercent = (diff / container.offsetWidth) * 100;
-
-            if (Math.abs(movePercent) > 20) { // Lower threshold for better responsiveness
-                if (movePercent > 0 && currentIndex < slides.length - 1) {
-                    nextSlide();
-                } else if (movePercent < 0 && currentIndex > 0) {
-                    prevSlide();
-                } else {
-                    goToSlide(currentIndex); // Snap back if at edge
-                }
-            } else {
-                goToSlide(currentIndex); // Return to current slide
-            }
-
-            touchStartX = 0;
-            resetAutoplay();
-        }, { passive: true });
-
-        let isDragging = false;
-        let dragDistance = 0;
-        const dragThreshold = 0.3; // 30% of slide width to trigger change
-
-        // Prevent scrolling only when actually dragging
-        carousel.addEventListener('touchmove', (e) => {
-            if (isDragging) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        container.addEventListener('touchstart', (e) => {
-            if (isTransitioning) return;
-            isDragging = true;
-            carousel.classList.add('dragging');
-            touchStartX = e.touches[0].clientX;
-            clearTimeout(autoplayTimer);
-            container.style.transition = 'none';
-        }, { passive: true });
-
-        container.addEventListener('touchmove', (e) => {
-            if (!isDragging || isTransitioning) return;
-
-            const currentX = e.touches[0].clientX;
-            const diff = touchStartX - currentX;
-            dragDistance = (diff / container.offsetWidth);
-            const movePercent = dragDistance * 100;
-
-            // Add resistance at edges
-            if ((currentIndex === 0 && movePercent < 0) ||
-                (currentIndex === slides.length - 1 && movePercent > 0)) {
-                container.style.transform = `translateX(${-currentIndex * 100 - movePercent * 0.2}%)`;
-            } else {
-                container.style.transform = `translateX(${-currentIndex * 100 - movePercent}%)`;
-            }
-        }, { passive: true });
-
-        container.addEventListener('touchend', (e) => {
-            if (!isDragging || isTransitioning) return;
-            isDragging = false;
-            carousel.classList.remove('dragging');
-            container.style.transition = `transform var(--transition-duration) ease`;
-
-            if (Math.abs(dragDistance) > dragThreshold) {
-                if (dragDistance > 0 && currentIndex < slides.length - 1) {
-                    nextSlide();
-                } else if (dragDistance < 0 && currentIndex > 0) {
-                    prevSlide();
-                } else {
-                    goToSlide(currentIndex); // Snap back if at edge
-                }
-            } else {
-                goToSlide(currentIndex); // Return to current slide
-            }
-
-            dragDistance = 0;
-            touchStartX = 0;
-            resetAutoplay();
-        }, { passive: true });
-
-        // Click events
-        nextButton.addEventListener('click', nextSlide);
-        prevButton.addEventListener('click', prevSlide);
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => goToSlide(index));
-        });
-
-        // Add click handler to container to prevent unintended navigation
-        container.addEventListener('click', (e) => {
-            if (!e.target.closest('.carousel-button')) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
-        });
-
-        container.addEventListener('touchend', (e) => {
-            if (!e.target.closest('.carousel-button')) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
-        });
-
-        // Modify navigation button click handlers to explicitly stop propagation
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            nextSlide();
-        });
-
+        // Button click handlers
         prevButton.addEventListener('click', (e) => {
             e.stopPropagation();
             prevSlide();
         });
 
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextSlide();
+        });
+
         // Start autoplay
         resetAutoplay();
 
-        // Pause autoplay when tab is not visible
+        // Handle visibility changes
         document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                clearTimeout(autoplayTimer);
-            } else {
-                resetAutoplay();
-            }
+            document.hidden ? clearTimeout(autoplayTimer) : resetAutoplay();
         });
     }
 });
