@@ -437,15 +437,15 @@ lite-youtube img {
 
 #home {
     background-color: var(--background-color);
-    background-position: top;
+    /* background-position: top; */
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-clip: padding-box;
     position: relative;
     z-index: 0;
     text-align: center;
-    background-position: top;
-    background-size: contain;
+    background-position: center;
+    /* background-size: contain; */
 }
 
 #home::before {
