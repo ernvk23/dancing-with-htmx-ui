@@ -240,8 +240,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let isTransitioning = false;
         const transitionDelay = 200; // Reduced from 500ms to 250ms for quicker transitions
 
-        // Set initial state
-        slides[0].classList.add('active');
+        // Set initial state - add this right after slides are selected
+        function initializeSlides() {
+            // Set first slide as active and its adjacent slide
+            slides[0].classList.add('active');
+            if (slides.length > 1) {
+                slides[1].classList.add('next');
+            }
+        }
+
+        // Call initialization right after setting up carousel
+        initializeSlides();
 
         // Create dots based on number of slides
         slides.forEach((_, index) => {
@@ -259,22 +268,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isTransitioning || index === currentIndex) return;
             isTransitioning = true;
 
-            // Remove all special classes first
+            // Remove all states
             slides.forEach(slide => {
-                slide.classList.remove('active', 'adjacent');
+                slide.classList.remove('active', 'prev', 'next');
             });
             dots[currentIndex].classList.remove('active');
 
-            // Add active class to current slide
+            // Add active state to current slide
             slides[index].classList.add('active');
             dots[index].classList.add('active');
 
-            // Add adjacent class to neighboring slides
+            // Add prev/next states to adjacent slides
             if (index > 0) {
-                slides[index - 1].classList.add('adjacent');
+                slides[index - 1].classList.add('prev');
             }
             if (index < slides.length - 1) {
-                slides[index + 1].classList.add('adjacent');
+                slides[index + 1].classList.add('next');
             }
 
             container.style.transform = `translateX(-${index * 100}%)`;
@@ -303,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(autoplayTimer);
             autoplayTimer = setTimeout(() => {
                 nextSlide();
-            }, 3000); // Change slides every 5 seconds
+            }, 2000); // Change slides every 5 seconds
         }
 
         function updateCarouselButtons() {
@@ -470,6 +479,32 @@ document.addEventListener('DOMContentLoaded', () => {
         prevButton.addEventListener('click', prevSlide);
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        // Add click handler to container to prevent unintended navigation
+        container.addEventListener('click', (e) => {
+            if (!e.target.closest('.carousel-button')) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        });
+
+        container.addEventListener('touchend', (e) => {
+            if (!e.target.closest('.carousel-button')) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        });
+
+        // Modify navigation button click handlers to explicitly stop propagation
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextSlide();
+        });
+
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevSlide();
         });
 
         // Start autoplay
