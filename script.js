@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchStartX = 0;
         let touchEndX = 0;
         let isTransitioning = false;
-        const transitionDelay = 500; // Match this with your CSS transition duration
+        const transitionDelay = 250; // Reduced from 500ms to 250ms for quicker transitions
 
         // Set initial state
         slides[0].classList.add('active');
@@ -259,17 +259,29 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isTransitioning || index === currentIndex) return;
             isTransitioning = true;
 
-            slides[currentIndex].classList.remove('active');
+            // Remove all special classes first
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'adjacent');
+            });
             dots[currentIndex].classList.remove('active');
 
+            // Add active class to current slide
             slides[index].classList.add('active');
             dots[index].classList.add('active');
+
+            // Add adjacent class to neighboring slides
+            if (index > 0) {
+                slides[index - 1].classList.add('adjacent');
+            }
+            if (index < slides.length - 1) {
+                slides[index + 1].classList.add('adjacent');
+            }
 
             container.style.transform = `translateX(-${index * 100}%)`;
             currentIndex = index;
             resetAutoplay();
+            updateCarouselButtons();
 
-            // Reset transition lock after animation completes
             setTimeout(() => {
                 isTransitioning = false;
             }, transitionDelay);
@@ -291,7 +303,13 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(autoplayTimer);
             autoplayTimer = setTimeout(() => {
                 nextSlide();
-            }, 3000); // Change slides every 5 seconds
+            }, 300000); // Change slides every 5 seconds
+        }
+
+        function updateCarouselButtons() {
+            // Always enable both buttons to allow circular navigation
+            prevButton.disabled = false;
+            nextButton.disabled = false;
         }
 
         // Touch events for mobile swipe
@@ -365,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.addEventListener('touchend', (e) => {
             if (isTransitioning) return;
-            container.style.transition = `transform var(--transition-duration) ease`;
+            container.style.transition = `transform 0.2s ease-in`;
 
             touchEndX = e.changedTouches[0].clientX;
             const diff = touchStartX - touchEndX;

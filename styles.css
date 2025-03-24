@@ -328,13 +328,13 @@ footer .container-full {
     overflow: hidden;
     background-color: rgb(12, 12, 12);
     text-align: center;
+
 }
 
 .image-placeholder::before {
     content: attr(aria-label);
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -344,9 +344,11 @@ footer .container-full {
 
 .image-placeholder img {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    /* aspect-ratio: 16/9; */
 }
 
 
@@ -370,7 +372,7 @@ footer .container-full {
 }
 
 .gallery-container .image-placeholder {
-    padding-bottom: 64%;
+    padding-bottom: 58%;
 }
 
 .gallery-container lite-youtube .image-placeholder {
@@ -957,60 +959,66 @@ lite-youtube.img-ready .lyt-playbtn {
 
 .carousel-container {
     display: flex;
-    /* width: 90%; */
-    /* gap: -3rem; */
-    transition: transform var(--transition-duration) ease;
-    margin-inline: 4%;
-    /* Create space for peek preview */
-    /* width: 120%; */
-    /* Compensate for margins */
+    width: 92%;
+    transition: transform 0.2s ease-in;
+    margin-inline: auto;
     will-change: transform;
 }
 
 .carousel-slide {
     min-width: 100%;
-    /* flex: 0 0 100%; */
     position: relative;
-    opacity: 0.3;
-    transition: all var(--transition-duration) ease;
+    opacity: 0;
+    transition: all 0.2s ease-in;
     pointer-events: none;
-    filter: blur(4px);
     user-select: none;
 }
 
 .carousel-slide.active {
     opacity: 1;
     pointer-events: auto;
-    filter: none;
-    /* Enable interaction only for active slide */
+    z-index: 1;
+}
+
+/* Add styles for adjacent slides */
+.carousel-slide.adjacent {
+    opacity: 0.3;
+    filter: blur(4px);
+    transform: scale(0.98);
+
 }
 
 .carousel-navigation {
     position: absolute;
-    top: 40%;
+    top: 0;
     left: 0;
     right: 0;
-    width: 100%;
+    bottom: 2rem;
+    width: 99%;
+    margin-inline: auto;
+    /* height: 56.25%; */
+    /* Match the padding-bottom of image-placeholder */
     display: flex;
     justify-content: space-between;
+    align-items: center;
     pointer-events: none;
     z-index: 2;
 }
 
-.carousel-slide .image-placeholder {
-    transform: scale(0.95);
+/* .carousel-slide .image-placeholder {
+    transform: scale(1);
     transition: transform var(--transition-duration-fast) ease;
 }
 
 .carousel-slide.active .image-placeholder {
     transform: scale(1);
-}
+} */
 
 .carousel-dots {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    padding-block: 1rem;
+    padding-block: 0.5rem;
     max-width: 100%;
 }
 
@@ -1033,19 +1041,27 @@ lite-youtube.img-ready .lyt-playbtn {
     width: 5rem;
     height: 5rem;
     border: none;
-    padding: 1.2rem;
-    margin-inline: 8rem;
+    border-radius: 50%;
     background: rgba(0, 0, 0, 0.7);
     color: var(--text-color);
     cursor: pointer;
-    border-radius: 50%;
+    pointer-events: auto;
+    transition: all var(--transition-duration) ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: auto;
-    font-size: 1rem;
-    transition: all var(--transition-duration) ease;
-    text-align: center;
+}
+
+.carousel-button svg {
+    width: 2rem;
+    height: 2rem;
+    transition: transform var(--transition-duration) ease;
+}
+
+.carousel-button img {
+    width: 2rem;
+    height: 2rem;
+    /* Make SVG white */
 }
 
 .carousel-button:hover {
@@ -1054,10 +1070,19 @@ lite-youtube.img-ready .lyt-playbtn {
 }
 
 .carousel-button:active {
-    transform: scale(0.90);
+    transform: scale(0.95);
 }
 
+/* .carousel-button:disabled {
+    opacity: 0;
+    pointer-events: none;
+} */
 
+/* Hide buttons at ends */
+.carousel-slide:first-child.active~.carousel-navigation .prev,
+.carousel-slide:last-child.active~.carousel-navigation .next {
+    display: none;
+}
 
 /* Questions Section */
 .qa-container {
@@ -1297,21 +1322,17 @@ footer .container-full {
         font-size: 0.8rem;
     }
 
-    .carousel-container {
-        margin-inline: 8%;
+    .carousel-navigation {
+        bottom: 1.8rem;
+        /* width: 100%; */
     }
+
 
     /* .carousel-slide {
         padding: 0 5%;
     } */
 
-    .carousel-navigation {
-        top: 30%;
-    }
 
-    .carousel-dots {
-        margin-block: 0.5rem;
-    }
 
     .carousel-dot {
         width: 0.8rem;
@@ -1321,7 +1342,16 @@ footer .container-full {
     .carousel-button {
         width: 2rem;
         height: 2rem;
-        margin-inline: 2rem;
+    }
+
+    .carousel-button svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .carousel-button img {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     .typing {
