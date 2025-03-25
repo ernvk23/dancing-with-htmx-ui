@@ -240,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let isDragging = false;
         const transitionDelay = 200;
         const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
+        let isVisible = false;  // Add visibility tracking
 
         // Set initial state
         function initializeSlides() {
@@ -290,17 +291,47 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isTransitioning) goToSlide((currentIndex - 1 + slides.length) % slides.length);
         }
 
-        function resetAutoplay() {
-            clearTimeout(autoplayTimer);
-            autoplayTimer = setTimeout(nextSlide, 2000);
+        function startAutoplay() {
+            if (isVisible && !autoplayTimer) {
+                autoplayTimer = setTimeout(nextSlide, 2000);
+            }
         }
 
-        // Touch event handlers
+        function stopAutoplay() {
+            if (autoplayTimer) {
+                clearTimeout(autoplayTimer);
+                autoplayTimer = null;
+            }
+        }
+
+        function resetAutoplay() {
+            stopAutoplay();
+            startAutoplay();
+        }
+
+        // Create intersection observer for carousel
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isVisible = entry.isIntersecting;
+                if (isVisible) {
+                    startAutoplay();
+                } else {
+                    stopAutoplay();
+                }
+            });
+        }, {
+            threshold: 0.5  // Trigger when 50% of carousel is visible
+        });
+
+        // Start observing the carousel
+        observer.observe(carousel);
+
+        // Update visibility handlers
         container.addEventListener('touchstart', (e) => {
             if (isTransitioning) return;
             isDragging = true;
             touchStartX = e.touches[0].clientX;
-            clearTimeout(autoplayTimer);
+            stopAutoplay();  // Stop on touch
             container.style.transition = 'none';
         }, { passive: true });
 
@@ -310,8 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const diff = touchStartX - currentX;
             const movePercent = (diff / container.offsetWidth) * 100;
 
-
-            // Allow movement even at edges, just with resistance
+            // Enable smooth movement
             const resistance = (currentIndex === 0 && diff < 0) ||
                 (currentIndex === slides.length - 1 && diff > 0) ? 0.3 : 1;
 
@@ -326,7 +356,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const diff = touchStartX - e.changedTouches[0].clientX;
             const movePercent = (diff / container.offsetWidth);
 
-            // Always check for movement, regardless of dragged state
             if (Math.abs(movePercent) > dragThreshold) {
                 if (movePercent > 0 && currentIndex < slides.length - 1) {
                     nextSlide();
@@ -339,10 +368,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 goToSlide(currentIndex);
             }
 
-            // Reset states
             touchStartX = 0;
-            resetAutoplay();
+            if (isVisible) {
+                resetAutoplay();
+            }
         }, { passive: true });
+
+        // Clean up observer when needed
+        window.addEventListener('unload', () => {
+            observer.disconnect();
+        });
+
+        // Replace old visibility change handler
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden || !isVisible) {
+                stopAutoplay();
+            } else {
+                startAutoplay();
+            }
+        });
 
         // Prevent scroll while dragging
         carousel.addEventListener('touchmove', (e) => {
@@ -362,10 +406,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Start autoplay
         resetAutoplay();
-
-        // Handle visibility changes
-        document.addEventListener('visibilitychange', () => {
-            document.hidden ? clearTimeout(autoplayTimer) : resetAutoplay();
-        });
     }
 });
