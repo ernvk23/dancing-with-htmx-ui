@@ -43,7 +43,7 @@
     --box-shadow-navbar: 0 0.1rem 0.5rem 0.03rem var(--primary-color);
     --box-shadow-cta: 0px 4px 8px -4px white;
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
-    --box-shadow-primary: 0 0 1rem 0.05rem var(--primary-color);
+    --box-shadow-primary: 0 0 0.5rem 0.05rem var(--primary-color);
     /* --box-shadow-secondary: 0 0 1rem 0.05rem var(--secondary-color-dark); */
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
@@ -51,7 +51,7 @@
     --transition-duration-fast: 0.25s;
 
     --linear-gradient: linear-gradient(90deg, var(--background-color) 60%, #2f075a);
-    --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, hsla(270, 51%, 20%, 0.329) 50%, transparent 80%);
+    --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, hsla(270, 51%, 20%, 0.527) 50%, transparent 80%);
     --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.233) 50%, transparent 80%);
     --viewport-width-desktop: 1600px;
     --viewport-width-mobile: 768px;
@@ -107,6 +107,7 @@ h2 {
     font-size: 3rem;
     text-align: center;
     margin-bottom: 1rem;
+    background: var(--linear-gradient-text-primary);
 }
 
 h3 {
@@ -1187,7 +1188,10 @@ footer .container-full {
 @media (max-width: 768px) {
     :root {
         --border-radius: 0.4rem;
+        --box-shadow-primary: 0 0 0.5rem 0.03rem var(--primary-color);
     }
+
+
 
     h1 {
         font-size: 3rem;
