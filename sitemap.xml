@@ -8,14 +8,14 @@
 
 <url>
   <loc>https://lacasadegrei.by/</loc>
-  <lastmod>2025-03-24</lastmod>  <!-- UPDATE THIS DATE WHEN YOU UPDATE HOMEPAGE CONTENT -->
+  <lastmod>2025-03-25</lastmod>  <!-- UPDATE THIS DATE WHEN YOU UPDATE HOMEPAGE CONTENT -->
   <changefreq>monthly</changefreq>
   <priority>1.0</priority>
 </url>
 
 <url>
   <loc>https://lacasadegrei.by/#about</loc>
-  <lastmod>2025-03-24</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE ABOUT SECTION -->
+  <lastmod>2025-03-25</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE ABOUT SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
