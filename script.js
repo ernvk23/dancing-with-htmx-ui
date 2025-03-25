@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let targetTransform = 0;
         let animationFrameId = null;
         const parallaxSpeed = 0.5; // Adjust this for the desired parallax effect (0.1 - 0.5 is a good range)
-        const easing = 0.05;       // Controls the smoothness of the animation (lower = smoother)
+        const easing = 0.075;       // Controls the smoothness of the animation (lower = smoother)
         let containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset; // Get the initial top position of the container
         let containerHeight = parallaxImg.offsetHeight;
         const initialTransform = 0; // Store the initial transform value, which is 0
@@ -154,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Example usage (assuming you have an element with class 'parallax-img'):
     const cleanup = initParallax();
 
-    // Clean up on page unload
-    window.addEventListener('unload', cleanup);
+    // Clean up on page hide instead of unload
+    window.addEventListener('pagehide', cleanup);
 
     const imageContainers = document.querySelectorAll('.image-placeholder');
 
