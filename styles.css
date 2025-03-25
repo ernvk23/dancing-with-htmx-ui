@@ -40,8 +40,8 @@
 
     /* Other Variables */
     --border-radius: 0.5rem;
-    --box-shadow-navbar: 0 0.1rem 0.5rem 0.03rem var(--accent-color-bright);
-    --box-shadow-cta: 0px 4px 8px -2px var(--accent-color-bright);
+    --box-shadow-navbar: 0 0.1rem 0.5rem 0.03rem var(--primary-color);
+    --box-shadow-cta: 0px 4px 8px -4px white;
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
     --box-shadow-primary: 0 0 1rem 0.2rem var(--primary-color);
     --box-shadow-secondary: 0 0 1rem 0.2rem var(--secondary-color-dark);
