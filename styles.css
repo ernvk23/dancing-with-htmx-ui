@@ -40,8 +40,8 @@
 
     /* Other Variables */
     --border-radius: 0.5rem;
-    --box-shadow-navbar: 0 0.1rem 0.5rem 0.05rem var(--primary-color);
-    --box-shadow-cta: 0px 4px 8px -4px var(--text-color-secondary);
+    --box-shadow-navbar: 0 0.1rem 0.5rem 0.03rem var(--accent-color-bright);
+    --box-shadow-cta: 0px 4px 8px -2px var(--accent-color-bright);
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
     --box-shadow-primary: 0 0 1rem 0.2rem var(--primary-color);
     --box-shadow-secondary: 0 0 1rem 0.2rem var(--secondary-color-dark);
@@ -113,18 +113,6 @@ h3 {
     font-size: 1.5rem;
 }
 
-#styles,
-#calendar,
-#contacts,
-footer .container-full {
-    /* background: var(--linear-gradient-text-primary); */
-}
-
-#about,
-#pricing,
-#qa {
-    /* background: var(--linear-gradient-text-secondary); */
-}
 
 .teacher-heading,
 .gallery-heading {
@@ -147,7 +135,7 @@ footer .container-full {
     margin-top: 4rem;
     display: inline-block;
     padding: 0.5rem;
-    background-color: #2d1644;
+    background-color: #451d6d;
     /* background: var(--linear-gradient); */
     color: white;
     text-decoration: none;
@@ -437,29 +425,41 @@ lite-youtube img {
 
 #home {
     background-color: var(--background-color);
-    /* background-position: top; */
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-clip: padding-box;
     position: relative;
     z-index: 0;
     text-align: center;
-    background-position: center;
-    /* background-size: contain; */
+    overflow: hidden;
 }
 
-
-#home::before {
-    content: '';
+.parallax-container {
     position: absolute;
-    inset: 0;
-    background-color: var(--background-color);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: -1;
-    transition: opacity var(--transition-duration) ease-in;
+    overflow: hidden;
 }
 
-#home.loaded::before {
-    opacity: 0.4;
+.parallax-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity var(--transition-duration) ease-in;
+    /* backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    will-change: transform, opacity; */
+}
+
+.parallax-img.loaded {
+    opacity: 0.8;
+    /*  Make the image visible when loaded! */
 }
 
 .home-container {
@@ -507,7 +507,7 @@ lite-youtube img {
     color: var(--text-color);
     /* Vertically align items */
     /* color: red; */
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-bright);
     border-radius: var(--border-radius);
     border: none;
     /* overflow: hidden; */
@@ -881,7 +881,7 @@ lite-youtube img {
 
 .not-available span {
     margin-right: 0.5rem;
-    color: var(--primary-color-dark);
+    color: var (--primary-color-dark);
 }
 
 .payment-methods {

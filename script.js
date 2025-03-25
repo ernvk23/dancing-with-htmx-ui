@@ -56,22 +56,104 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const homeSection = document.getElementById('home');
+    // const homeSection = document.getElementById('home');
 
-    function setBackgroundImage() {
-        const isMobile = window.innerWidth <= 768;
-        const bgImage = isMobile ? homeSection.dataset.bgMobile : homeSection.dataset.bgDesktop;
+    // Remove or comment out the old setBackgroundImage function
 
-        const img = new Image();
-        img.src = bgImage;
-        img.onload = function () {
-            homeSection.style.backgroundImage = `url(${bgImage})`;
-            homeSection.classList.add('loaded');
+    function initParallax() {
+        const parallaxImg = document.querySelector('.parallax-img');
+        if (!parallaxImg) return;
+
+        const isMobile = () => window.innerWidth <= 768;
+
+        const loadPlaceholder = () => {
+            const placeholder = isMobile() ? parallaxImg.dataset.placeholderMobile : parallaxImg.dataset.placeholderDesktop;
+            parallaxImg.src = placeholder;
+            parallaxImg.classList.add('loaded'); // Add 'loaded' immediately
+        };
+
+        const loadHighRes = () => {
+            const highResSrc = isMobile() ? parallaxImg.dataset.srcMobile : parallaxImg.dataset.srcDesktop;
+            const tempImg = new Image();
+            tempImg.onload = () => {
+                parallaxImg.src = highResSrc;
+            };
+            tempImg.src = highResSrc;
+        };
+
+        // --- Parallax Calculation and Animation ---
+
+        let currentTransform = 0;
+        let targetTransform = 0;
+        let animationFrameId = null;
+        const parallaxSpeed = 0.5; // Adjust this for the desired parallax effect (0.1 - 0.5 is a good range)
+        const easing = 0.05;       // Controls the smoothness of the animation (lower = smoother)
+        let containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset; // Get the initial top position of the container
+        let containerHeight = parallaxImg.offsetHeight;
+        const initialTransform = 0; // Store the initial transform value, which is 0
+
+        const updateParallax = () => {
+            // Calculate the target transform based on the scroll position and parallax speed.
+            const scrolled = window.pageYOffset;
+            targetTransform = (scrolled - containerTop) * parallaxSpeed;
+
+            // Limit the targetTransform so it doesn't go beyond the initial position when scrolling up
+            targetTransform = Math.max(initialTransform, targetTransform); // Ensure it doesn't go above initialTransform (0 in this case)
+
+            // Smooth easing animation
+            const diff = targetTransform - currentTransform;
+            currentTransform += diff * easing;
+
+            // Apply the transform using translate3d for hardware acceleration
+            parallaxImg.style.transform = `translate3d(0, ${currentTransform}px, 0)`;
+
+            // Continue the animation loop only if there's a significant difference
+            if (Math.abs(diff) > 0.5) { // Reduced threshold for even smoother animation
+                animationFrameId = requestAnimationFrame(updateParallax);
+            }
+        };
+
+        // --- Event Handling ---
+
+        const handleScroll = () => {
+            // Cancel any previous animation frame to prevent overlapping updates
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            // Request a new animation frame to update the parallax position
+            animationFrameId = requestAnimationFrame(updateParallax);
+        };
+
+        const handleResize = () => {
+            // Recalculate containerTop and containerHeight on resize
+            containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset;
+            containerHeight = parallaxImg.offsetHeight;
+            loadHighRes(); // Reload images for the correct resolution
+            updateParallax(); // Force an update after resize
+        };
+
+        // --- Initialization and Cleanup ---
+
+        loadPlaceholder(); // Load the placeholder image immediately
+        loadHighRes();     // Start loading the high-resolution image
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleResize);
+
+        // Return a cleanup function to remove event listeners
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
         };
     }
+    // Example usage (assuming you have an element with class 'parallax-img'):
+    const cleanup = initParallax();
 
-    setBackgroundImage();
-    window.addEventListener('resize', setBackgroundImage);
+    // Clean up on page unload
+    window.addEventListener('unload', cleanup);
 
     const imageContainers = document.querySelectorAll('.image-placeholder');
 
