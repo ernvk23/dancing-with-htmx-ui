@@ -31,7 +31,7 @@
     /* Golden Yellow - Refined and balanced */
 
     /* Neutral Colors */
-    --background-color: black;
+    --background-color: rgb(0, 0, 0);
     /* Very dark gray, almost black */
     --text-color: #f3f3f3;
     /* Very light gray, almost white */
@@ -40,20 +40,20 @@
 
     /* Other Variables */
     --border-radius: 0.5rem;
-    --box-shadow-navbar: 0 0.1rem 0.5rem 0.01rem var(--primary-color);
+    --box-shadow-navbar: 0 0.1rem 0.5rem 0.05rem var(--primary-color);
     --box-shadow-cta: 0px 4px 8px -4px var(--text-color-secondary);
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
-    --box-shadow-primary: 0 0 0.3rem 0.01rem var(--primary-color);
-    --box-shadow-secondary: 0 0 0.3rem 0.01rem var(--secondary-color-dark);
+    --box-shadow-primary: 0 0 1rem 0.2rem var(--primary-color);
+    --box-shadow-secondary: 0 0 1rem 0.2rem var(--secondary-color-dark);
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
     --transition-duration-longer: 0.5s;
     --transition-duration-fast: 0.25s;
 
-    --linear-gradient: linear-gradient(90deg, var(--background-color) 60%, #1f0c33);
+    --linear-gradient: linear-gradient(90deg, var(--background-color) 60%, #2f075a);
     --linear-gradient-text-primary: linear-gradient(90deg, transparent 20%, hsla(270, 51%, 20%, 0.329) 50%, transparent 80%);
     --linear-gradient-text-secondary: linear-gradient(90deg, transparent 20%, hsla(322, 53%, 31%, 0.233) 50%, transparent 80%);
-    --viewport-width-desktop: 1400px;
+    --viewport-width-desktop: 1600px;
     --viewport-width-mobile: 768px;
 
     --stagger-delay: 0.05s;
@@ -117,13 +117,13 @@ h3 {
 #calendar,
 #contacts,
 footer .container-full {
-    background: var(--linear-gradient-text-primary);
+    /* background: var(--linear-gradient-text-primary); */
 }
 
 #about,
 #pricing,
 #qa {
-    background: var(--linear-gradient-text-secondary);
+    /* background: var(--linear-gradient-text-secondary); */
 }
 
 .teacher-heading,
@@ -148,6 +148,7 @@ footer .container-full {
     display: inline-block;
     padding: 0.5rem;
     background-color: #2d1644;
+    /* background: var(--linear-gradient); */
     color: white;
     text-decoration: none;
     /* border: solid var(--accent-color); */
@@ -446,6 +447,7 @@ lite-youtube img {
     background-position: center;
     /* background-size: contain; */
 }
+
 
 #home::before {
     content: '';
@@ -1200,7 +1202,7 @@ footer .container-full {
     }
 
     #home {
-        /* background-position: top; */
+        background-position: top;
         background-size: cover;
     }
 

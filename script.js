@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, {
-            threshold: 0.5  // Trigger when 50% of carousel is visible
+            threshold: 0.4  // Trigger when 50% of carousel is visible
         });
 
         // Start observing the carousel
