@@ -91,14 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset; // Get the initial top position of the container
         let containerHeight = parallaxImg.offsetHeight;
         const initialTransform = 0; // Store the initial transform value, which is 0
+        let maxTransform = containerHeight * parallaxSpeed; // Calculate maximum transform based on container height and parallax speed
 
         const updateParallax = () => {
             // Calculate the target transform based on the scroll position and parallax speed.
             const scrolled = window.pageYOffset;
             targetTransform = (scrolled - containerTop) * parallaxSpeed;
 
-            // Limit the targetTransform so it doesn't go beyond the initial position when scrolling up
-            targetTransform = Math.max(initialTransform, targetTransform); // Ensure it doesn't go above initialTransform (0 in this case)
+            // Limit the targetTransform
+            targetTransform = Math.min(maxTransform, Math.max(initialTransform, targetTransform)); // Clamp between initial and max transform
 
             // Smooth easing animation
             const diff = targetTransform - currentTransform;
@@ -128,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Recalculate containerTop and containerHeight on resize
             containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset;
             containerHeight = parallaxImg.offsetHeight;
+            maxTransform = containerHeight * parallaxSpeed; // Recalculate maxTransform on resize
             loadHighRes(); // Reload images for the correct resolution
             updateParallax(); // Force an update after resize
         };
