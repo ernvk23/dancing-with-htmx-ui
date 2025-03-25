@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
 
         // Clean up observer when needed
-        window.addEventListener('unload', () => {
+        window.addEventListener('pagehide', () => {
             observer.disconnect();
         });
 
