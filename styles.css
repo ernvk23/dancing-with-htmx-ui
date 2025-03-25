@@ -44,7 +44,7 @@
     --box-shadow-cta: 0px 4px 8px -4px white;
     /* --box-shadow-primary: 0 0 0.3rem var(--primary-color); */
     --box-shadow-primary: 0 0 1rem 0.05rem var(--primary-color);
-    --box-shadow-secondary: 0 0 1rem 0.05rem var(--secondary-color-dark);
+    /* --box-shadow-secondary: 0 0 1rem 0.05rem var(--secondary-color-dark); */
     /* Reddish-purple glow */
     --transition-duration: 0.3s;
     --transition-duration-longer: 0.5s;
@@ -643,7 +643,7 @@ lite-youtube img {
     gap: 1rem;
     background-color: var(--background-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-secondary);
+    box-shadow: var(--box-shadow-primary);
     padding-block: 2rem;
     padding-inline: 1rem;
     max-width: 300px;
@@ -652,7 +652,7 @@ lite-youtube img {
 }
 
 .style-card>h3 {
-    border-bottom: solid 0.2rem var(--secondary-color-dark);
+    border-bottom: solid 0.2rem var(--primary-color-dark);
 }
 
 .teachers-container {
@@ -714,7 +714,7 @@ lite-youtube img {
     gap: 1rem;
     background-color: var(--background-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-secondary);
+    box-shadow: var(--box-shadow-primary);
     padding: 1.5rem;
     max-width: 300px;
     min-width: 250px;
@@ -736,7 +736,7 @@ lite-youtube img {
 .location-heading {
     /* font-size: 1em; */
     color: var(--text-color-secondary);
-    border-bottom: solid 0.2rem var(--secondary-color-dark);
+    border-bottom: solid 0.2rem var(--primary-color-dark);
     text-align: right;
     white-space: nowrap;
 }
@@ -757,7 +757,7 @@ lite-youtube img {
 
 .time {
     font-weight: bold;
-    color: var(--secondary-color-light);
+    color: var(--primary-color-light);
     flex: 0 0 4rem;
 }
 
