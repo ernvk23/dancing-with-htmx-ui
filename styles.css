@@ -316,38 +316,9 @@ lite-youtube img {
     transition: transform var(--transition-duration) ease;
 }
 
-
-.contact-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.contact-menu li {
-    white-space: nowrap;
-    margin-top: 0.2rem;
-}
-
 .contact-menu a {
-    text-decoration: none;
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    background-color: var(--primary-color-dark);
-    border-radius: var(--border-radius);
-    height: 2.5rem;
-    padding-inline: 0.5rem;
-    opacity: 0;
     transform: translateY(300%);
     transition: transform 0.15s ease-out, opacity 0.15s ease-out;
-}
-
-
-.contact-menu img {
-    height: 1.5rem;
-    width: 1.5rem;
-    /* padding: 0.2rem; */
-    margin-right: 0.5rem;
 }
 
 
