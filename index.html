@@ -454,7 +454,10 @@
     <noscript>
         <link rel="stylesheet" href="styles.css?v=3">
     </noscript>
-    <link rel="stylesheet" href="src/lite-yt-embed.css">
+    <link rel="preload" href="src/lite-yt-embed.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="src/lite-yt-embed.css">
+    </noscript>
     <!-- Scripts -->
     <script src="script.js?v=3" defer></script>
     <script src="src/lite-yt-embed.js" defer></script>
