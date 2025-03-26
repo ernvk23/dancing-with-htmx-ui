@@ -60,26 +60,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Remove or comment out the old setBackgroundImage function
 
-    function initParallax() {
+    function loadParallaxImage() {
         const parallaxImg = document.querySelector('.parallax-img');
         if (!parallaxImg) return;
 
         const isMobile = () => window.innerWidth <= 768;
 
-        const loadPlaceholder = () => {
-            const placeholder = isMobile() ? parallaxImg.dataset.placeholderMobile : parallaxImg.dataset.placeholderDesktop;
-            parallaxImg.src = placeholder;
-            parallaxImg.classList.add('loaded'); // Add 'loaded' immediately
+        // Determine URLs
+        const placeholderSrc = isMobile()
+            ? parallaxImg.dataset.placeholderMobile
+            : parallaxImg.dataset.placeholderDesktop;
+
+        const highResSrc = isMobile()
+            ? parallaxImg.dataset.srcMobile
+            : parallaxImg.dataset.srcDesktop;
+
+        // Only proceed if a placeholder URL exists
+        if (!placeholderSrc) return;
+
+        // Use preloader for placeholder
+        const placeholderImage = new Image();
+
+        placeholderImage.onload = () => {
+            // 1. Apply placeholder to the actual img tag
+            parallaxImg.src = placeholderImage.src;
+            // 2. Add class now that placeholder is ready (for CSS transitions)
+            parallaxImg.classList.add('loaded');
+
+            // 3. Start loading high-res if it exists
+            if (highResSrc) {
+                const highResImage = new Image();
+                highResImage.onload = () => {
+                    // 4. Swap src when high-res is loaded
+                    parallaxImg.src = highResImage.src;
+                };
+                // Start high-res download
+                highResImage.src = highResSrc;
+            }
         };
 
-        const loadHighRes = () => {
-            const highResSrc = isMobile() ? parallaxImg.dataset.srcMobile : parallaxImg.dataset.srcDesktop;
-            const tempImg = new Image();
-            tempImg.onload = () => {
-                parallaxImg.src = highResSrc;
-            };
-            tempImg.src = highResSrc;
-        };
+        // Start placeholder download
+        placeholderImage.src = placeholderSrc;
+
+    }
+
+    function initParallax() {
+        const parallaxImg = document.querySelector('.parallax-img');
+        if (!parallaxImg) return;
 
         // --- Parallax Calculation and Animation ---
 
@@ -130,14 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
             containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset;
             containerHeight = parallaxImg.offsetHeight;
             maxTransform = containerHeight * parallaxSpeed; // Recalculate maxTransform on resize
-            loadHighRes(); // Reload images for the correct resolution
+            // loadHighRes(); // Reload images for the correct resolution
+            loadParallaxImage();
             updateParallax(); // Force an update after resize
         };
 
         // --- Initialization and Cleanup ---
 
-        loadPlaceholder(); // Load the placeholder image immediately
-        loadHighRes();     // Start loading the high-resolution image
+        // loadPlaceholder(); // Load the placeholder image immediately
+        // loadHighRes();     // Start loading the high-resolution image
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', handleResize);

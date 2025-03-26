@@ -450,12 +450,8 @@ lite-youtube img {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity var(--transition-duration) ease-in;
-    /* backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    will-change: transform, opacity; */
+    transition: opacity 0.2s ease;
+    will-change: transform, opacity;
 }
 
 .parallax-img.loaded {
@@ -1356,10 +1352,6 @@ footer .container-full {
 
 .typing {
     font-size: 1.2rem;
-    background: linear-gradient(90deg,
-            rgba(0, 0, 0, 0.4),
-            var(--background-color) 50%,
-            rgba(0, 0, 0, 0.4));
     padding: 0.5rem;
     font-style: italic;
     min-height: 4.5rem;
@@ -1368,13 +1360,6 @@ footer .container-full {
     justify-content: center;
     margin-block: 1rem;
     border-radius: var(--border-radius);
-    transition: background-size 0.3s ease;
-    background-size: 0 100%;
-    background-repeat: no-repeat;
-}
-
-.typing.done {
-    background-size: 100% 100%;
 }
 
 /* Remove blink animation keyframes as we don't need them anymore */
