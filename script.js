@@ -60,49 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Remove or comment out the old setBackgroundImage function
 
-    function loadParallaxImage() {
-        const parallaxImg = document.querySelector('.parallax-img');
-        if (!parallaxImg) return;
 
-        const isMobile = () => window.innerWidth <= 768;
-
-        // Determine URLs
-        const placeholderSrc = isMobile()
-            ? parallaxImg.dataset.placeholderMobile
-            : parallaxImg.dataset.placeholderDesktop;
-
-        const highResSrc = isMobile()
-            ? parallaxImg.dataset.srcMobile
-            : parallaxImg.dataset.srcDesktop;
-
-        // Only proceed if a placeholder URL exists
-        if (!placeholderSrc) return;
-
-        // Use preloader for placeholder
-        const placeholderImage = new Image();
-
-        placeholderImage.onload = () => {
-            // 1. Apply placeholder to the actual img tag
-            parallaxImg.src = placeholderImage.src;
-            // 2. Add class now that placeholder is ready (for CSS transitions)
-            parallaxImg.classList.add('loaded');
-
-            // 3. Start loading high-res if it exists
-            if (highResSrc) {
-                const highResImage = new Image();
-                highResImage.onload = () => {
-                    // 4. Swap src when high-res is loaded
-                    parallaxImg.src = highResImage.src;
-                };
-                // Start high-res download
-                highResImage.src = highResSrc;
-            }
-        };
-
-        // Start placeholder download
-        placeholderImage.src = placeholderSrc;
-
-    }
 
     function initParallax() {
         const parallaxImg = document.querySelector('.parallax-img');
