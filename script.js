@@ -306,11 +306,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentIndex = 0;
         let autoplayTimer;
         let touchStartX = 0;
+        let touchStartY = 0; // Keep this
         let isTransitioning = false;
         let isDragging = false;
         const transitionDelay = 200;
-        const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
+        // const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
         let isVisible = false;  // Add visibility tracking
+        let dragDirectionDetermined = false;
+        let isHorizontalDrag = false;
+        const directionLockThreshold = 5; // Pixels to move before deciding direction
 
         // Set initial state
         function initializeSlides() {
@@ -396,53 +400,95 @@ document.addEventListener('DOMContentLoaded', () => {
         // Start observing the carousel
         observer.observe(carousel);
 
-        // Update visibility handlers
+        // --- Touch Start ---
         container.addEventListener('touchstart', (e) => {
-            if (isTransitioning) return;
+            if (isTransitioning || e.touches.length > 1) return; // Ignore during transition or multi-touch
             isDragging = true;
+            dragDirectionDetermined = false;    // Reset direction lock
+            isHorizontalDrag = false;         // Reset horizontal flag
             touchStartX = e.touches[0].clientX;
-            stopAutoplay();  // Stop on touch
-            container.style.transition = 'none';
-        }, { passive: true });
+            touchStartY = e.touches[0].clientY; // Store Y start coordinate
+            stopAutoplay();                     // Call your existing stopAutoplay function
+            container.style.transition = 'none';// Disable transition during drag for smooth movement
+        }, { passive: true });                  // Use passive: true as we don't preventDefault here
 
+        // --- Touch Move ---
         container.addEventListener('touchmove', (e) => {
-            if (!isDragging || isTransitioning) return;
+            if (!isDragging || isTransitioning || e.touches.length > 1) return; // Ignore if not dragging, transitioning, or multi-touch
+
             const currentX = e.touches[0].clientX;
-            const diff = touchStartX - currentX;
-            const movePercent = (diff / container.offsetWidth) * 100;
+            const currentY = e.touches[0].clientY;
 
-            // Enable smooth movement
-            const resistance = (currentIndex === 0 && diff < 0) ||
-                (currentIndex === slides.length - 1 && diff > 0) ? 0.3 : 1;
+            // Determine direction if not already decided
+            if (!dragDirectionDetermined) {
+                const diffX = Math.abs(currentX - touchStartX);
+                const diffY = Math.abs(currentY - touchStartY);
 
-            container.style.transform = `translateX(${-currentIndex * 100 - movePercent * resistance}%)`;
-        }, { passive: true });
-
-        container.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            container.style.transition = 'transform 0.2s ease-in';
-
-            const diff = touchStartX - e.changedTouches[0].clientX;
-            const movePercent = (diff / container.offsetWidth);
-
-            if (Math.abs(movePercent) > dragThreshold) {
-                if (movePercent > 0 && currentIndex < slides.length - 1) {
-                    nextSlide();
-                } else if (movePercent < 0 && currentIndex > 0) {
-                    prevSlide();
+                // Decide direction after a small threshold movement
+                if (diffX > directionLockThreshold || diffY > directionLockThreshold) {
+                    isHorizontalDrag = diffX > diffY; // Horizontal if X diff is greater
+                    dragDirectionDetermined = true;
                 } else {
-                    goToSlide(currentIndex);
+                    return; // Not enough movement yet
                 }
-            } else {
-                goToSlide(currentIndex);
             }
 
-            touchStartX = 0;
-            if (isVisible) {
-                resetAutoplay();
+            // Only prevent default and move carousel IF dragging horizontally
+            if (isHorizontalDrag) {
+                e.preventDefault(); // Prevent vertical scroll ONLY when swiping horizontally
+
+                // Apply visual feedback during drag (using your original percentage logic)
+                const currentDiffX = touchStartX - currentX;
+                const movePercent = (currentDiffX / container.offsetWidth) * 100;
+                // Optional resistance at the ends
+                const resistance = (currentIndex === 0 && currentDiffX < 0) ||
+                    (currentIndex === slides.length - 1 && currentDiffX > 0) ? 0.3 : 1;
+                container.style.transform = `translateX(${-currentIndex * 100 - movePercent * resistance}%)`;
             }
-        }, { passive: true });
+            // If !isHorizontalDrag, do nothing here - allow default vertical scroll
+
+        }, { passive: false }); // *** MUST BE passive: false to allow preventDefault ***
+
+        // --- Touch End ---
+        container.addEventListener('touchend', (e) => {
+            if (!isDragging) return; // Ignore if not dragging
+            isDragging = false;
+
+            // Restore the transition before deciding action
+            container.style.transition = `transform ${transitionDelay}ms ease-in`;
+
+            // Only process swipe logic IF the drag was determined to be horizontal
+            if (isHorizontalDrag) {
+                const diff = touchStartX - e.changedTouches[0].clientX;
+                const movePercent = (diff / container.offsetWidth);
+                const swipeThreshold = 0.1; // Minimum 10% drag to trigger a slide change (adjust if needed)
+
+                // Check if swipe distance threshold is met
+                if (Math.abs(movePercent) > swipeThreshold) {
+                    if (movePercent > 0 && currentIndex < slides.length - 1) {
+                        nextSlide(); // Call your existing nextSlide function
+                    } else if (movePercent < 0 && currentIndex > 0) {
+                        prevSlide(); // Call your existing prevSlide function
+                    } else {
+                        // Swiped past ends, snap back smoothly
+                        goToSlide(currentIndex); // Call your existing goToSlide function
+                    }
+                } else {
+                    // Swipe was too short, snap back smoothly
+                    goToSlide(currentIndex); // Call your existing goToSlide function
+                }
+            }
+            // If drag was NOT horizontal, do nothing - browser handled scroll.
+
+            // Reset flags
+            dragDirectionDetermined = false;
+            isHorizontalDrag = false;
+
+            // Restart autoplay if the carousel is visible
+            if (isVisible) { // Assumes 'isVisible' is updated by your IntersectionObserver
+                resetAutoplay(); // Call your existing resetAutoplay function
+            }
+        }, { passive: true }); // Use passive: true as we don't preventDefault here
 
         // Clean up observer when needed
         window.addEventListener('pagehide', () => {
@@ -459,9 +505,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Prevent scroll while dragging
-        carousel.addEventListener('touchmove', (e) => {
-            if (isDragging) e.preventDefault();
-        }, { passive: false });
+        // carousel.addEventListener('touchmove', (e) => {
+        //     if (isDragging) e.preventDefault();
+        // }, { passive: false });
 
         // Button click handlers
         prevButton.addEventListener('click', (e) => {

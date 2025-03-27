@@ -690,7 +690,7 @@ lite-youtube.img-ready .lyt-playbtn {
 .carousel {
     position: relative;
     overflow: hidden;
-    touch-action: pan-y;
+    /* touch-action: pan-y; */
 }
 
 .carousel-container {
@@ -708,6 +708,35 @@ lite-youtube.img-ready .lyt-playbtn {
     transition: all 0.2s ease-in;
     pointer-events: none;
     user-select: none;
+}
+
+.carousel-slide img {
+    /* Prevent text/image selection */
+    user-select: none;
+    /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari, Chrome */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+
+    /* Prevent long-press context menu on iOS/Safari */
+    -webkit-touch-callout: none;
+
+    /* Prevent browser's native dragging behavior */
+    -webkit-user-drag: none;
+    /* Safari */
+    /* Future standard */
+    -moz-user-drag: none;
+    /* Firefox */
+    -ms-user-drag: none;
+    /* IE/Edge (might not be needed) */
+
+    /* IMPORTANT: Prevent the image itself from capturing pointer events.
+       This ensures the touch events go directly to the '.carousel-container'
+       where your swipe listeners are attached. */
+    pointer-events: none;
 }
 
 .carousel-slide.active {
@@ -730,7 +759,7 @@ lite-youtube.img-ready .lyt-playbtn {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
+    carousel-slide right: 0;
     bottom: 2rem;
     width: 99%;
     margin-inline: auto;
