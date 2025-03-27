@@ -381,7 +381,7 @@ lite-youtube img {
     box-shadow: var(--box-shadow-primary);
     padding-block: 2rem;
     padding-inline: 1rem;
-    max-width: 300px;
+    max-width: 350px;
     min-width: 260px;
     flex-basis: 25%;
 }
