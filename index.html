@@ -15,8 +15,9 @@
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 
     <!-- Preloads -->
-    <link rel="preload" href="img/logo-content.svg?v=7" as="image">
-    <link rel="preload" href="img/scroll-down.svg?v=7" as="image">
+    <link rel="preload" as="image" href="img/logo-content.svg?v=7" type="image/svg+xml">
+    <link rel="preload" as="image" href="img/scroll-down.svg?v=7" type="image/svg+xml">
+
     <script>
         // Add this before preload links to determine which image to preload
         const isMobile = window.innerWidth <= 768;
@@ -47,10 +48,7 @@
             --accent-color-bright: #f7bd00;
             /* Used in contact button */
             --background-color: rgb(0, 0, 0);
-            --text-color: #f3f3f3;
-            --text-color-secondary: #919191;
-            /* Used in scroll-down */
-            --border-radius: 0.5rem;
+            --text-color: #f3f3logo-heaem;
             --box-shadow-cta: 0px 4px 8px -4px white;
             --transition-duration-fast: 0.25s;
             /* For parallax image fade-in */
@@ -1153,7 +1151,7 @@
                 <p><em>Создание и продвижение сайта <a href="mailto:ernvk23@gmail.com" target="_blank"
                             rel="noopener">Edgar
                             R.N</a></em></p>
-                <img src="img/logo-content.svg" alt="La Casa de Grei логотип" id="logo-footer">
+                <img src="img/logo-content.svg?v=7" alt="La Casa de Grei логотип" id="logo-footer">
             </div>
             <div class="legal">
                 <p>Индивидуальный предприниматель Коваленко Максим Леонидович</p>
