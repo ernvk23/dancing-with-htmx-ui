@@ -4,11 +4,11 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- Sitemap for https://lacasadegrei.by generated on 2025-03-26 -->
+<!-- Sitemap for https://lacasadegrei.by generated on 2025-03-27 -->
 
 <url>
   <loc>https://lacasadegrei.by/</loc>
-  <lastmod>2025-03-26</lastmod>  <!-- UPDATE THIS DATE WHEN YOU UPDATE HOMEPAGE CONTENT -->
+  <lastmod>2025-03-27</lastmod>  <!-- UPDATE THIS DATE WHEN YOU UPDATE HOMEPAGE CONTENT -->
   <changefreq>monthly</changefreq>
   <priority>1.0</priority>
 </url>
@@ -22,7 +22,7 @@
 
 <url>
   <loc>https://lacasadegrei.by/#styles</loc>
-  <lastmod>2025-02-02</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE STYLES SECTION -->
+  <lastmod>2025-03-27</lastmod>  <!-- UPDATE THIS DATE IF YOU UPDATE STYLES SECTION -->
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
