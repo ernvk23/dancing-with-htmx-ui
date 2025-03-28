@@ -216,49 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Adjust image map coordinates on resize
-    // Adjust image map coordinates on resize
-    function adjustImageMap() {
-        const image = document.querySelector('img[usemap="#map-directions"]');
-        const areas = document.querySelectorAll('map[name="map-directions"] area');
-        const originalWidth = 1400;
-        const originalHeight = 882;
 
-        if (!image || !areas.length) {
-            return;
-        }
-
-        function updateCoords() {
-            // Ensure image dimensions are accurate
-            if (image.width === 0 || image.height === 0) return;
-
-            const currentWidth = image.width;
-            const currentHeight = image.height;
-            const scaleX = currentWidth / originalWidth;
-            const scaleY = currentHeight / originalHeight;
-
-            areas.forEach(area => {
-                const originalCoords = area.dataset.originalCoords.split(',');
-                const newCoords = originalCoords.map((coord, index) => {
-                    // More robust rounding
-                    return Math.round(parseFloat(coord) * (index % 2 === 0 ? scaleX : scaleY));
-                }).join(',');
-                area.coords = newCoords;
-            });
-        }
-
-        // Store original coordinates only after the image has loaded
-        image.addEventListener('load', () => {
-            areas.forEach(area => {
-                area.dataset.originalCoords = area.coords;
-            });
-            updateCoords(); // Update immediately after storing original coords
-        }, { once: true });
-
-        window.addEventListener('resize', debounce(updateCoords, 250));
-    }
-
-    // Debounce function (custom, optimized)
+    // --- Debounce Function --- (Keep this or replace existing one if different)
     function debounce(func, delay) {
         let timeoutId;
         return function (...args) {
@@ -267,8 +226,98 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Call adjustImageMap after DOMContentLoaded
-    adjustImageMap();
+    // --- NEW Responsive Image Map Logic ---
+    function setupResponsiveImageMap() {
+        const image = document.querySelector('img[usemap="#map-directions"]');
+        const mapElement = document.querySelector('map[name="map-directions"]');
+
+        // Early exit if essential elements are missing
+        if (!image || !mapElement) return;
+        const areas = mapElement.querySelectorAll('area');
+        if (!areas.length) return;
+
+        let naturalWidth = 0;
+        let naturalHeight = 0;
+        let originalsStored = false;
+        let resizeListenerActive = false;
+
+        // --- Core Calculation Function ---
+        function calculateAndUpdateCoords() {
+            // Wait until originals are stored and image has valid dimensions
+            if (!originalsStored || naturalWidth === 0 || image.width === 0 || image.height === 0) {
+                return;
+            }
+            const currentWidth = image.width;
+            const currentHeight = image.height;
+            const scaleX = currentWidth / naturalWidth;
+            const scaleY = currentHeight / naturalHeight;
+
+            areas.forEach(area => {
+                const originalCoordsString = area.dataset.originalCoords;
+                if (!originalCoordsString) return;
+
+                const originalCoords = originalCoordsString.split(',').map(Number);
+                const newCoords = originalCoords.map((coord, index) => {
+                    return Math.round(coord * (index % 2 === 0 ? scaleX : scaleY));
+                }).join(',');
+
+                if (area.coords !== newCoords) {
+                    area.coords = newCoords;
+                }
+            });
+        }
+
+        // --- Debounced version for resize ---
+        const debouncedCalculateAndUpdate = debounce(calculateAndUpdateCoords, 200); // 200ms delay
+
+        // --- Function to run ONCE on first visibility/load ---
+        function performInitialSetup() {
+            if (originalsStored) return; // Prevent running multiple times
+            naturalWidth = image.naturalWidth;
+            naturalHeight = image.naturalHeight;
+            if (naturalWidth === 0) return; // If naturalWidth is 0, image likely failed
+
+            // Store original coords from the HTML 'coords' attribute
+            areas.forEach(area => {
+                if (!area.dataset.originalCoords) {
+                    area.dataset.originalCoords = area.coords;
+                }
+            });
+            originalsStored = true;
+            calculateAndUpdateCoords(); // Perform the first calculation
+
+            // Activate the resize listener ONLY AFTER initial setup
+            if (!resizeListenerActive) {
+                window.addEventListener('resize', debouncedCalculateAndUpdate);
+                resizeListenerActive = true;
+            }
+        }
+
+        // --- Intersection Observer Setup ---
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Image is visible, check if loaded
+                    if (image.complete && image.naturalWidth > 0) {
+                        performInitialSetup(); // Already loaded
+                    } else {
+                        image.addEventListener('load', performInitialSetup, { once: true }); // Wait for load
+                    }
+                    // Stop observing once triggered
+                    obs.unobserve(image);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px', // Optional: Trigger slightly before fully in view
+            threshold: 0.01       // Trigger if even a tiny part is visible
+        });
+
+        // Start observing the image
+        observer.observe(image);
+    }
+
+    // Call the new setup function (Place this where adjustImageMap() was called)
+    setupResponsiveImageMap();
 
 
     //Navbar border shadow when scrolling
