@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let targetTransform = 0;
         let animationFrameId = null;
         const parallaxSpeed = 0.75;
-        const easing = 0.75;
+        const easing = 1;
 
         const updateParallax = () => {
             // const container = parallaxImg.parentElement;
