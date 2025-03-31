@@ -56,19 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // const homeSection = document.getElementById('home');
-
-    // Remove or comment out the old setBackgroundImage function
-
-
-
     function initParallax() {
         const parallaxImg = document.querySelector('.parallax-img');
         if (!parallaxImg) return;
 
         const updateParallax = () => {
             const scrolled = window.pageYOffset;
-            parallaxImg.style.transform = `translate3d(0, ${scrolled * 0.6}px, 0)`;
+            parallaxImg.style.transform = `translate3d(0, ${scrolled * 0.75}px, 0)`;
         };
 
         const handleResize = () => {
