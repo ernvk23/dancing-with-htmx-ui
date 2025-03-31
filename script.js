@@ -60,45 +60,60 @@ document.addEventListener('DOMContentLoaded', () => {
         const parallaxImg = document.querySelector('.parallax-img');
         if (!parallaxImg) return;
 
+        let currentTransform = 0;
+        let targetTransform = 0;
+        let animationFrameId = null;
+        const parallaxSpeed = 0.5; // Reduced for smoother effect
+
         const updateParallax = () => {
+            const container = parallaxImg.parentElement;
+            const containerRect = container.getBoundingClientRect();
             const scrolled = window.pageYOffset;
-            parallaxImg.style.transform = `translate3d(0, ${scrolled * 0.75}px, 0)`;
+
+            // Only update if container is still in view
+            if (containerRect.bottom > 0) {
+                // Calculate target transform with container bounds
+                targetTransform = Math.max(0, scrolled * parallaxSpeed);
+
+                // Apply easing
+                const diff = targetTransform - currentTransform;
+
+                // Apply transform only if significant change
+                if (Math.abs(diff) > 0.1) {
+                    parallaxImg.style.transform = `translate3d(0, ${diff}px, 0)`;
+                    animationFrameId = requestAnimationFrame(updateParallax);
+                }
+            }
+        };
+
+        // --- Event Handling ---
+
+        const handleScroll = () => {
+            // Cancel any previous animation frame to prevent overlapping updates
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            // Request a new animation frame to update the parallax position
+            animationFrameId = requestAnimationFrame(updateParallax);
         };
 
         const handleResize = () => {
             loadParallaxImage();
-            updateParallax();
+            updateParallax(); // Force an update after resize
         };
 
-        // Create intersection observer for parallax
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Add event listeners when element comes into view
-                    window.addEventListener('scroll', updateParallax, { passive: true });
-                    window.addEventListener('resize', handleResize);
-                    updateParallax(); // Initial position update
-                } else {
-                    // Remove event listeners when element leaves viewport
-                    window.removeEventListener('scroll', updateParallax);
-                    window.removeEventListener('resize', handleResize);
-                }
-            });
-        }, {
-            threshold: 0.01,
-            rootMargin: '50px 0px'
-        });
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleResize);
 
-        // Start observing the parallax element
-        observer.observe(parallaxImg);
-
+        // Return a cleanup function to remove event listeners
         return () => {
-            observer.disconnect();
-            window.removeEventListener('scroll', updateParallax);
+            window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', handleResize);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
         };
     }
-
     // Example usage (assuming you have an element with class 'parallax-img'):
     const cleanup = initParallax();
 
