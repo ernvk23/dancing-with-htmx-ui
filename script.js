@@ -66,77 +66,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const parallaxImg = document.querySelector('.parallax-img');
         if (!parallaxImg) return;
 
-        // --- Parallax Calculation and Animation ---
-
-        let currentTransform = 0;
-        let targetTransform = 0;
-        let animationFrameId = null;
-        const parallaxSpeed = 0.5; // Adjust this for the desired parallax effect (0.1 - 0.5 is a good range)
-        const easing = 0.075;       // Controls the smoothness of the animation (lower = smoother)
-        let containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset; // Get the initial top position of the container
-        let containerHeight = parallaxImg.offsetHeight;
-        const initialTransform = 0; // Store the initial transform value, which is 0
-        let maxTransform = containerHeight * parallaxSpeed; // Calculate maximum transform based on container height and parallax speed
-
         const updateParallax = () => {
-            // Calculate the target transform based on the scroll position and parallax speed.
             const scrolled = window.pageYOffset;
-            targetTransform = (scrolled - containerTop) * parallaxSpeed;
-
-            // Limit the targetTransform
-            targetTransform = Math.min(maxTransform, Math.max(initialTransform, targetTransform)); // Clamp between initial and max transform
-
-            // Smooth easing animation
-            const diff = targetTransform - currentTransform;
-            currentTransform += diff * easing;
-
-            // Apply the transform using translate3d for hardware acceleration
-            parallaxImg.style.transform = `translate3d(0, ${currentTransform}px, 0)`;
-
-            // Continue the animation loop only if there's a significant difference
-            if (Math.abs(diff) > 0.5) { // Reduced threshold for even smoother animation
-                animationFrameId = requestAnimationFrame(updateParallax);
-            }
-        };
-
-        // --- Event Handling ---
-
-        const handleScroll = () => {
-            // Cancel any previous animation frame to prevent overlapping updates
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
-            // Request a new animation frame to update the parallax position
-            animationFrameId = requestAnimationFrame(updateParallax);
+            parallaxImg.style.transform = `translate3d(0, ${scrolled * 0.6}px, 0)`;
         };
 
         const handleResize = () => {
-            // Recalculate containerTop and containerHeight on resize
-            containerTop = parallaxImg.getBoundingClientRect().top + window.pageYOffset;
-            containerHeight = parallaxImg.offsetHeight;
-            maxTransform = containerHeight * parallaxSpeed; // Recalculate maxTransform on resize
-            // loadHighRes(); // Reload images for the correct resolution
             loadParallaxImage();
-            updateParallax(); // Force an update after resize
+            updateParallax();
         };
 
-        // --- Initialization and Cleanup ---
+        // Create intersection observer for parallax
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add event listeners when element comes into view
+                    window.addEventListener('scroll', updateParallax, { passive: true });
+                    window.addEventListener('resize', handleResize);
+                    updateParallax(); // Initial position update
+                } else {
+                    // Remove event listeners when element leaves viewport
+                    window.removeEventListener('scroll', updateParallax);
+                    window.removeEventListener('resize', handleResize);
+                }
+            });
+        }, {
+            threshold: 0.01,
+            rootMargin: '50px 0px'
+        });
 
-        // loadPlaceholder(); // Load the placeholder image immediately
-        // loadHighRes();     // Start loading the high-resolution image
+        // Start observing the parallax element
+        observer.observe(parallaxImg);
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        window.addEventListener('resize', handleResize);
-
-        // Return a cleanup function to remove event listeners
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            observer.disconnect();
+            window.removeEventListener('scroll', updateParallax);
             window.removeEventListener('resize', handleResize);
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
         };
     }
+
     // Example usage (assuming you have an element with class 'parallax-img'):
     const cleanup = initParallax();
 
