@@ -63,61 +63,75 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentTransform = 0;
         let targetTransform = 0;
         let animationFrameId = null;
-        const parallaxSpeed = 0.5; // Reduced for smoother effect
+        const parallaxSpeed = 0.75;
+        const easing = 0.75;
 
         const updateParallax = () => {
-            const container = parallaxImg.parentElement;
-            const containerRect = container.getBoundingClientRect();
+            // const container = parallaxImg.parentElement;
+            // const containerRect = container.getBoundingClientRect();
             const scrolled = window.pageYOffset;
 
-            // Only update if container is still in view
-            if (containerRect.bottom > 0) {
-                // Calculate target transform with container bounds
-                targetTransform = Math.max(0, scrolled * parallaxSpeed);
+            // Only update if container is partially in view
+            // if (containerRect.bottom > 0 && containerRect.top < window.innerHeight) {
+            targetTransform = Math.max(0, scrolled * parallaxSpeed);
 
-                // Apply easing
-                const diff = targetTransform - currentTransform;
+            const diff = targetTransform - currentTransform;
+            currentTransform += diff * easing;
 
-                // Apply transform only if significant change
-                if (Math.abs(diff) > 0.1) {
-                    parallaxImg.style.transform = `translate3d(0, ${diff}px, 0)`;
-                    animationFrameId = requestAnimationFrame(updateParallax);
-                }
+            // Still keep this threshold for performance
+            if (Math.abs(diff) > 0.1) {
+                parallaxImg.style.transform = `translate3d(0, ${currentTransform}px, 0)`;
+                animationFrameId = requestAnimationFrame(updateParallax);
             }
+            // }
         };
 
-        // --- Event Handling ---
+        // Create intersection observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    window.addEventListener('scroll', handleScroll, { passive: true });
+                    updateParallax();
+                } else {
+                    window.removeEventListener('scroll', handleScroll);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px 0px'
+        });
 
         const handleScroll = () => {
-            // Cancel any previous animation frame to prevent overlapping updates
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
             }
-            // Request a new animation frame to update the parallax position
             animationFrameId = requestAnimationFrame(updateParallax);
         };
 
         const handleResize = () => {
-            loadParallaxImage();
-            updateParallax(); // Force an update after resize
+            if (typeof loadParallaxImage === 'function') {
+                loadParallaxImage();
+            }
+            updateParallax();
         };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
         window.addEventListener('resize', handleResize);
+        observer.observe(parallaxImg.parentElement);
 
-        // Return a cleanup function to remove event listeners
+        // Return cleanup function
         return () => {
-            window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', handleResize);
+            window.removeEventListener('scroll', handleScroll);
+            observer.disconnect();
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
             }
         };
     }
-    // Example usage (assuming you have an element with class 'parallax-img'):
+
+    // Initialize
     const cleanup = initParallax();
 
-    // Clean up on page hide instead of unload
     window.addEventListener('pagehide', cleanup);
 
     const imageContainers = document.querySelectorAll('.image-placeholder');
