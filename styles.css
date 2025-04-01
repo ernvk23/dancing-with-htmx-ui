@@ -422,7 +422,7 @@ lite-youtube img {
     justify-content: center;
     z-index: 2000;
     background: rgb(0, 0, 0);
-    padding: 2rem;
+    padding: 0.5rem;
     gap: 1rem;
 }
 
@@ -456,6 +456,8 @@ lite-youtube img {
 /* Update close button z-index */
 .close-modal {
     align-self: flex-end;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
     /* position: relative; */
     /* top: -3rem; */
     /* right: 0; */
