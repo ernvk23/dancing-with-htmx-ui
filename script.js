@@ -128,8 +128,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const cleanup = initParallax();
 
     window.addEventListener('pagehide', cleanup);
-    // Consider adding beforeunload for broader cleanup coverage
-    // window.addEventListener('beforeunload', cleanup);
+
+    // Video modal functionality
+    const videoModal = document.querySelector('.video-modal');
+    const modalContent = videoModal.querySelector('.modal-content');
+    const closeModal = videoModal.querySelector('.close-modal');
+    let currentVideo = null;
+
+    function showVideoModal(videoId) {
+        const youtube = document.createElement('lite-youtube');
+        youtube.setAttribute('videoid', videoId);
+
+        // Clear and insert
+        modalContent.innerHTML = '';
+        modalContent.appendChild(youtube);
+
+        // Show modal
+        requestAnimationFrame(() => {
+            videoModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            currentVideo = youtube;
+
+            // Warm up connections first
+            LiteYTEmbed.warmConnections();
+
+            // Force immediate activation and play
+            if (typeof youtube.addYTPlayerIframe === 'function') {
+                youtube.addYTPlayerIframe();
+            }
+        });
+    }
+
+    function hideVideoModal() {
+        videoModal.classList.remove('show');
+        document.body.style.overflow = '';
+        // Clear after hide animation
+        setTimeout(() => {
+            modalContent.innerHTML = '';
+            currentVideo = null;
+        }, 200);
+    }
+
+    // Event delegation for demo buttons
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('watch-demo')) {
+            const videoId = e.target.dataset.videoId;
+            if (videoId) showVideoModal(videoId);
+        }
+    });
+
+    // Close modal events
+    closeModal.addEventListener('click', hideVideoModal);
+    videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) hideVideoModal();
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && videoModal.classList.contains('show')) {
+            hideVideoModal();
+        }
+    });
 
     const imageContainers = document.querySelectorAll('.image-placeholder');
 
@@ -154,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if the image is associated with a lite-youtube element
             const liteYouTube = img.parentElement.parentElement;
             if (liteYouTube && liteYouTube.tagName === 'LITE-YOUTUBE') {
-                console.log(liteYouTube);
                 // Add a class to the lite-youtube element to make it interactive
                 liteYouTube.classList.add('img-ready');
             }
