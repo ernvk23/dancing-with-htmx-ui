@@ -64,27 +64,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateParallax = () => {
             const scrolled = window.pageYOffset;
-            // Round to 2 decimal places to reduce micro-jitters
-            const transform = Math.max(0, scrolled * parallaxSpeed);
-            parallaxImg.style.transform = `translate3d(0, ${transform}px, 0)`;
+            let transformValue = Math.max(0, scrolled * parallaxSpeed);
+            const finalTransform = Math.round(transformValue);
+            parallaxImg.style.transform = `translate3d(0, ${finalTransform}px, 0)`;
+            animationFrameId = null;
         };
 
+        // Renamed for clarity
+        const requestParallaxUpdate = () => {
+            // Only schedule a new frame if one isn't already pending
+            if (!animationFrameId) {
+                animationFrameId = requestAnimationFrame(updateParallax);
+            }
+        };
 
         const handleScroll = () => {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
-            animationFrameId = requestAnimationFrame(updateParallax);
+            requestParallaxUpdate(); // Use the scheduler
         };
 
         const handleResize = () => {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
             if (typeof loadParallaxImage === 'function') {
                 loadParallaxImage();
             }
-            animationFrameId = requestAnimationFrame(updateParallax);
+            requestParallaxUpdate(); // Use the scheduler
         };
 
         // Create intersection observer
@@ -92,18 +94,22 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     window.addEventListener('scroll', handleScroll, { passive: true });
-                    handleScroll(); // Initial call to set position
+                    requestParallaxUpdate();
                 } else {
                     window.removeEventListener('scroll', handleScroll);
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                        animationFrameId = null; // Clear the ID
+                    }
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '50px 0px'
+            threshold: 0.1, // Adjust if needed
+            rootMargin: '50px 0px' // Adjust if needed
         });
 
         window.addEventListener('resize', handleResize);
-        observer.observe(parallaxImg.parentElement);
+        observer.observe(parallaxImg.parentElement); // Ensure this observes the correct element
 
         // Return cleanup function
         return () => {
@@ -112,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.disconnect();
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
             }
         };
     }
@@ -120,6 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cleanup = initParallax();
 
     window.addEventListener('pagehide', cleanup);
+    // Consider adding beforeunload for broader cleanup coverage
+    // window.addEventListener('beforeunload', cleanup);
 
     const imageContainers = document.querySelectorAll('.image-placeholder');
 
