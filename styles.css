@@ -421,9 +421,8 @@ lite-youtube img {
     align-items: center;
     justify-content: center;
     z-index: 2000;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgb(0, 0, 0);
     padding: 2rem;
-    backdrop-filter: blur(2px);
     gap: 1rem;
 }
 
@@ -433,7 +432,8 @@ lite-youtube img {
 
 .modal-content {
     position: relative;
-    aspect-ratio: 0.5;
+    /* aspect-ratio: 0.5; */
+    width: 100%;
     height: 100%;
     margin-inline: auto;
     background: black;
@@ -475,7 +475,7 @@ lite-youtube img {
 }
 
 .close-modal:hover {
-    /* background-color: var(--accent-color); */
+    /* background: var(--accent-color-bright); */
 }
 
 .teachers-container {
@@ -1106,6 +1106,15 @@ footer .container-full {
 
     .video-modal {
         max-width: var(--viewport-width-mobile);
+    }
+
+    .close-modal {
+        padding: 0.5rem;
+    }
+
+    .close-modal svg {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 }
 
