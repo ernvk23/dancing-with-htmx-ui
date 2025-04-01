@@ -64,18 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateParallax = () => {
             const scrolled = window.pageYOffset;
-            const transform = Math.max(0, scrolled * parallaxSpeed);
-            // const finalTransform = Math.round(transformValue);
-            parallaxImg.style.transform = `translate3d(0, ${transform}px, 0)`;
+            let transformValue = Math.max(0, scrolled * parallaxSpeed);
+            const finalTransform = Math.round(transformValue);
+            parallaxImg.style.transform = `translate3d(0, ${finalTransform}px, 0)`;
             animationFrameId = null;
         };
 
         // Renamed for clarity
         const requestParallaxUpdate = () => {
             // Only schedule a new frame if one isn't already pending
-            if (!animationFrameId) {
-                animationFrameId = requestAnimationFrame(updateParallax);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
             }
+            animationFrameId = requestAnimationFrame(updateParallax);
         };
 
         const handleScroll = () => {
