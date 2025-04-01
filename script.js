@@ -59,47 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function initParallax() {
         const parallaxImg = document.querySelector('.parallax-img');
         if (!parallaxImg) return;
-
-        let currentTransform = 0;
-        let targetTransform = 0;
         let animationFrameId = null;
-        const parallaxSpeed = 0.75;
-        const easing = 1;
+        const parallaxSpeed = 0.6;
 
         const updateParallax = () => {
-            // const container = parallaxImg.parentElement;
-            // const containerRect = container.getBoundingClientRect();
             const scrolled = window.pageYOffset;
-
-            // Only update if container is partially in view
-            // if (containerRect.bottom > 0 && containerRect.top < window.innerHeight) {
-            targetTransform = Math.max(0, scrolled * parallaxSpeed);
-
-            const diff = targetTransform - currentTransform;
-            currentTransform += diff * easing;
-
-            // Still keep this threshold for performance
-            if (Math.abs(diff) > 0.1) {
-                parallaxImg.style.transform = `translate3d(0, ${currentTransform}px, 0)`;
-                animationFrameId = requestAnimationFrame(updateParallax);
-            }
-            // }
+            // Round to 2 decimal places to reduce micro-jitters
+            const transform = Math.max(0, scrolled * parallaxSpeed);
+            parallaxImg.style.transform = `translate3d(0, ${transform}px, 0)`;
         };
 
-        // Create intersection observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    window.addEventListener('scroll', handleScroll, { passive: true });
-                    updateParallax();
-                } else {
-                    window.removeEventListener('scroll', handleScroll);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '50px 0px'
-        });
 
         const handleScroll = () => {
             if (animationFrameId) {
@@ -109,11 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const handleResize = () => {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
             if (typeof loadParallaxImage === 'function') {
                 loadParallaxImage();
             }
-            updateParallax();
+            animationFrameId = requestAnimationFrame(updateParallax);
         };
+
+        // Create intersection observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    window.addEventListener('scroll', handleScroll, { passive: true });
+                    handleScroll(); // Initial call to set position
+                } else {
+                    window.removeEventListener('scroll', handleScroll);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px 0px'
+        });
 
         window.addEventListener('resize', handleResize);
         observer.observe(parallaxImg.parentElement);
