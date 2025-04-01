@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateParallax = () => {
             const scrolled = window.pageYOffset;
-            let transformValue = Math.max(0, scrolled * parallaxSpeed);
-            const finalTransform = Math.round(transformValue);
-            parallaxImg.style.transform = `translate3d(0, ${finalTransform}px, 0)`;
+            const transform = Math.max(0, scrolled * parallaxSpeed);
+            // const finalTransform = Math.round(transformValue);
+            parallaxImg.style.transform = `translate3d(0, ${transform}px, 0)`;
             animationFrameId = null;
         };
 
