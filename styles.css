@@ -424,6 +424,7 @@ lite-youtube img {
     background: rgb(0, 0, 0);
     padding: 0.5rem;
     /* gap: 1rem; */
+
 }
 
 .video-modal.show {
@@ -435,10 +436,11 @@ lite-youtube img {
     width: 100%;
     height: 100%;
     margin-inline: auto;
-    background: black;
+    background: rgb(0, 0, 0);
     border-radius: var(--border-radius);
     overflow: hidden;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
+    /* box-shadow: var(--box-shadow-primary); */
 }
 
 /* Update lite-youtube styles */
@@ -459,6 +461,7 @@ lite-youtube img {
     border-radius: 50%;
     cursor: pointer;
     transition: transform var(--clicked-feedback-time) ease;
+    margin-right: 1rem;
     padding: 0.5rem;
 }
 
@@ -1105,7 +1108,9 @@ footer .container-full {
     }
 
     .close-modal {
-        padding: 0.5rem;
+        margin-right: 0.5rem;
+        padding: 0.25rem;
+        /* margin-inline-end: 1rem; */
     }
 
     .close-modal svg {
@@ -1118,7 +1123,7 @@ footer .container-full {
     }
 
     .modal-content {
-        margin-bottom: 2.25rem;
+        margin-bottom: 1rem;
     }
 }
 
