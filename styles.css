@@ -422,7 +422,7 @@ lite-youtube img {
     justify-content: space-between;
     z-index: 2000;
     background: rgb(0, 0, 0);
-    padding: 0.5rem;
+    padding: 0.25rem;
     /* gap: 1rem; */
 
 }
@@ -439,8 +439,7 @@ lite-youtube img {
     background: rgb(0, 0, 0);
     border-radius: var(--border-radius);
     overflow: hidden;
-    margin-bottom: 2rem;
-    /* box-shadow: var(--box-shadow-primary); */
+    margin-bottom: 3.5rem;
 }
 
 /* Update lite-youtube styles */
@@ -462,6 +461,7 @@ lite-youtube img {
     cursor: pointer;
     transition: transform var(--clicked-feedback-time) ease;
     margin-right: 1rem;
+    margin-top: 1rem;
     padding: 0.5rem;
 }
 
@@ -1109,6 +1109,7 @@ footer .container-full {
 
     .close-modal {
         margin-right: 0.5rem;
+        margin-top: 0.5rem;
         padding: 0.25rem;
         /* margin-inline-end: 1rem; */
     }
@@ -1123,7 +1124,7 @@ footer .container-full {
     }
 
     .modal-content {
-        margin-bottom: 1rem;
+        margin-bottom: 2.25rem;
     }
 }
 
