@@ -139,6 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const youtube = document.createElement('lite-youtube');
         youtube.setAttribute('videoid', videoId);
 
+        // Add history state on mobile
+        if (window.innerWidth <= 768) {
+            history.pushState({ modal: 'video' }, '');
+        }
+
         // Clear and insert
         modalContent.innerHTML = '';
         modalContent.appendChild(youtube);
@@ -162,12 +167,25 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideVideoModal() {
         videoModal.classList.remove('show');
         document.body.style.overflow = '';
+
+        // Remove history state if it exists
+        if (window.innerWidth <= 768 && history.state?.modal === 'video') {
+            history.back();
+        }
+
         // Clear after hide animation
         setTimeout(() => {
             modalContent.innerHTML = '';
             currentVideo = null;
         }, 200);
     }
+
+    // Add popstate handler
+    window.addEventListener('popstate', (e) => {
+        if (window.innerWidth <= 768 && videoModal.classList.contains('show')) {
+            hideVideoModal();
+        }
+    });
 
     // Event delegation for demo buttons
     document.addEventListener('click', (e) => {
