@@ -147,12 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
             activeButton.style.backgroundColor = '';
 
             // Reset aria and touch/active states
-            // activeButton.setAttribute('aria-pressed', 'false');
+            activeButton.setAttribute('aria-pressed', 'false');
             activeButton.classList.remove('active');
 
             // Force clear hover/active/focus states
-            // activeButton.style.pointerEvents = 'none';
-            // setTimeout(() => activeButton.style.pointerEvents = '', 100);
+            activeButton.style.pointerEvents = 'none';
+            setTimeout(() => activeButton.style.pointerEvents = '', 100);
         }
     }
 
