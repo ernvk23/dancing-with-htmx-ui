@@ -143,9 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
             activeButton.style.transform = '';
             activeButton.style.backgroundColor = '';
             // Remove all possible states
-            activeButton.classList.remove('active', 'pressed', 'touched');
-            // Force browser to drop the active state
-            document.activeElement.blur();
+            // activeButton.classList.remove('active', 'pressed', 'touched');
+            // // Force browser to drop the active state
+            // document.activeElement.blur();
         }
     }
 

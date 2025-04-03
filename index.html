@@ -317,7 +317,7 @@
         .floating-contact-button {
             position: fixed;
             bottom: 2rem;
-            left: 12%;
+            left: calc(50% - var(--viewport-width-desktop)/2 + 2rem);
             font-size: 1rem;
             padding: 0.5rem;
             z-index: 80;
@@ -457,7 +457,8 @@
 
             /* Contact Button Text Swap */
             .floating-contact-button {
-                left: 2rem;
+                left: 1rem;
+                bottom: 1rem;
             }
 
             /* Adjust mobile position */

@@ -113,7 +113,7 @@ h3 {
 #cta {
     cursor: pointer;
     user-select: none;
-    transition: background-color var(--clicked-feedback-time) ease, transform var(--clicked-feedback-time) ease;
+    /* transition: background-color var(--clicked-feedback-time) ease, transform var(--clicked-feedback-time) ease; */
 }
 
 #cta:active {
@@ -402,15 +402,29 @@ lite-youtube img {
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-size: 0.9rem;
-    /* transition: transform var(--clicked-feedback-time) ease; */
     box-shadow: var(--box-shadow-cta);
-    /* -webkit-tap-highlight-color: transparent; */
-    /* Remove tap highlight on mobile */
+    /* Prevent touch selection/highlights */
     user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
 }
 
-.watch-demo:active {
-    transform: scale(0.93);
+/* Mouse-specific styles */
+@media (pointer: fine) {
+    .watch-demo:active {
+        background-color: var(--primary-color);
+        transform: scale(0.93);
+    }
+}
+
+/* Touch-specific styles - no transitions */
+@media (pointer: coarse) {
+    .watch-demo:active {
+        background-color: var(--primary-color);
+        transform: scale(0.93);
+    }
 }
 
 .video-modal {
@@ -1151,5 +1165,9 @@ footer .container-full {
 
     .floating-contact-button:hover {
         background-color: var(--accent-color-bright);
+    }
+
+    .watch-demo:hover {
+        background-color: var(--primary-color);
     }
 }
