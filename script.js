@@ -140,6 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeButton = document.querySelector('.watch-demo');
         if (activeButton) {
             activeButton.blur();
+            activeButton.style.transform = '';
+            activeButton.style.backgroundColor = '';
             // Remove all possible states
             activeButton.classList.remove('active', 'pressed', 'touched');
             // Force browser to drop the active state
