@@ -162,27 +162,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function hideVideoModal() {
+    function hideVideoModal(fromPopState = false) {
+        // Reset any active/focused watch-demo button
+        const activeButton = document.querySelector('.watch-demo:active, .watch-demo:focus');
+        if (activeButton) {
+            activeButton.blur();
+            activeButton.style.transform = 'none';
+            activeButton.style.backgroundColor = '';
+        }
+
         videoModal.classList.remove('show');
         document.body.style.overflow = '';
-        // Clear immediately to prevent flash of old content
         modalContent.innerHTML = '';
         currentVideo = null;
 
-        // Remove history state if it exists and this was triggered by a button click
-        if (history.state?.modal === 'video') {
+        // Only trigger history.back() if we're not already handling a popstate event
+        if (!fromPopState && history.state?.modal === 'video') {
             history.back();
         }
     }
 
-    // Update popstate handler for complete reset
+    // Simplified popstate handler
     window.addEventListener('popstate', (e) => {
         if (videoModal.classList.contains('show')) {
-            videoModal.classList.remove('show');
-            document.body.style.overflow = '';
-            modalContent.innerHTML = '';
-            currentVideo = null;
-            videoModal.setAttribute('aria-hidden', 'true');
+            hideVideoModal(true); // Pass true to indicate it's called from popstate
         }
     });
 
