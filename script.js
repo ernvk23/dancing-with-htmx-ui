@@ -139,20 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetWatchDemoButton() {
         const activeButton = document.querySelector('.watch-demo');
         if (activeButton) {
-            // Clear focus state
             activeButton.blur();
-
-            // Reset visual styles
-            activeButton.style.transform = '';
-            activeButton.style.backgroundColor = '';
-
-            // Reset aria and touch/active states
-            activeButton.setAttribute('aria-pressed', 'false');
-            activeButton.classList.remove('active');
-
-            // Force clear hover/active/focus states
-            activeButton.style.pointerEvents = 'none';
-            setTimeout(() => activeButton.style.pointerEvents = '', 100);
+            // Remove all possible states
+            activeButton.classList.remove('active', 'pressed', 'touched');
+            // Force browser to drop the active state
+            document.activeElement.blur();
         }
     }
 

@@ -401,6 +401,9 @@ lite-youtube img {
     transition: background-color var(--transition-duration) ease,
         transform var(--clicked-feedback-time) ease;
     box-shadow: var(--box-shadow-cta);
+    -webkit-tap-highlight-color: transparent;
+    /* Remove tap highlight on mobile */
+    user-select: none;
 }
 
 .watch-demo:hover {
@@ -409,6 +412,16 @@ lite-youtube img {
 
 .watch-demo:active {
     transform: scale(0.95);
+}
+
+.watch-demo:active,
+.watch-demo:focus,
+.watch-demo:focus-visible,
+.watch-demo:focus-within {
+    transform: none !important;
+    background-color: rgba(35, 2, 54, 0.849) !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .video-modal {
