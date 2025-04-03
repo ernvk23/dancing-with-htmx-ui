@@ -135,6 +135,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = videoModal.querySelector('.close-modal');
     let currentVideo = null;
 
+    // Add this new function for button reset
+    function resetWatchDemoButton() {
+        const activeButton = document.querySelector('.watch-demo');
+        if (activeButton) {
+            activeButton.blur();
+            activeButton.style.transform = 'none';
+            activeButton.style.backgroundColor = '';
+        }
+    }
+
     function showVideoModal(videoId) {
         const youtube = document.createElement('lite-youtube');
         youtube.setAttribute('videoid', videoId);
@@ -163,18 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function hideVideoModal(fromPopState = false) {
-        // Reset any active/focused watch-demo button
-        const activeButton = document.querySelector('.watch-demo:active, .watch-demo:focus');
-        if (activeButton) {
-            activeButton.blur();
-            activeButton.style.transform = 'none';
-            activeButton.style.backgroundColor = '';
-        }
-
         videoModal.classList.remove('show');
         document.body.style.overflow = '';
         modalContent.innerHTML = '';
         currentVideo = null;
+        resetWatchDemoButton();  // Always reset button state
 
         // Only trigger history.back() if we're not already handling a popstate event
         if (!fromPopState && history.state?.modal === 'video') {
