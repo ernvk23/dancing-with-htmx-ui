@@ -318,7 +318,6 @@ lite-youtube img {
 }
 
 
-
 .floating-contact-button:active {
     transform: scale(0.93);
     /* Scale down on press */
@@ -425,6 +424,7 @@ lite-youtube img {
     inset: 0;
     max-width: var(--viewport-width-desktop);
     margin-inline: auto;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
