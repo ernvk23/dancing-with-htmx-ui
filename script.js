@@ -175,14 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Add popstate handler for all devices
+    // Update popstate handler for complete reset
     window.addEventListener('popstate', (e) => {
         if (videoModal.classList.contains('show')) {
-            // Don't call history.back() here to prevent loops
             videoModal.classList.remove('show');
             document.body.style.overflow = '';
             modalContent.innerHTML = '';
             currentVideo = null;
+            videoModal.setAttribute('aria-hidden', 'true');
         }
     });
 

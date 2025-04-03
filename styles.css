@@ -476,9 +476,6 @@ lite-youtube img {
     fill: white;
 }
 
-.close-modal:hover {
-    /* background: var(--accent-color-bright); */
-}
 
 .teachers-container {
     display: flex;
