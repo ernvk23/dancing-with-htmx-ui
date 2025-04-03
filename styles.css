@@ -100,6 +100,16 @@ h3 {
     font-size: 1.5rem;
 }
 
+button {
+    cursor: pointer;
+    border: none;
+    /* Touch-related properties for all buttons */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+}
 
 .teacher-heading,
 .gallery-heading {
@@ -395,44 +405,26 @@ lite-youtube img {
 }
 
 .watch-demo {
-    cursor: pointer;
     background-color: rgba(35, 2, 54, 0.849);
     color: white;
-    border: none;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-size: 0.9rem;
     box-shadow: var(--box-shadow-cta);
-    /* Prevent touch selection/highlights */
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    touch-action: manipulation;
+    /* Removed duplicated touch-related properties since they're now in button {} */
 }
 
-/* Mouse-specific styles */
-@media (pointer: fine) {
-    .watch-demo:active {
-        background-color: var(--primary-color);
-        transform: scale(0.93);
-    }
+.watch-demo:active {
+    background-color: var(--primary-color);
+    transform: scale(0.93);
 }
 
-/* Touch-specific styles - no transitions */
-@media (pointer: coarse) {
-    .watch-demo:active {
-        background-color: var(--primary-color);
-        transform: scale(0.93);
-    }
-}
 
 .video-modal {
     position: fixed;
     inset: 0;
     max-width: var(--viewport-width-desktop);
     margin-inline: auto;
-    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -1008,8 +1000,6 @@ footer .container-full {
 
 #logo-footer {
     display: inline-block;
-    width: 5rem;
-    height: 5rem;
     margin-inline: auto;
 }
 
@@ -1141,7 +1131,6 @@ footer .container-full {
     }
 }
 
-/* Remove blink animation keyframes as we don't need them anymore */
 
 @media (hover:hover) {
     a:hover {

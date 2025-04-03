@@ -135,20 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = videoModal.querySelector('.close-modal');
     let currentVideo = null;
 
-    // Add this new function for button reset
-    function resetWatchDemoButton() {
-        const activeButton = document.querySelector('.watch-demo');
-        if (activeButton) {
-            activeButton.blur();
-            activeButton.style.transform = '';
-            activeButton.style.backgroundColor = '';
-            // Remove all possible states
-            // activeButton.classList.remove('active', 'pressed', 'touched');
-            // // Force browser to drop the active state
-            // document.activeElement.blur();
-        }
-    }
-
     function showVideoModal(videoId) {
         const youtube = document.createElement('lite-youtube');
         youtube.setAttribute('videoid', videoId);
@@ -181,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
         modalContent.innerHTML = '';
         currentVideo = null;
-        resetWatchDemoButton();  // Always reset button state
 
         // Only trigger history.back() if we're not already handling a popstate event
         if (!fromPopState && history.state?.modal === 'video') {
@@ -645,4 +630,28 @@ document.addEventListener('DOMContentLoaded', () => {
         // Start autoplay
         resetAutoplay();
     }
+
+    // Add touch event handlers for watch-demo buttons
+    const watchDemoButtons = document.querySelectorAll('.watch-demo');
+
+    const removeActiveStyles = (element) => {
+        element.style.backgroundColor = '';
+        element.style.transform = '';
+        element.blur(); // Remove focus state as well
+    };
+
+    watchDemoButtons.forEach(button => {
+        button.addEventListener('touchend', () => {
+            setTimeout(() => removeActiveStyles(button), 50);
+        }, { passive: true });
+
+        button.addEventListener('touchcancel', () => {
+            setTimeout(() => removeActiveStyles(button), 50);
+        }, { passive: true });
+
+        // Prevent context menu on long press
+        button.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+    });
 });
