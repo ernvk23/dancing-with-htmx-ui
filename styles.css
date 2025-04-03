@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+*:focus {
+    outline: none;
+}
+
 :root {
     /* Primary Color (Deep and Rich) */
     --primary-color: #663399;
@@ -398,26 +402,15 @@ lite-youtube img {
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-size: 0.9rem;
-    transition: background-color var(--transition-duration) ease,
-        transform var(--clicked-feedback-time) ease;
+    /* transition: transform var(--clicked-feedback-time) ease; */
     box-shadow: var(--box-shadow-cta);
-    -webkit-tap-highlight-color: transparent;
+    /* -webkit-tap-highlight-color: transparent; */
     /* Remove tap highlight on mobile */
     user-select: none;
 }
 
 .watch-demo:active {
-    transform: scale(0.95);
-}
-
-.watch-demo:active,
-.watch-demo:focus,
-.watch-demo:focus-visible,
-.watch-demo:focus-within {
-    transform: none !important;
-    background-color: rgba(35, 2, 54, 0.849) !important;
-    outline: none !important;
-    -webkit-tap-highlight-color: transparent;
+    transform: scale(0.93);
 }
 
 .video-modal {
