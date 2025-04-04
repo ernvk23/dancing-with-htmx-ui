@@ -427,6 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
     // Carousel functionality
     const carousel = document.querySelector('.carousel');
     if (carousel) {
