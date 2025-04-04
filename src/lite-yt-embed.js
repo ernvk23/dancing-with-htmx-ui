@@ -176,6 +176,7 @@ class LiteYTEmbed extends HTMLElement {
         params.append('autoplay', '1');
         params.append('playsinline', '1');
         params.append('rel', '0');
+        params.append('enablejsapi', '1');
         return params;
     }
 

@@ -239,6 +239,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Setup Intersection Observer for lite-youtube elements
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const liteYt = entry.target;
+            if (!entry.isIntersecting && liteYt.hasAttribute('videoid')) {
+                const iframe = liteYt.querySelector('iframe');
+                if (iframe) {
+                    // Pause the video using YouTube iframe API
+                    iframe.contentWindow.postMessage(JSON.stringify({
+                        'event': 'command',
+                        'func': 'pauseVideo',
+                        'args': []
+                    }), '*');
+                }
+            }
+        });
+    }, {
+        threshold: 0.2 // Adjust as needed
+    });
+
+    // Observe all lite-youtube elements
+    document.querySelectorAll('.gallery-container lite-youtube').forEach(video => {
+        videoObserver.observe(video);
+    });
+
     const contactButton = document.querySelector('.floating-contact-button');
 
     // Handle contact button clicks and outside clicks
