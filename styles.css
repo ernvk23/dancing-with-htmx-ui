@@ -373,20 +373,21 @@ lite-youtube img {
     justify-content: space-around;
     border-radius: var(--border-radius);
     gap: 1rem;
-    flex-grow: 1;
+    flex-grow: 4;
 }
 
 .styles-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 2rem;
+    justify-content: space-evenly;
+    gap: 1rem;
+    /* align-items: stretch; */
 }
 
 .style-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: 1rem;
     background-color: var(--background-color);
@@ -394,13 +395,29 @@ lite-youtube img {
     box-shadow: var(--box-shadow-primary);
     padding-block: 2rem;
     padding-inline: 1rem;
-    max-width: 350px;
-    min-width: 260px;
-    flex-basis: 25%;
+    min-width: 350px;
+    /* Changed from 300px to allow more flexibility */
+    /* flex-grow: 1; */
+    flex-basis: calc(25% - 1rem);
 }
+
+@media (max-width: 1479px) {
+    .style-card {
+        padding-block: 3rem;
+        flex-basis: 34%;
+    }
+}
+
 
 .style-card>h3 {
     border-bottom: solid 0.2rem var(--primary-color-dark);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
 }
 
 .watch-demo {
@@ -410,6 +427,9 @@ lite-youtube img {
     border-radius: var(--border-radius);
     font-size: 0.9rem;
     box-shadow: var(--box-shadow-cta);
+    width: 50%;
+    white-space: nowrap;
+
     /* Removed duplicated touch-related properties since they're now in button {} */
 }
 
@@ -607,7 +627,7 @@ lite-youtube img {
 .pricing-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     /* min-width: 200px; */
     /* width: 100%; */
     /* justify-content: space-evenly; */
@@ -640,20 +660,33 @@ lite-youtube img {
 .pricing-card {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     background-color: var(--background-color);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-primary);
-    /* padding-block: 1rem; */
-    /* flex-basis: 200px; */
     padding-block: 2rem;
-    padding-inline: 0.5rem;
-    max-width: 300px;
-    min-width: 260px;
-    flex-basis: 25%;
+    padding-inline: 1rem;
+    min-width: 250px;
+    flex-basis: calc(20% - 1rem);
 }
+
+@media (max-width: 1079px) {
+    .pricing-card {
+        flex-basis: 34%;
+        padding-block: 3rem;
+        padding-inline: 1rem;
+    }
+}
+
+/* @media (max-width: 768px) {
+    .pricing-card {
+        flex: 1 1 100%;
+        max-width: 40%;
+        min-width: 200px;
+    }
+} */
 
 .price {
     background-color: var(--primary-color);
@@ -1074,9 +1107,9 @@ footer .container-full {
         max-width: var(--viewport-width-mobile);
     }
 
-    .styles-cards {
+    /* .styles-cards {
         gap: 2rem;
-    }
+    } */
 
     lite-youtube::before {
         font-size: 0.8rem;
