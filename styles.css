@@ -773,9 +773,9 @@ lite-youtube::before {
 
 lite-youtube .lyt-playbtn {
     filter: none !important;
-    z-index: 4000 !important;
+    z-index: -1 !important;
     transition: opacity var(--transition-duration-fast) ease-in !important;
-    opacity: 1;
+    opacity: 0;
 }
 
 lite-youtube .lyt-visually-hidden {
