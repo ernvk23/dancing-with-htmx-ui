@@ -239,30 +239,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Setup Intersection Observer for lite-youtube elements
+    let currentlyPlayingGalleryVideo = null;
+
+    // --- Helper Function to Pause Video ---
+    const pauseLiteYtVideo = (liteYtElement) => {
+        if (!liteYtElement) return;
+        const iframe = liteYtElement.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage(JSON.stringify({
+                'event': 'command',
+                'func': 'pauseVideo',
+                'args': []
+            }), '*');
+            currentlyPlayingGalleryVideo = null;
+        }
+    };
+
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const liteYt = entry.target;
             if (!entry.isIntersecting && liteYt.hasAttribute('videoid')) {
-                const iframe = liteYt.querySelector('iframe');
-                if (iframe) {
-                    // Pause the video using YouTube iframe API
-                    iframe.contentWindow.postMessage(JSON.stringify({
-                        'event': 'command',
-                        'func': 'pauseVideo',
-                        'args': []
-                    }), '*');
-                }
+                pauseLiteYtVideo(liteYt); // Observer directly calls pause
             }
         });
     }, {
-        threshold: 0.2 // Adjust as needed
+        threshold: 0.2
     });
 
-    // Observe all lite-youtube elements
+    // --- Process All lite-youtube Elements in the Gallery ---
     document.querySelectorAll('.gallery-container lite-youtube').forEach(video => {
+        // 1. Observe for scrolling out of view
         videoObserver.observe(video);
+
+        // 2. Add Direct Click Listener to handle pausing other videos
+        video.addEventListener('click', () => {
+            const clickedVideo = video; // The element that was just clicked
+
+            // Check if a *different* video was playing before this click
+            if (currentlyPlayingGalleryVideo && currentlyPlayingGalleryVideo !== clickedVideo) {
+                pauseLiteYtVideo(currentlyPlayingGalleryVideo);
+            }
+
+            currentlyPlayingGalleryVideo = clickedVideo;
+
+            // NOTE: This listener might not fire reliably after the first click
+            // if the click lands inside the loaded iframe.
+        });
     });
+
 
     const contactButton = document.querySelector('.floating-contact-button');
 
@@ -681,3 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+
