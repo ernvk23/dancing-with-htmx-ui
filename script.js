@@ -294,11 +294,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                             pauseLiteYtVideo(currentlyPlayingGalleryVideo);
                                         }
                                         currentlyPlayingGalleryVideo = video;
+                                        stopAutoplay(); // Stop autoplay if needed
                                     }
                                     else if (event.data === YT.PlayerState.ENDED ||
                                         event.data === YT.PlayerState.PAUSED) {
                                         if (currentlyPlayingGalleryVideo === video) {
                                             currentlyPlayingGalleryVideo = null;
+                                            startAutoplay(); // Restart autoplay if needed
                                         }
                                     }
                                 }
