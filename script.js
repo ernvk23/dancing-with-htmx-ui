@@ -255,10 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const videoObserver = new IntersectionObserver((entries) => {
+    // --- Intersection Observer for Scrolling ---
+    const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const liteYt = entry.target;
-            if (!entry.isIntersecting && liteYt.hasAttribute('videoid')) {
+            if (!entry.isIntersecting) {
                 pauseLiteYtVideo(liteYt); // Observer directly calls pause
             }
         });
@@ -266,26 +267,56 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.2
     });
 
+    // Load YouTube API if not already loaded
+    // The lite-youtube script already does it, so no need to load it again
+    // if (!window.YT) {
+    //     const tag = document.createElement('script');
+    //     tag.src = 'https://www.youtube.com/iframe_api';
+    //     const firstScriptTag = document.getElementsByTagName('script')[0];
+    //     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // }
+
     // --- Process All lite-youtube Elements in the Gallery ---
     document.querySelectorAll('.gallery-container lite-youtube').forEach(video => {
-        // 1. Observe for scrolling out of view
-        videoObserver.observe(video);
+        // Observe for scrolling out of view
+        scrollObserver.observe(video);
 
-        // 2. Add Direct Click Listener to handle pausing other videos
-        video.addEventListener('click', () => {
-            const clickedVideo = video; // The element that was just clicked
+        const mutationObserver = new MutationObserver((mutations) => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.tagName === 'IFRAME') {
+                        // Once iframe is injected, setup YouTube player
+                        const player = new YT.Player(node, {
+                            events: {
+                                'onStateChange': (event) => {
+                                    if (event.data === YT.PlayerState.PLAYING) {
+                                        if (currentlyPlayingGalleryVideo && currentlyPlayingGalleryVideo !== video) {
+                                            pauseLiteYtVideo(currentlyPlayingGalleryVideo);
+                                        }
+                                        currentlyPlayingGalleryVideo = video;
+                                    }
+                                    else if (event.data === YT.PlayerState.ENDED ||
+                                        event.data === YT.PlayerState.PAUSED) {
+                                        if (currentlyPlayingGalleryVideo === video) {
+                                            currentlyPlayingGalleryVideo = null;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        mutationObserver.disconnect();
+                    }
+                });
+            });
+        });
 
-            // Check if a *different* video was playing before this click
-            if (currentlyPlayingGalleryVideo && currentlyPlayingGalleryVideo !== clickedVideo) {
-                pauseLiteYtVideo(currentlyPlayingGalleryVideo);
-            }
-
-            currentlyPlayingGalleryVideo = clickedVideo;
-
-            // NOTE: This listener might not fire reliably after the first click
-            // if the click lands inside the loaded iframe.
+        // Start observing for iframe injection
+        mutationObserver.observe(video, {
+            childList: true,
+            subtree: true
         });
     });
+
 
 
     const contactButton = document.querySelector('.floating-contact-button');
