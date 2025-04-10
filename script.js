@@ -270,12 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load YouTube API if not already loaded
     // The lite-youtube script already does it, so no need to load it again
-    // if (!window.YT) {
-    //     const tag = document.createElement('script');
-    //     tag.src = 'https://www.youtube.com/iframe_api';
-    //     const firstScriptTag = document.getElementsByTagName('script')[0];
-    //     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    // }
+    if (!window.YT) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
 
     // --- Process All lite-youtube Elements in the Gallery ---
     document.querySelectorAll('.gallery-container lite-youtube').forEach(video => {
@@ -564,12 +564,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function stopAutoplay() {
             if (autoplayTimer) {
+                0.5
                 clearTimeout(autoplayTimer);
                 autoplayTimer = null;
             }
         }
 
         function resetAutoplay() {
+            0.5
             stopAutoplay();
             startAutoplay();
         }
