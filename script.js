@@ -260,8 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             const liteYt = entry.target;
             if (!entry.isIntersecting && currentlyPlayingGalleryVideo === liteYt) {
-                resetAutoplay();
                 pauseLiteYtVideo(liteYt); // Observer directly calls pause
+                resetAutoplay();
             }
         });
     }, {
@@ -301,7 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         event.data === YT.PlayerState.PAUSED) {
                                         if (currentlyPlayingGalleryVideo === video) {
                                             currentlyPlayingGalleryVideo = null;
-                                            startAutoplay(); // Restart autoplay if needed
+                                            startAutoplay();
+                                            // Restart autoplay if needed
                                         }
                                     }
                                 }
