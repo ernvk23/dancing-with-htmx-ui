@@ -261,10 +261,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const liteYt = entry.target;
             if (!entry.isIntersecting) {
                 pauseLiteYtVideo(liteYt); // Observer directly calls pause
+                startAutoplay();
             }
         });
     }, {
-        threshold: 0.2
+        threshold: 0.5
     });
 
     // Load YouTube API if not already loaded
@@ -577,14 +578,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 isVisible = entry.isIntersecting;
-                if (isVisible) {
+                if (isVisible && !currentlyPlayingGalleryVideo) {
                     startAutoplay();
                 } else {
                     stopAutoplay();
                 }
             });
         }, {
-            threshold: 0.4  // Trigger when 50% of carousel is visible
+            threshold: 0.5  // Trigger when 50% of carousel is visible
         });
 
         // Start observing the carousel
@@ -685,14 +686,14 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.disconnect();
         });
 
-        // Replace old visibility change handler
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden || !isVisible) {
-                stopAutoplay();
-            } else {
-                startAutoplay();
-            }
-        });
+        // // Replace old visibility change handler
+        // document.addEventListener('visibilitychange', () => {
+        //     if (document.hidden || !isVisible) {
+        //         stopAutoplay();
+        //     } else {
+        //         startAutoplay();
+        //     }
+        // });
 
         // Prevent scroll while dragging
         // carousel.addEventListener('touchmove', (e) => {
