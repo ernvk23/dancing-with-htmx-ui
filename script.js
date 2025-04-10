@@ -259,13 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const liteYt = entry.target;
-            if (!entry.isIntersecting && currentlyPlayingGalleryVideo) {
+            if (!entry.isIntersecting && currentlyPlayingGalleryVideo === liteYt) {
+                resetAutoplay();
                 pauseLiteYtVideo(liteYt); // Observer directly calls pause
-                startAutoplay();
             }
         });
     }, {
-        threshold: 1
+        threshold: 0.2
     });
 
     // Load YouTube API if not already loaded
@@ -543,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             container.style.transform = `translateX(-${index * 100}%)`;
             currentIndex = index;
+
             resetAutoplay();
 
             setTimeout(() => isTransitioning = false, transitionDelay);
@@ -564,24 +565,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function stopAutoplay() {
             if (autoplayTimer) {
-                0.5
                 clearTimeout(autoplayTimer);
                 autoplayTimer = null;
             }
         }
 
         function resetAutoplay() {
-            0.5
-            stopAutoplay();
-            startAutoplay();
+            if (!currentlyPlayingGalleryVideo) {
+                stopAutoplay();
+                startAutoplay();
+            }
         }
 
         // Create intersection observer for carousel
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 isVisible = entry.isIntersecting;
-                if (isVisible && !currentlyPlayingGalleryVideo) {
-                    startAutoplay();
+                if (isVisible) {
+                    resetAutoplay();
                 } else {
                     stopAutoplay();
                 }
@@ -687,20 +688,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('pagehide', () => {
             observer.disconnect();
         });
-
-        // // Replace old visibility change handler
-        // document.addEventListener('visibilitychange', () => {
-        //     if (document.hidden || !isVisible) {
-        //         stopAutoplay();
-        //     } else {
-        //         startAutoplay();
-        //     }
-        // });
-
-        // Prevent scroll while dragging
-        // carousel.addEventListener('touchmove', (e) => {
-        //     if (isDragging) e.preventDefault();
-        // }, { passive: false });
 
         // Button click handlers
         prevButton.addEventListener('click', (e) => {
