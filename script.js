@@ -259,13 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const liteYt = entry.target;
-            if (!entry.isIntersecting) {
+            if (!entry.isIntersecting && currentlyPlayingGalleryVideo) {
                 pauseLiteYtVideo(liteYt); // Observer directly calls pause
                 startAutoplay();
             }
         });
     }, {
-        threshold: 0.5
+        threshold: 1
     });
 
     // Load YouTube API if not already loaded
