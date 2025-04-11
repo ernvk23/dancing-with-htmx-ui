@@ -487,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     // Carousel functionality
     const carousel = document.querySelector('.carousel');
     if (carousel) {
@@ -501,12 +502,22 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchStartY = 0; // Keep this
         let isTransitioning = false;
         let isDragging = false;
-        const transitionDelay = 300;
+        const transitionDelaySwipe = 50;
+        const transitionDelay = 200;
         // const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
         let isVisible = false;  // Add visibility tracking
         let dragDirectionDetermined = false;
         let isHorizontalDrag = false;
         const directionLockThreshold = 5; // Pixels to move before deciding direction
+
+        function speedupTransition(slideFunction) {
+            container.style.transition = `transform ${transitionDelaySwipe}ms ease-in`;
+            slideFunction();
+            setTimeout(() => {
+                // Restore transition after swipe
+                container.style.transition = `transform ${transitionDelay}ms ease-in`;
+            }, transitionDelaySwipe);
+        }
 
         // Set initial state
         function initializeSlides() {
@@ -618,7 +629,8 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.addEventListener('click', () => {
                 // Only preload the target slide
                 triggerLazyLoad(slides[index]);
-                goToSlide(index);
+                speedupTransition(() => goToSlide(index));
+                // goToSlide(index);
             });
         });
 
@@ -714,14 +726,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isDragging) return; // Ignore if not dragging
             isDragging = false;
 
-            // Restore the transition before deciding action
-            container.style.transition = `transform ${transitionDelay}ms ease-in`;
+
 
             // Only process swipe logic IF the drag was determined to be horizontal
             if (isHorizontalDrag) {
+                // Restore the transition before deciding action
+                container.style.transition = `transform ${transitionDelaySwipe}ms ease-in`;
+
                 const diff = touchStartX - e.changedTouches[0].clientX;
                 const movePercent = (diff / container.offsetWidth);
-                const swipeThreshold = 0.02; // Minimum 10% drag to trigger a slide change (adjust if needed)
+                const swipeThreshold = 0.02; // Minimum 2% drag to trigger a slide change (adjust if needed)
 
                 // Check if swipe distance threshold is met
                 if (Math.abs(movePercent) > swipeThreshold) {
@@ -737,9 +751,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Swipe was too short, snap back smoothly
                     goToSlide(currentIndex); // Call your existing goToSlide function
                 }
+                setTimeout(() => {
+                    // Restore transition after swipe
+                    container.style.transition = `transform ${transitionDelay}ms ease-in`;
+                }, transitionDelaySwipe);
             }
-            // If drag was NOT horizontal, do nothing - browser handled scroll.
 
+            // If drag was NOT horizontal, do nothing - browser handled scroll.
             // Reset flags
             dragDirectionDetermined = false;
             isHorizontalDrag = false;
@@ -758,17 +776,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Button click handlers
         prevButton.addEventListener('click', (e) => {
             e.stopPropagation();
-            prevSlide();
+            speedupTransition(() => prevSlide());
         });
 
         nextButton.addEventListener('click', (e) => {
             e.stopPropagation();
-            nextSlide();
+            speedupTransition(() => nextSlide());
         });
 
         // Start autoplay
         resetAutoplay();
     }
+
+
 
     // Add touch event handlers for watch-demo buttons
     const watchDemoButtons = document.querySelectorAll('.watch-demo');

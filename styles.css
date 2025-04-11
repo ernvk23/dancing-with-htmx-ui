@@ -804,7 +804,7 @@ lite-youtube.img-ready .lyt-playbtn {
 .carousel-container {
     display: flex;
     width: 100%;
-    transition: all 0.3s ease-in;
+    transition: all 0.2s ease-in;
     margin-inline: auto;
     will-change: transform, opacity;
 }
@@ -813,7 +813,7 @@ lite-youtube.img-ready .lyt-playbtn {
     min-width: 100%;
     position: relative;
     opacity: 1;
-    transition: all 0.3s ease-in;
+    transition: all 0.2s ease-in;
     pointer-events: none;
     user-select: none;
 }
