@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchStartY = 0; // Keep this
         let isTransitioning = false;
         let isDragging = false;
-        const transitionDelay = 200;
+        const transitionDelay = 300;
         // const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
         let isVisible = false;  // Add visibility tracking
         let dragDirectionDetermined = false;
@@ -529,6 +529,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const dots = dotsContainer.querySelectorAll('.carousel-dot');
 
+        function triggerLazyLoad(slide) {
+            if (!slide) return;
+            const img = slide.querySelector('img[loading="lazy"]:not(.loaded)');
+            if (img) {
+                img.loading = 'eager'; // Only need to set once to trigger load
+            }
+        }
+
+        function preloadAdjacentSlides(currentIndex) {
+            if (!isVisible) return; // Only preload if carousel is visible
+
+            // Load previous slide
+            if (currentIndex > 0) {
+                triggerLazyLoad(slides[currentIndex - 1]);
+            }
+            // Load current slide
+            triggerLazyLoad(slides[currentIndex]);
+            // Load next slide
+            if (currentIndex < slides.length - 1) {
+                triggerLazyLoad(slides[currentIndex + 1]);
+            }
+        }
+
+        // Create intersection observer for carousel
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isVisible = entry.isIntersecting;
+                if (isVisible) {
+                    preloadAdjacentSlides(currentIndex); // Start preloading when carousel becomes visible
+                    resetAutoplay();
+                } else {
+                    stopAutoplay();
+                }
+            });
+        }, {
+            threshold: 0.5  // Trigger when 50% of carousel is visible
+        });
+
+        // Start observing the carousel
+        observer.observe(carousel);
+
         function goToSlide(index) {
             if (isTransitioning || index === currentIndex) return;
             isTransitioning = true;
@@ -545,10 +586,41 @@ document.addEventListener('DOMContentLoaded', () => {
             container.style.transform = `translateX(-${index * 100}%)`;
             currentIndex = index;
 
+            // Preload adjacent slides when changing slides
+            preloadAdjacentSlides(index);
+
             resetAutoplay();
 
             setTimeout(() => isTransitioning = false, transitionDelay);
         }
+
+        // Remove hover handlers and update button click handlers
+        prevButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Preload previous slide before transitioning
+            if (currentIndex > 0) {
+                triggerLazyLoad(slides[currentIndex - 1]);
+            }
+            prevSlide();
+        });
+
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Preload next slide before transitioning
+            if (currentIndex < slides.length - 1) {
+                triggerLazyLoad(slides[currentIndex + 1]);
+            }
+            nextSlide();
+        });
+
+        // Update dot click handlers to include preloading
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                // Only preload the target slide
+                triggerLazyLoad(slides[index]);
+                goToSlide(index);
+            });
+        });
 
         function nextSlide() {
             if (!isTransitioning) goToSlide((currentIndex + 1) % slides.length);
@@ -577,23 +649,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 startAutoplay();
             }
         }
-
-        // Create intersection observer for carousel
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                isVisible = entry.isIntersecting;
-                if (isVisible) {
-                    resetAutoplay();
-                } else {
-                    stopAutoplay();
-                }
-            });
-        }, {
-            threshold: 0.5  // Trigger when 50% of carousel is visible
-        });
-
-        // Start observing the carousel
-        observer.observe(carousel);
 
         // --- Touch Start ---
         container.addEventListener('touchstart', (e) => {
