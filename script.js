@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 // Restore transition after swipe
                 container.style.transition = `transform ${transitionDelay}ms ease-in`;
-            }, transitionDelaySwipe);
+            }, transitionDelaySwipe + 50);
         }
 
         // Set initial state
@@ -748,7 +748,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     // Restore transition after swipe
                     container.style.transition = `transform ${transitionDelay}ms ease-in`;
-                }, transitionDelaySwipe);
+                }, transitionDelaySwipe + 50);
             }
 
             // If drag was NOT horizontal, do nothing - browser handled scroll.
