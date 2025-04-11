@@ -534,7 +534,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const dot = document.createElement('div');
             dot.classList.add('carousel-dot');
             if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
             dotsContainer.appendChild(dot);
         });
 
@@ -612,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentIndex > 0) {
                 triggerLazyLoad(slides[currentIndex - 1]);
             }
-            prevSlide();
+            speedupTransition(() => prevSlide());
         });
 
         nextButton.addEventListener('click', (e) => {
@@ -621,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentIndex < slides.length - 1) {
                 triggerLazyLoad(slides[currentIndex + 1]);
             }
-            nextSlide();
+            speedupTransition(() => nextSlide());
         });
 
         // Update dot click handlers to include preloading
@@ -630,7 +629,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Only preload the target slide
                 triggerLazyLoad(slides[index]);
                 speedupTransition(() => goToSlide(index));
-                // goToSlide(index);
             });
         });
 
@@ -638,8 +636,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isTransitioning) {
                 const nextIndex = (currentIndex + 1) % slides.length;
                 goToSlide(nextIndex);
-                // Preload next set of slides after transitioning
-                preloadAdjacentSlides(nextIndex);
             }
         }
 
@@ -647,8 +643,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isTransitioning) {
                 const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
                 goToSlide(prevIndex);
-                // Preload previous set of slides after transitioning
-                preloadAdjacentSlides(prevIndex);
             }
         }
 
@@ -771,17 +765,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clean up observer when needed
         window.addEventListener('pagehide', () => {
             observer.disconnect();
-        });
-
-        // Button click handlers
-        prevButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            speedupTransition(() => prevSlide());
-        });
-
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            speedupTransition(() => nextSlide());
         });
 
         // Start autoplay
