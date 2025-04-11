@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchStartY = 0; // Keep this
         let isTransitioning = false;
         let isDragging = false;
-        const transitionDelay = 50;
+        const transitionDelay = 200;
         // const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
         let isVisible = false;  // Add visibility tracking
         let dragDirectionDetermined = false;
@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!dragDirectionDetermined) {
                 const diffX = Math.abs(currentX - touchStartX);
                 const diffY = Math.abs(currentY - touchStartY);
-
+                0.2
                 // Decide direction after a small threshold movement
                 if (diffX > directionLockThreshold || diffY > directionLockThreshold) {
                     isHorizontalDrag = diffX > diffY; // Horizontal if X diff is greater
@@ -656,7 +656,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isHorizontalDrag) {
                 const diff = touchStartX - e.changedTouches[0].clientX;
                 const movePercent = (diff / container.offsetWidth);
-                const swipeThreshold = 0.1; // Minimum 10% drag to trigger a slide change (adjust if needed)
+                const swipeThreshold = 0.02; // Minimum 10% drag to trigger a slide change (adjust if needed)
 
                 // Check if swipe distance threshold is met
                 if (Math.abs(movePercent) > swipeThreshold) {
