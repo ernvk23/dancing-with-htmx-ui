@@ -623,11 +623,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         function nextSlide() {
-            if (!isTransitioning) goToSlide((currentIndex + 1) % slides.length);
+            if (!isTransitioning) {
+                const nextIndex = (currentIndex + 1) % slides.length;
+                goToSlide(nextIndex);
+                // Preload next set of slides after transitioning
+                preloadAdjacentSlides(nextIndex);
+            }
         }
 
         function prevSlide() {
-            if (!isTransitioning) goToSlide((currentIndex - 1 + slides.length) % slides.length);
+            if (!isTransitioning) {
+                const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                goToSlide(prevIndex);
+                // Preload previous set of slides after transitioning
+                preloadAdjacentSlides(prevIndex);
+            }
         }
 
         function startAutoplay() {
