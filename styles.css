@@ -804,16 +804,16 @@ lite-youtube.img-ready .lyt-playbtn {
 .carousel-container {
     display: flex;
     width: 100%;
-    transition: all 0.2s ease-in;
+    transition: transform 0.1s ease-in;
     margin-inline: auto;
-    will-change: transform, opacity;
+    will-change: transform;
 }
 
 .carousel-slide {
     min-width: 100%;
     position: relative;
     opacity: 1;
-    transition: all 0.2s ease-in;
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
     pointer-events: none;
     user-select: none;
 }
@@ -826,17 +826,17 @@ lite-youtube.img-ready .lyt-playbtn {
 }
 
 .carousel-slide.active {
-    opacity: 1;
     transform: scale(1);
     z-index: 1;
     pointer-events: auto;
+    opacity: 1;
     /* Removed pointer-events to fix touch issues */
 }
 
 .carousel-slide.prev,
 .carousel-slide.next {
+    transform: scale(0.96);
     opacity: 0.5;
-    transform: scale(0.9);
 }
 
 .carousel-navigation {

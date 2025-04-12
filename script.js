@@ -502,22 +502,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let touchStartY = 0; // Keep this
         let isTransitioning = false;
         let isDragging = false;
-        const transitionDelaySwipe = 50;
-        const transitionDelay = 200;
+        const transitionDelay = 100;
         // const dragThreshold = 0.02; // Reduced from 0.3 to 0.15 for easier triggering
         let isVisible = false;  // Add visibility tracking
         let dragDirectionDetermined = false;
         let isHorizontalDrag = false;
         const directionLockThreshold = 5; // Pixels to move before deciding direction
 
-        function speedupTransition(slideFunction) {
-            container.style.transition = `transform ${transitionDelaySwipe}ms ease-in`;
-            slideFunction();
-            setTimeout(() => {
-                // Restore transition after swipe
-                container.style.transition = `transform ${transitionDelay}ms ease-in`;
-            }, transitionDelaySwipe + 50);
-        }
 
         // Set initial state
         function initializeSlides() {
@@ -611,7 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentIndex > 0) {
                 triggerLazyLoad(slides[currentIndex - 1]);
             }
-            speedupTransition(() => prevSlide());
+            prevSlide();
         });
 
         nextButton.addEventListener('click', (e) => {
@@ -620,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentIndex < slides.length - 1) {
                 triggerLazyLoad(slides[currentIndex + 1]);
             }
-            speedupTransition(() => nextSlide());
+            nextSlide();
         });
 
         // Update dot click handlers to include preloading
@@ -628,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.addEventListener('click', () => {
                 // Only preload the target slide
                 triggerLazyLoad(slides[index]);
-                speedupTransition(() => goToSlide(index));
+                goToSlide(index);
             });
         });
 
@@ -720,13 +711,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isDragging) return; // Ignore if not dragging
             isDragging = false;
 
-
+            // Restore the transition before deciding action
+            container.style.transition = `transform ${transitionDelay}ms ease-in`;
 
             // Only process swipe logic IF the drag was determined to be horizontal
             if (isHorizontalDrag) {
-                // Restore the transition before deciding action
-                container.style.transition = `transform ${transitionDelaySwipe}ms ease-in`;
-
                 const diff = touchStartX - e.changedTouches[0].clientX;
                 const movePercent = (diff / container.offsetWidth);
                 const swipeThreshold = 0.02; // Minimum 2% drag to trigger a slide change (adjust if needed)
@@ -745,10 +734,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Swipe was too short, snap back smoothly
                     goToSlide(currentIndex); // Call your existing goToSlide function
                 }
-                setTimeout(() => {
-                    // Restore transition after swipe
-                    container.style.transition = `transform ${transitionDelay}ms ease-in`;
-                }, transitionDelaySwipe + 50);
             }
 
             // If drag was NOT horizontal, do nothing - browser handled scroll.
