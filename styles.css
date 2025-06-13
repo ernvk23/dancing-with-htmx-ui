@@ -241,7 +241,6 @@ button {
     overflow: hidden;
     background-color: rgb(12, 12, 12);
     text-align: center;
-
 }
 
 .image-placeholder::before {
@@ -484,7 +483,7 @@ lite-youtube img {
     border: none;
     border-radius: 50%;
 
-    cursor: pointer;
+
     /* z-index: 2020; */
     transition: background-color var(--transition-duration) ease;
 }
